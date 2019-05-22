@@ -2,7 +2,8 @@
   <div>
     <v-layout>
       <v-flex>
-        <h1>Contact Page</h1>
+        <h1>Contact Pages</h1>
+        <p>Contact us</p>
       </v-flex>
     </v-layout>
   </div>

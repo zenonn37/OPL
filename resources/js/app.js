@@ -9,6 +9,7 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 Vue.use(VueRouter);
 Vue.use(Vuetify);
+//Vue.component("app", require("./App.vue").default);
 
 let app = new Vue({
     el: "#app",

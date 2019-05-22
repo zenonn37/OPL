@@ -1754,6 +1754,244 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScheduleForm.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ScheduleForm.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      games: [{
+        id: 1,
+        game1: {
+          home: "Giants",
+          away: "Bucs"
+        },
+        game2: {
+          home: "Redskins",
+          away: "Falcons"
+        },
+        game3: {
+          home: "Seahawks",
+          away: "Rams"
+        },
+        game4: {
+          home: "Cowboys",
+          away: "Eagles"
+        },
+        week: 1,
+        date: new Date()
+      }, {
+        id: 2,
+        game1: {
+          home: "Falcons",
+          away: "Bucs"
+        },
+        game2: {
+          home: "Redskins",
+          away: "Giants"
+        },
+        game3: {
+          home: "Seahawks",
+          away: "49ers"
+        },
+        game4: {
+          home: "Denver",
+          away: "Eagles"
+        },
+        week: 2,
+        date: new Date()
+      }],
+      nfl: [{
+        id: 1,
+        week: 1,
+        date: new Date(),
+        schedule: [{
+          game1: {
+            home: "Giants",
+            away: "Bucs",
+            game: 1
+          },
+          game2: {
+            home: "Eagles",
+            away: "Bears",
+            game: 2
+          },
+          game3: {
+            home: "Dolphins",
+            away: "Pats",
+            game: 3
+          },
+          game4: {
+            home: "Bills",
+            away: "Raiders",
+            game: 4
+          }
+        }]
+      }],
+      form: {
+        team1: null,
+        team2: null,
+        team3: null,
+        team4: null
+      }
+    };
+  },
+  methods: {
+    onSubmit: function onSubmit() {
+      console.log(this.form);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/About.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/About.vue?vue&type=script&lang=js& ***!
@@ -1786,6 +2024,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -1836,6 +2075,41 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Schedule.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Schedule.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_ScheduleForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/ScheduleForm */ "./resources/js/components/ScheduleForm.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    ScheduleForm: _components_ScheduleForm__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Team.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Team.vue?vue&type=script&lang=js& ***!
@@ -1855,10 +2129,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      teams: []
+    };
+  },
   created: function created() {
+    var _this = this;
+
     axios.get("api/teams").then(function (res) {
       console.log(res.data);
+      _this.teams = res.data;
     })["catch"](function (err) {
       console.log(err);
     });
@@ -2367,6 +2650,284 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScheduleForm.vue?vue&type=template&id=16f3ee66&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ScheduleForm.vue?vue&type=template&id=16f3ee66& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    _vm._l(_vm.games, function(team) {
+      return _c("div", { key: team.id }, [
+        _c(
+          "form",
+          {
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.onSubmit($event)
+              }
+            }
+          },
+          [
+            _c(
+              "v-layout",
+              { attrs: { wrap: "", row: "" } },
+              [
+                _c(
+                  "v-flex",
+                  [
+                    _c("v-checkbox", {
+                      attrs: {
+                        label: team.game1.home,
+                        color: "orange",
+                        value: team.game1.home,
+                        "hide-details": ""
+                      },
+                      model: {
+                        value: _vm.form.team1,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "team1", $$v)
+                        },
+                        expression: "form.team1"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-flex",
+                  [
+                    _c("v-checkbox", {
+                      attrs: {
+                        label: team.game1.away,
+                        color: "blue",
+                        value: team.game1.away,
+                        "hide-details": ""
+                      },
+                      model: {
+                        value: _vm.form.team1,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "team1", $$v)
+                        },
+                        expression: "form.team1"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-layout",
+              { attrs: { wrap: "", row: "" } },
+              [
+                _c(
+                  "v-flex",
+                  [
+                    _c("v-checkbox", {
+                      attrs: {
+                        label: team.game2.home,
+                        color: "orange",
+                        value: team.game2.home,
+                        "hide-details": ""
+                      },
+                      model: {
+                        value: _vm.form.team2,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "team2", $$v)
+                        },
+                        expression: "form.team2"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-flex",
+                  [
+                    _c("v-checkbox", {
+                      attrs: {
+                        label: team.game2.away,
+                        color: "blue",
+                        value: team.game2.away,
+                        "hide-details": ""
+                      },
+                      model: {
+                        value: _vm.form.team2,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "team2", $$v)
+                        },
+                        expression: "form.team2"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-layout",
+              { attrs: { wrap: "", row: "" } },
+              [
+                _c(
+                  "v-flex",
+                  [
+                    _c("v-checkbox", {
+                      attrs: {
+                        label: team.game3.home,
+                        color: "orange",
+                        value: team.game3.home,
+                        "hide-details": ""
+                      },
+                      model: {
+                        value: _vm.form.team3,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "team3", $$v)
+                        },
+                        expression: "form.team3"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-flex",
+                  [
+                    _c("v-checkbox", {
+                      attrs: {
+                        label: team.game3.away,
+                        color: "blue",
+                        value: team.game3.away,
+                        "hide-details": ""
+                      },
+                      model: {
+                        value: _vm.form.team3,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "team3", $$v)
+                        },
+                        expression: "form.team3"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-layout",
+              { attrs: { wrap: "", row: "" } },
+              [
+                _c(
+                  "v-flex",
+                  [
+                    _c("v-checkbox", {
+                      attrs: {
+                        label: team.game4.home,
+                        color: "orange",
+                        value: team.game4.home,
+                        "hide-details": ""
+                      },
+                      model: {
+                        value: _vm.form.team4,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "team4", $$v)
+                        },
+                        expression: "form.team4"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-flex",
+                  [
+                    _c("v-checkbox", {
+                      attrs: {
+                        label: team.game4.away,
+                        color: "blue",
+                        value: team.game4.away,
+                        "hide-details": ""
+                      },
+                      model: {
+                        value: _vm.form.team4,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "team4", $$v)
+                        },
+                        expression: "form.team4"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-layout",
+              { attrs: { "mt-3": "" } },
+              [
+                _c(
+                  "v-flex",
+                  [
+                    _c(
+                      "v-btn",
+                      {
+                        attrs: {
+                          type: "submit",
+                          color: "primary",
+                          large: "",
+                          outline: ""
+                        }
+                      },
+                      [_vm._v("Complete")]
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("hr")
+      ])
+    }),
+    0
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/About.vue?vue&type=template&id=2995bb7e&":
 /*!***************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/About.vue?vue&type=template&id=2995bb7e& ***!
@@ -2412,7 +2973,19 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("v-layout", [_c("v-flex", [_c("h1", [_vm._v("Contact Page")])])], 1)],
+    [
+      _c(
+        "v-layout",
+        [
+          _c("v-flex", [
+            _c("h1", [_vm._v("Contact Pages")]),
+            _vm._v(" "),
+            _c("p", [_vm._v("Contact us")])
+          ])
+        ],
+        1
+      )
+    ],
     1
   )
 }
@@ -2478,6 +3051,46 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Schedule.vue?vue&type=template&id=df451994&":
+/*!******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Schedule.vue?vue&type=template&id=df451994& ***!
+  \******************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-layout",
+        [
+          _c("v-flex", [
+            _c("h1", { staticClass: "display-1" }, [_vm._v("Schedule")])
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-layout", [_c("v-flex", [_c("schedule-form")], 1)], 1)
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Team.vue?vue&type=template&id=f0c0a908&":
 /*!**************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Team.vue?vue&type=template&id=f0c0a908& ***!
@@ -2495,7 +3108,25 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("v-layout", [_c("v-flex", [_c("h1", [_vm._v("Teams")])])], 1)],
+    [
+      _c(
+        "v-layout",
+        [
+          _c(
+            "v-flex",
+            [
+              _c("h1", [_vm._v("NFL Teams")]),
+              _vm._v(" "),
+              _vm._l(_vm.teams, function(team) {
+                return _c("div", { key: team.id }, [_vm._v("teams")])
+              })
+            ],
+            2
+          )
+        ],
+        1
+      )
+    ],
     1
   )
 }
@@ -43297,11 +43928,81 @@ __webpack_require__.r(__webpack_exports__);
 window.axios = axios__WEBPACK_IMPORTED_MODULE_3___default.a;
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_4___default.a);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_4___default.a); //Vue.component("app", require("./App.vue").default);
+
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: "#app",
   router: new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"](_routes__WEBPACK_IMPORTED_MODULE_2__["default"])
 });
+
+/***/ }),
+
+/***/ "./resources/js/components/ScheduleForm.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/ScheduleForm.vue ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ScheduleForm_vue_vue_type_template_id_16f3ee66___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ScheduleForm.vue?vue&type=template&id=16f3ee66& */ "./resources/js/components/ScheduleForm.vue?vue&type=template&id=16f3ee66&");
+/* harmony import */ var _ScheduleForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScheduleForm.vue?vue&type=script&lang=js& */ "./resources/js/components/ScheduleForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ScheduleForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ScheduleForm_vue_vue_type_template_id_16f3ee66___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ScheduleForm_vue_vue_type_template_id_16f3ee66___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ScheduleForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ScheduleForm.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/ScheduleForm.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ScheduleForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ScheduleForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScheduleForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ScheduleForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ScheduleForm.vue?vue&type=template&id=16f3ee66&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/ScheduleForm.vue?vue&type=template&id=16f3ee66& ***!
+  \*********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScheduleForm_vue_vue_type_template_id_16f3ee66___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ScheduleForm.vue?vue&type=template&id=16f3ee66& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ScheduleForm.vue?vue&type=template&id=16f3ee66&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScheduleForm_vue_vue_type_template_id_16f3ee66___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ScheduleForm_vue_vue_type_template_id_16f3ee66___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -43319,6 +44020,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_About__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/About */ "./resources/js/views/About.vue");
 /* harmony import */ var _views_Contact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/Contact */ "./resources/js/views/Contact.vue");
 /* harmony import */ var _views_Team__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/Team */ "./resources/js/views/Team.vue");
+/* harmony import */ var _views_Schedule__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./views/Schedule */ "./resources/js/views/Schedule.vue");
+
 
 
 
@@ -43337,10 +44040,14 @@ __webpack_require__.r(__webpack_exports__);
     component: _views_About__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
     path: "/contact",
-    component: _views_Contact__WEBPACK_IMPORTED_MODULE_3__["default"]
+    component: _views_Schedule__WEBPACK_IMPORTED_MODULE_5__["default"]
   }, {
     path: "/teams",
     component: _views_Team__WEBPACK_IMPORTED_MODULE_4__["default"]
+  }, {
+    path: "/schedule",
+    component: _views_Schedule__WEBPACK_IMPORTED_MODULE_5__["default"],
+    name: "schedule"
   }]
 });
 
@@ -43617,6 +44324,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFound_vue_vue_type_template_id_5dcdfd0e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFound_vue_vue_type_template_id_5dcdfd0e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/Schedule.vue":
+/*!*****************************************!*\
+  !*** ./resources/js/views/Schedule.vue ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Schedule_vue_vue_type_template_id_df451994___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Schedule.vue?vue&type=template&id=df451994& */ "./resources/js/views/Schedule.vue?vue&type=template&id=df451994&");
+/* harmony import */ var _Schedule_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Schedule.vue?vue&type=script&lang=js& */ "./resources/js/views/Schedule.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Schedule_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Schedule_vue_vue_type_template_id_df451994___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Schedule_vue_vue_type_template_id_df451994___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/Schedule.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/Schedule.vue?vue&type=script&lang=js&":
+/*!******************************************************************!*\
+  !*** ./resources/js/views/Schedule.vue?vue&type=script&lang=js& ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Schedule_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Schedule.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Schedule.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Schedule_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/Schedule.vue?vue&type=template&id=df451994&":
+/*!************************************************************************!*\
+  !*** ./resources/js/views/Schedule.vue?vue&type=template&id=df451994& ***!
+  \************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Schedule_vue_vue_type_template_id_df451994___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Schedule.vue?vue&type=template&id=df451994& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Schedule.vue?vue&type=template&id=df451994&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Schedule_vue_vue_type_template_id_df451994___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Schedule_vue_vue_type_template_id_df451994___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
