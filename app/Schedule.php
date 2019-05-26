@@ -15,6 +15,6 @@ class Schedule extends Model
 
     public function games()
     {
-        $this->belongsTo(Game::class);
+        return $this->belongsTo(Game::class);
     }
 }

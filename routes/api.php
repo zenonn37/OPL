@@ -34,7 +34,7 @@ Route::delete('/schedules', 'TeamController@destroy');
 
 
 //game user all
-Route::get('/game', 'GameController@index');
+Route::get('/games', 'GameController@index');
 //admin only
 Route::get('/games/{game}', 'GameController@show');
 Route::post('/games', 'GameController@store');

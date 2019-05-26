@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Schedule as ScheduleResource;
 
 class Game extends JsonResource
 {
@@ -19,6 +20,7 @@ class Game extends JsonResource
             'games' => $this->games,
             'week' => $this->week,
             'date' => $this->date,
+            'schedules' => ScheduleResource::collection($this->schedules),
         ];
     }
 }

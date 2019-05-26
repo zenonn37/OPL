@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div v-for="team in games" :key="team.id">
+    <div v-for="team in test" :key="team.id">
       <form @submit.prevent="onSubmit">
         <v-layout wrap row>
           <v-flex>
             <v-checkbox
               v-model="form.team1"
-              :label="team.game1.home"
+              :label="team.home"
               color="orange"
-              :value="team.game1.home"
+              :value="team.home"
               hide-details
             ></v-checkbox>
           </v-flex>
@@ -16,9 +16,9 @@
           <v-flex>
             <v-checkbox
               v-model="form.team1"
-              :label="team.game1.away"
+              :label="team.away"
               color="blue"
-              :value="team.game1.away"
+              :value="team.away"
               hide-details
             ></v-checkbox>
           </v-flex>
@@ -28,9 +28,9 @@
           <v-flex>
             <v-checkbox
               v-model="form.team2"
-              :label="team.game2.home"
+              :label="team.home"
               color="orange"
-              :value="team.game2.home"
+              :value="team.home"
               hide-details
             ></v-checkbox>
           </v-flex>
@@ -38,9 +38,9 @@
           <v-flex>
             <v-checkbox
               v-model="form.team2"
-              :label="team.game2.away"
+              :label="team.away"
               color="blue"
-              :value="team.game2.away"
+              :value="team.away"
               hide-details
             ></v-checkbox>
           </v-flex>
@@ -50,9 +50,9 @@
           <v-flex>
             <v-checkbox
               v-model="form.team3"
-              :label="team.game3.home"
+              :label="team.home"
               color="orange"
-              :value="team.game3.home"
+              :value="team.home"
               hide-details
             ></v-checkbox>
           </v-flex>
@@ -60,9 +60,9 @@
           <v-flex>
             <v-checkbox
               v-model="form.team3"
-              :label="team.game3.away"
+              :label="team.away"
               color="blue"
-              :value="team.game3.away"
+              :value="team.away"
               hide-details
             ></v-checkbox>
           </v-flex>
@@ -72,9 +72,9 @@
           <v-flex>
             <v-checkbox
               v-model="form.team4"
-              :label="team.game4.home"
+              :label="team.home"
               color="orange"
-              :value="team.game4.home"
+              :value="team.home"
               hide-details
             ></v-checkbox>
           </v-flex>
@@ -82,9 +82,9 @@
           <v-flex>
             <v-checkbox
               v-model="form.team4"
-              :label="team.game4.away"
+              :label="team.away"
               color="blue"
-              :value="team.game4.away"
+              :value="team.away"
               hide-details
             ></v-checkbox>
           </v-flex>
@@ -136,6 +136,33 @@
         </v-layout>
       </form>
     </div>-->
+    <div>
+      <div v-for="(sch, index) in schedules" :key="sch.id">
+        {{index}}
+        {{newTeam(index)}}
+        <v-layout wrap row>
+          <v-flex>
+            <v-checkbox
+              v-model="picks[index].team"
+              :label="sch.home"
+              color="orange"
+              :value="sch.home"
+              hide-details
+            ></v-checkbox>
+          </v-flex>
+
+          <v-flex>
+            <v-checkbox
+              v-model="picks[index].team"
+              :label="sch.away"
+              color="blue"
+              :value="sch.away"
+              hide-details
+            ></v-checkbox>
+          </v-flex>
+        </v-layout>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -143,6 +170,139 @@
 export default {
   data() {
     return {
+      schedules: [
+        {
+          id: 1,
+          home: "Giants",
+          away: "Redskins",
+          game: "1",
+          favorite: "Giants",
+          spread: "2",
+          location: "New York",
+          time: "2019-09-07"
+        },
+        {
+          id: 2,
+          home: "Tampa",
+          away: "Falcons",
+          game: "2",
+          favorite: "Falcons",
+          spread: "2",
+          location: "Atlanta",
+          time: "2019-09-07"
+        },
+        {
+          id: 3,
+          home: "Panthers",
+          away: "Saints",
+          game: "3",
+          favorite: "Panthers",
+          spread: "5",
+          location: "New Orleans",
+          time: "2019-09-07"
+        },
+        {
+          id: 4,
+          home: "Bills",
+          away: "Pats",
+          game: "4",
+          favorite: "New England",
+          spread: "7",
+          location: "Pats",
+          time: "2019-09-07"
+        }
+      ],
+      picks: [],
+      testing: [
+        {
+          id: 8,
+          games: 16,
+          week: "6",
+          date: "2019-09-07",
+          schedules: [
+            {
+              id: 1,
+              home: "Giants",
+              away: "Redskins",
+              game: "1",
+              favorite: "Giants",
+              spread: "2",
+              location: "New York",
+              time: "2019-09-07"
+            },
+            {
+              id: 2,
+              home: "Tampa",
+              away: "Falcons",
+              game: "2",
+              favorite: "Falcons",
+              spread: "2",
+              location: "Atlanta",
+              time: "2019-09-07"
+            }
+          ]
+        },
+        {
+          id: 9,
+          games: 16,
+          week: "6",
+          date: "2019-09-07",
+          schedules: [
+            {
+              id: 2,
+              home: "Tampa",
+              away: "Falcons",
+              game: "2",
+              favorite: "Falcons",
+              spread: "2",
+              location: "Atlanta",
+              time: "2019-09-07"
+            }
+          ]
+        }
+      ],
+      test: [
+        {
+          id: 1,
+          home: "Giants",
+          away: "Redskins",
+          game: "1",
+          favorite: "Giants",
+          spread: "2",
+          location: "New York",
+          time: "2019-09-07"
+        },
+        {
+          id: 2,
+          home: "Bucs",
+          away: "Cowboys",
+          game: "2",
+          favorite: "Cowbuys",
+          spread: "2",
+          location: "Irving",
+          time: "2019-09-07"
+        },
+        {
+          id: 3,
+          home: "Packers",
+          away: "Lions",
+          game: "3",
+          favorite: "Packers",
+          spread: "2",
+          location: "Lions",
+          time: "2019-09-07"
+        },
+        {
+          id: 4,
+          home: "Cards",
+          away: "49ers",
+          game: "4",
+          favorite: "49ers",
+          spread: "2",
+          location: "New York",
+          time: "2019-09-07"
+        }
+      ],
       games: [
         {
           id: 1,
@@ -230,7 +390,19 @@ export default {
   methods: {
     onSubmit() {
       console.log(this.form);
+    },
+    newTeam(index) {
+      console.log(index);
     }
+  },
+  created() {
+    this.schedules.forEach(element => {
+      console.log("called");
+      this.picks.push({
+        team: "",
+        spread: ""
+      });
+    });
   }
 };
 </script>

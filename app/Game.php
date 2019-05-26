@@ -9,8 +9,8 @@ class Game extends Model
 {
     protected $fillable = ['week', 'date', 'games'];
 
-    public function Schedules()
+    public function schedules()
     {
-        $this->hasMany(Schedule::class);
+        return  $this->hasMany(Schedule::class);
     }
 }
