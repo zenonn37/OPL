@@ -1763,6 +1763,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1805,132 +1807,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2127,7 +2004,36 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onSubmit: function onSubmit() {
-      console.log(this.form);
+      console.log(this.picks);
+      var games = this.schedules.length;
+      var picks = "";
+
+      switch (games) {
+        case 4:
+          picks = {
+            team1: this.picks[0].team,
+            spread1: this.picks[0].spread,
+            team2: this.picks[1].team,
+            spread2: this.picks[1].spread,
+            team3: this.picks[2].team,
+            spread3: this.picks[2].spread,
+            team4: this.picks[3].team,
+            spread4: this.picks[3].spread
+          };
+          break;
+
+        default:
+          console.log("none");
+          break;
+      }
+
+      console.log(games);
+      console.log(picks);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/picks", picks).then(function (res) {
+        console.log(res.data);
+      })["catch"](function (err) {
+        console.log(err);
+      });
     },
     newTeam: function newTeam(index) {
       console.log(index);
@@ -2136,8 +2042,9 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
+    var count = 0;
     this.schedules.forEach(function (element) {
-      console.log("called");
+      count++;
 
       _this.picks.push({
         team: "",
@@ -2822,321 +2729,117 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm._l(_vm.test, function(team) {
-        return _c("div", { key: team.id }, [
-          _c(
-            "form",
-            {
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.onSubmit($event)
-                }
-              }
-            },
-            [
-              _c(
-                "v-layout",
-                { attrs: { wrap: "", row: "" } },
-                [
-                  _c(
-                    "v-flex",
-                    [
-                      _c("v-checkbox", {
-                        attrs: {
-                          label: team.home,
-                          color: "orange",
-                          value: team.home,
-                          "hide-details": ""
-                        },
-                        model: {
-                          value: _vm.form.team1,
-                          callback: function($$v) {
-                            _vm.$set(_vm.form, "team1", $$v)
-                          },
-                          expression: "form.team1"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    [
-                      _c("v-checkbox", {
-                        attrs: {
-                          label: team.away,
-                          color: "blue",
-                          value: team.away,
-                          "hide-details": ""
-                        },
-                        model: {
-                          value: _vm.form.team1,
-                          callback: function($$v) {
-                            _vm.$set(_vm.form, "team1", $$v)
-                          },
-                          expression: "form.team1"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-layout",
-                { attrs: { wrap: "", row: "" } },
-                [
-                  _c(
-                    "v-flex",
-                    [
-                      _c("v-checkbox", {
-                        attrs: {
-                          label: team.home,
-                          color: "orange",
-                          value: team.home,
-                          "hide-details": ""
-                        },
-                        model: {
-                          value: _vm.form.team2,
-                          callback: function($$v) {
-                            _vm.$set(_vm.form, "team2", $$v)
-                          },
-                          expression: "form.team2"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    [
-                      _c("v-checkbox", {
-                        attrs: {
-                          label: team.away,
-                          color: "blue",
-                          value: team.away,
-                          "hide-details": ""
-                        },
-                        model: {
-                          value: _vm.form.team2,
-                          callback: function($$v) {
-                            _vm.$set(_vm.form, "team2", $$v)
-                          },
-                          expression: "form.team2"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-layout",
-                { attrs: { wrap: "", row: "" } },
-                [
-                  _c(
-                    "v-flex",
-                    [
-                      _c("v-checkbox", {
-                        attrs: {
-                          label: team.home,
-                          color: "orange",
-                          value: team.home,
-                          "hide-details": ""
-                        },
-                        model: {
-                          value: _vm.form.team3,
-                          callback: function($$v) {
-                            _vm.$set(_vm.form, "team3", $$v)
-                          },
-                          expression: "form.team3"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    [
-                      _c("v-checkbox", {
-                        attrs: {
-                          label: team.away,
-                          color: "blue",
-                          value: team.away,
-                          "hide-details": ""
-                        },
-                        model: {
-                          value: _vm.form.team3,
-                          callback: function($$v) {
-                            _vm.$set(_vm.form, "team3", $$v)
-                          },
-                          expression: "form.team3"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-layout",
-                { attrs: { wrap: "", row: "" } },
-                [
-                  _c(
-                    "v-flex",
-                    [
-                      _c("v-checkbox", {
-                        attrs: {
-                          label: team.home,
-                          color: "orange",
-                          value: team.home,
-                          "hide-details": ""
-                        },
-                        model: {
-                          value: _vm.form.team4,
-                          callback: function($$v) {
-                            _vm.$set(_vm.form, "team4", $$v)
-                          },
-                          expression: "form.team4"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    [
-                      _c("v-checkbox", {
-                        attrs: {
-                          label: team.away,
-                          color: "blue",
-                          value: team.away,
-                          "hide-details": ""
-                        },
-                        model: {
-                          value: _vm.form.team4,
-                          callback: function($$v) {
-                            _vm.$set(_vm.form, "team4", $$v)
-                          },
-                          expression: "form.team4"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-layout",
-                { attrs: { "mt-3": "" } },
-                [
-                  _c(
-                    "v-flex",
-                    [
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: {
-                            type: "submit",
-                            color: "primary",
-                            large: "",
-                            outline: ""
-                          }
-                        },
-                        [_vm._v("Complete")]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
-          _c("hr")
-        ])
-      }),
-      _vm._v(" "),
+  return _c("div", [
+    _c("div", [
       _c(
-        "div",
-        _vm._l(_vm.schedules, function(sch, index) {
-          return _c(
-            "div",
-            { key: sch.id },
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.onSubmit($event)
+            }
+          }
+        },
+        [
+          _vm._l(_vm.schedules, function(sch, index) {
+            return _c(
+              "div",
+              { key: sch.id },
+              [
+                _vm._v(
+                  "\n        " +
+                    _vm._s(index) +
+                    "\n        " +
+                    _vm._s(_vm.newTeam(index)) +
+                    "\n        "
+                ),
+                _c(
+                  "v-layout",
+                  { attrs: { wrap: "", row: "" } },
+                  [
+                    _c(
+                      "v-flex",
+                      [
+                        _c("v-checkbox", {
+                          attrs: {
+                            label: sch.home,
+                            color: "orange",
+                            value: sch.home,
+                            "hide-details": ""
+                          },
+                          model: {
+                            value: _vm.picks[index].team,
+                            callback: function($$v) {
+                              _vm.$set(_vm.picks[index], "team", $$v)
+                            },
+                            expression: "picks[index].team"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-flex",
+                      [
+                        _c("v-checkbox", {
+                          attrs: {
+                            label: sch.away,
+                            color: "blue",
+                            value: sch.away,
+                            "hide-details": ""
+                          },
+                          model: {
+                            value: _vm.picks[index].team,
+                            callback: function($$v) {
+                              _vm.$set(_vm.picks[index], "team", $$v)
+                            },
+                            expression: "picks[index].team"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-flex",
+                      [
+                        _c("v-text-field", {
+                          attrs: {
+                            type: "number",
+                            label: "Spread",
+                            outline: ""
+                          },
+                          model: {
+                            value: _vm.picks[index].spread,
+                            callback: function($$v) {
+                              _vm.$set(_vm.picks[index], "spread", $$v)
+                            },
+                            expression: "picks[index].spread"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          }),
+          _vm._v(" "),
+          _c(
+            "v-layout",
             [
-              _vm._v(
-                "\n      " +
-                  _vm._s(index) +
-                  "\n      " +
-                  _vm._s(_vm.newTeam(index)) +
-                  "\n      "
-              ),
               _c(
-                "v-layout",
-                { attrs: { wrap: "", row: "" } },
+                "v-flex",
                 [
                   _c(
-                    "v-flex",
-                    [
-                      _c("v-checkbox", {
-                        attrs: {
-                          label: sch.home,
-                          color: "orange",
-                          value: sch.home,
-                          "hide-details": ""
-                        },
-                        model: {
-                          value: _vm.picks[index].team,
-                          callback: function($$v) {
-                            _vm.$set(_vm.picks[index], "team", $$v)
-                          },
-                          expression: "picks[index].team"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    [
-                      _c("v-checkbox", {
-                        attrs: {
-                          label: sch.away,
-                          color: "blue",
-                          value: sch.away,
-                          "hide-details": ""
-                        },
-                        model: {
-                          value: _vm.picks[index].team,
-                          callback: function($$v) {
-                            _vm.$set(_vm.picks[index], "team", $$v)
-                          },
-                          expression: "picks[index].team"
-                        }
-                      })
-                    ],
-                    1
+                    "v-btn",
+                    { attrs: { type: "submit", color: "info", large: "" } },
+                    [_vm._v("Complete")]
                   )
                 ],
                 1
@@ -3144,12 +2847,11 @@ var render = function() {
             ],
             1
           )
-        }),
-        0
+        ],
+        2
       )
-    ],
-    2
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

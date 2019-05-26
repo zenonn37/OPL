@@ -1,172 +1,47 @@
 <template>
   <div>
-    <div v-for="team in test" :key="team.id">
-      <form @submit.prevent="onSubmit">
-        <v-layout wrap row>
-          <v-flex>
-            <v-checkbox
-              v-model="form.team1"
-              :label="team.home"
-              color="orange"
-              :value="team.home"
-              hide-details
-            ></v-checkbox>
-          </v-flex>
-
-          <v-flex>
-            <v-checkbox
-              v-model="form.team1"
-              :label="team.away"
-              color="blue"
-              :value="team.away"
-              hide-details
-            ></v-checkbox>
-          </v-flex>
-        </v-layout>
-
-        <v-layout wrap row>
-          <v-flex>
-            <v-checkbox
-              v-model="form.team2"
-              :label="team.home"
-              color="orange"
-              :value="team.home"
-              hide-details
-            ></v-checkbox>
-          </v-flex>
-
-          <v-flex>
-            <v-checkbox
-              v-model="form.team2"
-              :label="team.away"
-              color="blue"
-              :value="team.away"
-              hide-details
-            ></v-checkbox>
-          </v-flex>
-        </v-layout>
-
-        <v-layout wrap row>
-          <v-flex>
-            <v-checkbox
-              v-model="form.team3"
-              :label="team.home"
-              color="orange"
-              :value="team.home"
-              hide-details
-            ></v-checkbox>
-          </v-flex>
-
-          <v-flex>
-            <v-checkbox
-              v-model="form.team3"
-              :label="team.away"
-              color="blue"
-              :value="team.away"
-              hide-details
-            ></v-checkbox>
-          </v-flex>
-        </v-layout>
-
-        <v-layout wrap row>
-          <v-flex>
-            <v-checkbox
-              v-model="form.team4"
-              :label="team.home"
-              color="orange"
-              :value="team.home"
-              hide-details
-            ></v-checkbox>
-          </v-flex>
-
-          <v-flex>
-            <v-checkbox
-              v-model="form.team4"
-              :label="team.away"
-              color="blue"
-              :value="team.away"
-              hide-details
-            ></v-checkbox>
-          </v-flex>
-        </v-layout>
-
-        <v-layout mt-3>
-          <v-flex>
-            <v-btn type="submit" color="primary" large outline>Complete</v-btn>
-          </v-flex>
-        </v-layout>
-      </form>
-      <br>
-      <hr>
-    </div>
-
-    <!-- <hr>
-
-    <div v-for="(team, index) in  nfl" :key="team.id">
-      {{team.week}}
-      <form @submit.prevent="onSubmit">
-        <v-layout wrap row v-for="(game, index) in team.schedule" :key="index">
-          <p>{{game.game1}}</p>
-          <p>{{game.game2}}</p>
-          <v-flex>
-            <v-checkbox
-              :v-model="`form.team ${index + 1}`"
-              :label="`game.game${index + 1}.home`"
-              color="orange"
-              :value="`game.game${index + 1}.home`"
-              hide-details
-            ></v-checkbox>
-          </v-flex>
-
-          <v-flex>
-            <v-checkbox
-              :v-model="`form.team ${index + 2}`"
-              :label="game.game1.away"
-              color="blue"
-              :value="`game.game${index + 2}.away`"
-              hide-details
-            ></v-checkbox>
-          </v-flex>
-        </v-layout>
-
-        <v-layout mt-3>
-          <v-flex>
-            <v-btn type="submit" color="primary" large outline>Complete</v-btn>
-          </v-flex>
-        </v-layout>
-      </form>
-    </div>-->
     <div>
-      <div v-for="(sch, index) in schedules" :key="sch.id">
-        {{index}}
-        {{newTeam(index)}}
-        <v-layout wrap row>
-          <v-flex>
-            <v-checkbox
-              v-model="picks[index].team"
-              :label="sch.home"
-              color="orange"
-              :value="sch.home"
-              hide-details
-            ></v-checkbox>
-          </v-flex>
+      <form @submit.prevent="onSubmit">
+        <div v-for="(sch, index) in schedules" :key="sch.id">
+          {{index}}
+          {{newTeam(index)}}
+          <v-layout wrap row>
+            <v-flex>
+              <v-checkbox
+                v-model="picks[index].team"
+                :label="sch.home"
+                color="orange"
+                :value="sch.home"
+                hide-details
+              ></v-checkbox>
+            </v-flex>
 
+            <v-flex>
+              <v-checkbox
+                v-model="picks[index].team"
+                :label="sch.away"
+                color="blue"
+                :value="sch.away"
+                hide-details
+              ></v-checkbox>
+            </v-flex>
+            <v-flex>
+              <v-text-field type="number" label="Spread" outline v-model="picks[index].spread"></v-text-field>
+            </v-flex>
+          </v-layout>
+        </div>
+        <v-layout>
           <v-flex>
-            <v-checkbox
-              v-model="picks[index].team"
-              :label="sch.away"
-              color="blue"
-              :value="sch.away"
-              hide-details
-            ></v-checkbox>
+            <v-btn type="submit" color="info" large>Complete</v-btn>
           </v-flex>
         </v-layout>
-      </div>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -389,15 +264,51 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log(this.form);
+      console.log(this.picks);
+      const games = this.schedules.length;
+      let picks = "";
+      switch (games) {
+        case 4:
+          picks = {
+            team1: this.picks[0].team,
+            spread1: this.picks[0].spread,
+            team2: this.picks[1].team,
+            spread2: this.picks[1].spread,
+            team3: this.picks[2].team,
+            spread3: this.picks[2].spread,
+            team4: this.picks[3].team,
+            spread4: this.picks[3].spread
+          };
+
+          break;
+
+        default:
+          console.log("none");
+
+          break;
+      }
+
+      console.log(games);
+
+      console.log(picks);
+
+      axios
+        .post("api/picks", picks)
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     newTeam(index) {
       console.log(index);
     }
   },
   created() {
+    let count = 0;
     this.schedules.forEach(element => {
-      console.log("called");
+      count++;
       this.picks.push({
         team: "",
         spread: ""

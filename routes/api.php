@@ -43,6 +43,15 @@ Route::delete('/games/{game}', 'GameController@destroy');
 
 
 
+//picks all
+Route::get('/picks', 'PickController@index');
+Route::get('/picks/{pick}', 'PickController@show');
+Route::post('/picks', 'PickController@store');
+Route::patch('/picks/{pick}', 'PickController@update');
+Route::delete('/picks/{pick}', 'PickController@destroy');
+
+
+
 Route::get('/teams', 'TeamController@index');
 Route::get('/teams/{team}', 'TeamController@show');
 Route::post('/teams', 'TeamController@store');
