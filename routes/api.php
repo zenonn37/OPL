@@ -29,8 +29,8 @@ Route::get('/schedules', 'ScheduleController@index');
 
 Route::get('/schedules/{schedule}', 'ScheduleController@show');
 Route::post('/schedules', 'ScheduleController@store');
-Route::patch('/schedules', 'ScheduleController@update');
-Route::delete('/schedules', 'ScheduleController@destroy');
+Route::patch('/schedules/{schedule}', 'ScheduleController@update');
+Route::delete('/schedules/{schedule}', 'ScheduleController@destroy');
 
 
 //game user all

@@ -6,6 +6,7 @@ use App\Schedule;
 
 use Illuminate\Http\Request;
 use App\Http\Resources\Schedule as ScheduleResource;
+use App\Http\Requests\ScheduleRequest;
 
 class ScheduleController extends Controller
 {
@@ -22,6 +23,12 @@ class ScheduleController extends Controller
         return ScheduleResource::collection($schedule);
     }
 
+    public function show(Schedule $schedule)
+    {
+
+        return new ScheduleResource($schedule);
+    }
+
 
 
     /**
@@ -30,7 +37,7 @@ class ScheduleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ScheduleRequest $request)
     {
         $schedule = new Schedule;
         $schedule->game_id = $request->game_id;
@@ -56,9 +63,20 @@ class ScheduleController extends Controller
      * @param  \App\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Schedule $schedule)
+    public function update(ScheduleRequest $request, Schedule $schedule)
     {
-        //
+
+        $schedule->home = $request->get('home', $schedule->home);
+        $schedule->away = $request->get('away', $schedule->away);
+        $schedule->game = $request->get('game', $schedule->game);
+        $schedule->favorite = $request->get('favorite', $schedule->favorite);
+        $schedule->spread = $request->get('spread', $schedule->spread);
+        $schedule->location = $request->get('location', $schedule->location);
+        $schedule->time = $request->get('time', $schedule->time);
+
+
+        $schedule->save();
+        return new ScheduleResource($schedule);
     }
 
     /**
@@ -69,6 +87,7 @@ class ScheduleController extends Controller
      */
     public function destroy(Schedule $schedule)
     {
-        //
+        $schedule->delete();
+        return response('Deleted', 201);
     }
 }
