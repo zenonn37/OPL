@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Picks;
+use App\Pick;
 use App\Http\Requests\PickRequest;
+use App\Http\Resources\PicksResource;
 
 class PickController extends Controller
 {
@@ -15,20 +16,13 @@ class PickController extends Controller
      */
     public function index()
     {
-        $picks = Picks::all();
+        $picks = Pick::all();
 
-        return response($picks, 201);
+        return PicksResource::collection($picks);
+        //return response($picks, 201);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -38,7 +32,7 @@ class PickController extends Controller
      */
     public function store(PickRequest $request)
     {
-        $picks = new Picks;
+        $picks = new Pick;
 
         $picks->team1 = $request->team1;
         $picks->team2 = $request->team2;
@@ -76,7 +70,9 @@ class PickController extends Controller
 
         $picks->save();
 
-        return response($picks, 201);
+
+        return new PicksResource($picks);
+        // return response($picks, 201);
     }
 
     /**
@@ -90,16 +86,7 @@ class PickController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -108,9 +95,11 @@ class PickController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pick $pick)
     {
-        //
+        $pick->update();
+
+        return new PicksResource($pick);
     }
 
     /**
@@ -119,8 +108,10 @@ class PickController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pick $pick)
     {
-        //
+        $pick->delete();
+
+        return response('Deleted', 201);
     }
 }

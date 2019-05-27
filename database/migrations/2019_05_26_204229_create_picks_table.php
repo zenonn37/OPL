@@ -29,9 +29,9 @@ class CreatePicksTable extends Migration
             $table->string('team11');
             $table->string('team12');
             $table->string('team13');
-            $table->string('team14')->default('BYE');
-            $table->string('team15')->default('BYE');
-            $table->string('team16')->default('BYE');
+            $table->string('team14')->nullable();
+            $table->string('team15')->nullable();
+            $table->string('team16')->nullable();
 
             $table->integer('spread1');
             $table->integer('spread2');
@@ -46,9 +46,9 @@ class CreatePicksTable extends Migration
             $table->integer('spread11');
             $table->integer('spread12');
             $table->integer('spread13');
-            $table->integer('spread14')->default(0);
-            $table->integer('spread15')->default(0);
-            $table->integer('spread16')->default(0);
+            $table->integer('spread14')->nullable();
+            $table->integer('spread15')->nullable();
+            $table->integer('spread16')->nullable();
 
 
 
