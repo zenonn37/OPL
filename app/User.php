@@ -41,4 +41,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Role');
     }
+    public function picks()
+    {
+        return $this->hasMany(Pick::class);
+    }
 }

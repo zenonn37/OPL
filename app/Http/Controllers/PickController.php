@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Pick;
 use App\Http\Requests\PickRequest;
 use App\Http\Resources\PicksResource;
+use App\Http\Requests\PicksUpdateRequest;
 
 class PickController extends Controller
 {
@@ -97,8 +98,43 @@ class PickController extends Controller
      */
     public function update(Request $request, Pick $pick)
     {
-        $pick->update();
 
+        $pick->team1 = $request->get('team1', $pick->team1);
+        $pick->team2 = $request->get('team2', $pick->team2);
+        $pick->team3 = $request->get('team3', $pick->team3);
+        $pick->team4 = $request->get('team4', $pick->team4);
+        $pick->team5 = $request->get('team5', $pick->team5);
+        $pick->team6 = $request->get('team6', $pick->team6);
+        $pick->team7 = $request->get('team7', $pick->team7);
+        $pick->team8 = $request->get('team8', $pick->team8);
+        $pick->team9 = $request->get('team9', $pick->team9);
+        $pick->team10 = $request->get('team10', $pick->team10);
+        $pick->team11 = $request->get('team11', $pick->team11);
+        $pick->team12 = $request->get('team12', $pick->team12);
+        $pick->team13 = $request->get('team13', $pick->team13);
+        $pick->team14 = $request->get('team14', $pick->team14);
+        $pick->team15 = $request->get('team15', $pick->team15);
+        $pick->team16 = $request->get('team16', $pick->team16);
+
+        $pick->spread1 = $request->get('spread1', $pick->spread1);
+        $pick->spread2 = $request->get('spread2', $pick->spread2);
+        $pick->spread3 = $request->get('spread3', $pick->spread3);
+        $pick->spread4 = $request->get('spread4', $pick->spread4);
+        $pick->spread5 = $request->get('spread5', $pick->spread5);
+        $pick->spread6 = $request->get('spread6', $pick->spread6);
+        $pick->spread7 = $request->get('spread7', $pick->spread7);
+        $pick->spread8 = $request->get('spread8', $pick->spread8);
+        $pick->spread9 = $request->get('spread9', $pick->spread9);
+        $pick->spread10 = $request->get('spread10', $pick->spread10);
+        $pick->spread11 = $request->get('spread11', $pick->spread11);
+        $pick->spread12 = $request->get('spread12', $pick->spread12);
+        $pick->spread13 = $request->get('spread13', $pick->spread13);
+        $pick->spread14 = $request->get('spread14', $pick->spread14);
+        $pick->spread15 = $request->get('spread15', $pick->spread15);
+        $pick->spread16 = $request->get('spread16', $pick->spread16);
+
+        $pick->save();
+        return response($request);
         return new PicksResource($pick);
     }
 
