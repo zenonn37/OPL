@@ -25,12 +25,12 @@ Route::post('/login', 'AuthController@login');
 
 
 //admin only
-Route::get('/schedules', 'TeamController@index');
+Route::get('/schedules', 'ScheduleController@index');
 
-Route::get('/schedules/{schedule}', 'TeamController@show');
-Route::post('/schedules', 'TeamController@store');
-Route::patch('/schedules', 'TeamController@update');
-Route::delete('/schedules', 'TeamController@destroy');
+Route::get('/schedules/{schedule}', 'ScheduleController@show');
+Route::post('/schedules', 'ScheduleController@store');
+Route::patch('/schedules', 'ScheduleController@update');
+Route::delete('/schedules', 'ScheduleController@destroy');
 
 
 //game user all

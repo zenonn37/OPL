@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Schedule;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\Schedule as ScheduleResource;
 
 class ScheduleController extends Controller
 {
@@ -14,7 +15,12 @@ class ScheduleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { }
+    {
+
+        $schedule = Schedule::all();
+
+        return ScheduleResource::collection($schedule);
+    }
 
 
 
@@ -26,19 +32,20 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $schedule = new Schedule;
+        $schedule->game_id = $request->game_id;
+        $schedule->home = $request->home;
+        $schedule->away = $request->away;
+        $schedule->game = $request->game;
+        $schedule->favorite = $request->favorite;
+        $schedule->spread = $request->spread;
+        $schedule->location = $request->location;
+        $schedule->time = $request->time;
+
+        $schedule->save();
+        return new ScheduleResource($schedule);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Schedule  $schedule
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Schedule $schedule)
-    {
-        //
-    }
 
 
 

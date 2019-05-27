@@ -1811,43 +1811,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      schedules: [{
-        id: 1,
-        home: "Giants",
-        away: "Redskins",
-        game: "1",
-        favorite: "Giants",
-        spread: "2",
-        location: "New York",
-        time: "2019-09-07"
-      }, {
-        id: 2,
-        home: "Tampa",
-        away: "Falcons",
-        game: "2",
-        favorite: "Falcons",
-        spread: "2",
-        location: "Atlanta",
-        time: "2019-09-07"
-      }, {
-        id: 3,
-        home: "Panthers",
-        away: "Saints",
-        game: "3",
-        favorite: "Panthers",
-        spread: "5",
-        location: "New Orleans",
-        time: "2019-09-07"
-      }, {
-        id: 4,
-        home: "Bills",
-        away: "Pats",
-        game: "4",
-        favorite: "New England",
-        spread: "7",
-        location: "Pats",
-        time: "2019-09-07"
-      }],
+      schedules: [],
       picks: [],
       testing: [{
         id: 8,
@@ -2030,7 +1994,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(games);
       console.log(picks);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/picks", picks).then(function (res) {
-        console.log(res.data);
+        console.log(res.data.data);
       })["catch"](function (err) {
         console.log(err);
       });
@@ -2042,15 +2006,22 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    var count = 0;
-    this.schedules.forEach(function (element) {
-      count++;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/schedules").then(function (res) {
+      console.log(res.data.data);
+      _this.schedules = res.data.data;
 
-      _this.picks.push({
-        team: "",
-        spread: ""
+      _this.schedules.forEach(function (element) {
+        count++;
+
+        _this.picks.push({
+          team: "",
+          spread: ""
+        });
       });
+    })["catch"](function (err) {
+      console.log(err);
     });
+    var count = 0;
   }
 });
 

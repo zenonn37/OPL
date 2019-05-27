@@ -45,48 +45,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      schedules: [
-        {
-          id: 1,
-          home: "Giants",
-          away: "Redskins",
-          game: "1",
-          favorite: "Giants",
-          spread: "2",
-          location: "New York",
-          time: "2019-09-07"
-        },
-        {
-          id: 2,
-          home: "Tampa",
-          away: "Falcons",
-          game: "2",
-          favorite: "Falcons",
-          spread: "2",
-          location: "Atlanta",
-          time: "2019-09-07"
-        },
-        {
-          id: 3,
-          home: "Panthers",
-          away: "Saints",
-          game: "3",
-          favorite: "Panthers",
-          spread: "5",
-          location: "New Orleans",
-          time: "2019-09-07"
-        },
-        {
-          id: 4,
-          home: "Bills",
-          away: "Pats",
-          game: "4",
-          favorite: "New England",
-          spread: "7",
-          location: "Pats",
-          time: "2019-09-07"
-        }
-      ],
+      schedules: [],
       picks: [],
       testing: [
         {
@@ -295,7 +254,7 @@ export default {
       axios
         .post("api/picks", picks)
         .then(res => {
-          console.log(res.data);
+          console.log(res.data.data);
         })
         .catch(err => {
           console.log(err);
@@ -306,14 +265,24 @@ export default {
     }
   },
   created() {
-    let count = 0;
-    this.schedules.forEach(element => {
-      count++;
-      this.picks.push({
-        team: "",
-        spread: ""
+    axios
+      .get("api/schedules")
+      .then(res => {
+        console.log(res.data.data);
+        this.schedules = res.data.data;
+
+        this.schedules.forEach(element => {
+          count++;
+          this.picks.push({
+            team: "",
+            spread: ""
+          });
+        });
+      })
+      .catch(err => {
+        console.log(err);
       });
-    });
+    let count = 0;
   }
 };
 </script>
