@@ -20,10 +20,35 @@ class CreatePicksTable extends Migration
             $table->string('team2');
             $table->string('team3');
             $table->string('team4');
+            $table->string('team5');
+            $table->string('team6');
+            $table->string('team7');
+            $table->string('team8');
+            $table->string('team9');
+            $table->string('team10');
+            $table->string('team11');
+            $table->string('team12');
+            $table->string('team13');
+            $table->string('team14')->default('BYE');
+            $table->string('team15')->default('BYE');
+            $table->string('team16')->default('BYE');
+
             $table->integer('spread1');
             $table->integer('spread2');
             $table->integer('spread3');
             $table->integer('spread4');
+            $table->integer('spread5');
+            $table->integer('spread6');
+            $table->integer('spread7');
+            $table->integer('spread8');
+            $table->integer('spread9');
+            $table->integer('spread10');
+            $table->integer('spread11');
+            $table->integer('spread12');
+            $table->integer('spread13');
+            $table->integer('spread14')->default(0);
+            $table->integer('spread15')->default(0);
+            $table->integer('spread16')->default(0);
 
 
 
