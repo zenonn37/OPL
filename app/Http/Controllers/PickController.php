@@ -17,7 +17,7 @@ class PickController extends Controller
      */
     public function index()
     {
-        $picks = Pick::all();
+        $picks = Pick::paginate(1);
 
         return PicksResource::collection($picks);
         //return response($picks, 201);
@@ -68,9 +68,10 @@ class PickController extends Controller
         $picks->spread14 = $request->spread14;
         $picks->spread15 = $request->spread15;
         $picks->spread16 = $request->spread16;
+        $picks->user()->associate($request->user());
 
         $picks->save();
-
+        //return response($request, 201);
 
         return new PicksResource($picks);
         // return response($picks, 201);
@@ -96,7 +97,7 @@ class PickController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pick $pick)
+    public function update(PicksUpdateRequest $request, Pick $pick)
     {
 
         $pick->team1 = $request->get('team1', $pick->team1);
@@ -134,7 +135,7 @@ class PickController extends Controller
         $pick->spread16 = $request->get('spread16', $pick->spread16);
 
         $pick->save();
-        return response($request);
+        //return response($request);
         return new PicksResource($pick);
     }
 

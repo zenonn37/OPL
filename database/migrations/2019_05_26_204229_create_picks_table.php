@@ -16,6 +16,7 @@ class CreatePicksTable extends Migration
         Schema::create('picks', function (Blueprint $table) {
 
             $table->increments('id');
+            $table->unsignedInteger('user_id')->index();
             $table->string('team1');
             $table->string('team2');
             $table->string('team3');

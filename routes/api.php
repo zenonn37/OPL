@@ -13,24 +13,45 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+
+
+Route::middleware('auth:api')->group(function () {
+
+
+
+    Route::post('/logout', 'AuthenicateController@logout');
+
+    //picks all
+
+
 });
 
+Route::get('/user', 'AuthenicateController@user')->middleware('auth:api');
+// Route::get('/picks', 'PickController@index')->middleware('auth:api');
 
+// Route::get('/picks/{pick}', 'PickController@show')->middleware('auth:api');
+// Route::post('/picks', 'PickController@store')->middleware('auth:api');
+// Route::patch('/picks/{pick}', 'PickController@update')->middleware('auth:api');
+// Route::delete('/picks/{pick}', 'PickController@destroy')->middleware('auth:api');
+
+Route::get('/picks', 'PickController@index')->middleware('auth:api');
 
 //auth
-Route::post('/register', 'AuthController@register');
-Route::post('/login', 'AuthController@login');
+Route::post('/register', 'AuthenicateController@register');
+Route::post('/login', 'AuthenicateController@login');
 
 
 //admin only
-Route::get('/schedules', 'ScheduleController@index');
+Route::get('/schedules', 'ScheduleController@index')->middleware('auth:api');
 
-Route::get('/schedules/{schedule}', 'ScheduleController@show');
-Route::post('/schedules', 'ScheduleController@store');
-Route::patch('/schedules/{schedule}', 'ScheduleController@update');
-Route::delete('/schedules/{schedule}', 'ScheduleController@destroy');
+Route::get('/schedules/{schedule}', 'ScheduleController@show')->middleware('auth:api');
+Route::post('/schedules', 'ScheduleController@store')->middleware('auth:api');
+Route::patch('/schedules/{schedule}', 'ScheduleController@update')->middleware('auth:api');
+Route::delete('/schedules/{schedule}', 'ScheduleController@destroy')->middleware('auth:api');
 
 
 //game user all
@@ -44,11 +65,15 @@ Route::delete('/games/{game}', 'GameController@destroy');
 
 
 //picks all
-Route::get('/picks', 'PickController@index');
-Route::get('/picks/{pick}', 'PickController@show');
-Route::post('/picks', 'PickController@store');
-Route::patch('/picks/{pick}', 'PickController@update');
-Route::delete('/picks/{pick}', 'PickController@destroy');
+
+Route::get('/picks/{pick}', 'PickController@show')->middleware('auth:api');
+
+Route::post('/picks', 'PickController@store')->middleware('auth:api');
+
+Route::patch('/picks/{pick}', 'PickController@update')->middleware('auth:api');
+
+Route::delete('/picks/{pick}', 'PickController@destroy')->middleware('auth:api');
+
 
 
 
