@@ -7,23 +7,24 @@
             <form @submit.prevent="onRegister">
               <v-text-field
                 label="Name"
-                v-model.trim="name"
+                v-model.trim="auth.name"
                 type="text"
                 prepend-inner-icon="account_circle"
               ></v-text-field>
               <v-text-field
                 label="Email"
-                v-model.trim="email"
+                v-model.trim="auth.email"
                 type="email"
                 prepend-inner-icon="email"
               ></v-text-field>
               <v-text-field
                 aria-label="Password"
                 label="Password"
-                v-model.trim="password"
+                v-model.trim="auth.password"
                 type="password"
                 prepend-inner-icon="lock"
               ></v-text-field>
+              <p v-if="errors">{{errors}}</p>
               <v-btn type="submit" color="primary" large>Login</v-btn>
             </form>
           </div>
@@ -38,25 +39,24 @@ import axios from "axios";
 export default {
   data() {
     return {
-      name: "",
-      email: "",
-      password: ""
+      errors: null,
+      auth: {
+        name: "",
+        email: "",
+        password: ""
+      }
     };
   },
   methods: {
     onRegister() {
-      axios
-        .post("api/register", {
-          name: this.name,
-          email: this.email,
-          password: this.password
-        })
+      //dispatch register redirect to login if successful needs validation
+      this.$store
+        .dispatch("REGISTER", this.auth)
         .then(res => {
-          console.log(res.data);
           this.$router.push("/login");
         })
         .catch(err => {
-          console.log(err);
+          this.errors = this.$store.getters["GET_ERRORS"];
         });
     }
   }

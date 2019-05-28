@@ -7,17 +7,18 @@
             <form @submit.prevent="onLogin">
               <v-text-field
                 label="Username"
-                v-model.trim="username"
+                v-model.trim="auth.username"
                 type="email"
                 prepend-inner-icon="account_circle"
               ></v-text-field>
               <v-text-field
                 aria-label="Password"
                 label="Password"
-                v-model.trim="password"
+                v-model.trim="auth.password"
                 type="password"
                 prepend-inner-icon="lock"
               ></v-text-field>
+              <p>{{errors}}</p>
               <v-btn type="submit" color="primary" large>Login</v-btn>
             </form>
           </div>
@@ -28,27 +29,26 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data() {
     return {
-      username: "",
-      password: ""
+      errors: "",
+      auth: {
+        username: "",
+        password: ""
+      }
     };
   },
   methods: {
     onLogin() {
-      axios
-        .post("api/login", {
-          username: this.username,
-          password: this.password
-        })
+      //dispatch login
+      this.$store
+        .dispatch("LOGIN", this.auth)
         .then(res => {
-          console.log(res.data);
           this.$router.push("/");
         })
         .catch(err => {
-          console.log(err);
+          this.errors = this.$store.getters["GET_ERRORS"];
         });
     }
   }
