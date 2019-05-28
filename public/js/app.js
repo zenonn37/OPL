@@ -1837,169 +1837,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      page: 1,
+      loaded: false,
       schedules: [],
-      picks: [],
-      testing: [{
-        id: 8,
-        games: 16,
-        week: "6",
-        date: "2019-09-07",
-        schedules: [{
-          id: 1,
-          home: "Giants",
-          away: "Redskins",
-          game: "1",
-          favorite: "Giants",
-          spread: "2",
-          location: "New York",
-          time: "2019-09-07"
-        }, {
-          id: 2,
-          home: "Tampa",
-          away: "Falcons",
-          game: "2",
-          favorite: "Falcons",
-          spread: "2",
-          location: "Atlanta",
-          time: "2019-09-07"
-        }]
-      }, {
-        id: 9,
-        games: 16,
-        week: "6",
-        date: "2019-09-07",
-        schedules: [{
-          id: 2,
-          home: "Tampa",
-          away: "Falcons",
-          game: "2",
-          favorite: "Falcons",
-          spread: "2",
-          location: "Atlanta",
-          time: "2019-09-07"
-        }]
-      }],
-      test: [{
-        id: 1,
-        home: "Giants",
-        away: "Redskins",
-        game: "1",
-        favorite: "Giants",
-        spread: "2",
-        location: "New York",
-        time: "2019-09-07"
-      }, {
-        id: 2,
-        home: "Bucs",
-        away: "Cowboys",
-        game: "2",
-        favorite: "Cowbuys",
-        spread: "2",
-        location: "Irving",
-        time: "2019-09-07"
-      }, {
-        id: 3,
-        home: "Packers",
-        away: "Lions",
-        game: "3",
-        favorite: "Packers",
-        spread: "2",
-        location: "Lions",
-        time: "2019-09-07"
-      }, {
-        id: 4,
-        home: "Cards",
-        away: "49ers",
-        game: "4",
-        favorite: "49ers",
-        spread: "2",
-        location: "New York",
-        time: "2019-09-07"
-      }],
-      games: [{
-        id: 1,
-        game1: {
-          home: "Giants",
-          away: "Bucs"
-        },
-        game2: {
-          home: "Redskins",
-          away: "Falcons"
-        },
-        game3: {
-          home: "Seahawks",
-          away: "Rams"
-        },
-        game4: {
-          home: "Cowboys",
-          away: "Eagles"
-        },
-        week: 1,
-        date: new Date()
-      }, {
-        id: 2,
-        game1: {
-          home: "Falcons",
-          away: "Bucs"
-        },
-        game2: {
-          home: "Redskins",
-          away: "Giants"
-        },
-        game3: {
-          home: "Seahawks",
-          away: "49ers"
-        },
-        game4: {
-          home: "Denver",
-          away: "Eagles"
-        },
-        week: 2,
-        date: new Date()
-      }],
-      nfl: [{
-        id: 1,
-        week: 1,
-        date: new Date(),
-        schedule: [{
-          game1: {
-            home: "Giants",
-            away: "Bucs",
-            game: 1
-          },
-          game2: {
-            home: "Eagles",
-            away: "Bears",
-            game: 2
-          },
-          game3: {
-            home: "Dolphins",
-            away: "Pats",
-            game: 3
-          },
-          game4: {
-            home: "Bills",
-            away: "Raiders",
-            game: 4
-          }
-        }]
-      }],
-      form: {
-        team1: null,
-        team2: null,
-        team3: null,
-        team4: null
-      }
+      picks: []
     };
   },
   methods: {
     onSubmit: function onSubmit() {
       console.log(this.picks);
-      var games = this.schedules.length;
+      var games = this.schedule.length;
       var picks = "";
 
       switch (games) {
@@ -2029,29 +1887,49 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       });
     },
-    newTeam: function newTeam(index) {
-      console.log(index);
+    loadMore: function loadMore(value) {
+      console.log(value + "im called");
+      this.$store.dispatch("LoadSchedules", value).then(function (res) {
+        console.log("loaded");
+      });
     }
   },
-  created: function created() {
-    var _this = this;
+  computed: {
+    paginate: function paginate() {
+      var data = this.page;
+      return data;
+    },
+    schedule: function schedule() {
+      var _this = this;
 
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/schedules").then(function (res) {
-      console.log(res.data.data);
-      _this.schedules = res.data.data;
-
-      _this.schedules.forEach(function (element) {
-        count++;
-
+      var sch = this.$store.getters.GET_SCHEDULE;
+      sch.forEach(function (element) {
         _this.picks.push({
           team: "",
           spread: ""
         });
       });
-    })["catch"](function (err) {
-      console.log(err);
+      return sch;
+    },
+    links: function links() {
+      return this.$store.getters.GET_LINKS;
+    },
+    meta: function meta() {
+      return this.$store.getters.GET_META;
+    }
+  },
+  watch: {
+    paginate: function paginate(value) {
+      console.log(value);
+      this.loadMore(value);
+    }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    this.$store.dispatch("GET_SCHEDULE").then(function (res) {
+      _this2.loaded = true;
     });
-    var count = 0;
   }
 });
 
@@ -3726,129 +3604,154 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", [
-      _c(
-        "form",
-        {
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              return _vm.onSubmit($event)
-            }
-          }
-        },
-        [
-          _vm._l(_vm.schedules, function(sch, index) {
-            return _c(
-              "div",
-              { key: sch.id },
-              [
-                _vm._v(
-                  "\n        " +
-                    _vm._s(index) +
-                    "\n        " +
-                    _vm._s(_vm.newTeam(index)) +
-                    "\n        "
-                ),
-                _c(
-                  "v-layout",
-                  { attrs: { wrap: "", row: "" } },
-                  [
-                    _c(
-                      "v-flex",
+  return _c(
+    "div",
+    [
+      !_vm.loaded
+        ? [_c("div", [_vm._v("please wait...")])]
+        : [
+            _c("div", [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.onSubmit($event)
+                    }
+                  }
+                },
+                [
+                  _vm._l(_vm.schedule, function(sch, index) {
+                    return _c(
+                      "div",
+                      { key: sch.id },
                       [
-                        _c("v-checkbox", {
-                          attrs: {
-                            label: sch.home,
-                            color: "orange",
-                            value: sch.home,
-                            "hide-details": ""
-                          },
-                          model: {
-                            value: _vm.picks[index].team,
-                            callback: function($$v) {
-                              _vm.$set(_vm.picks[index], "team", $$v)
-                            },
-                            expression: "picks[index].team"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-flex",
-                      [
-                        _c("v-checkbox", {
-                          attrs: {
-                            label: sch.away,
-                            color: "blue",
-                            value: sch.away,
-                            "hide-details": ""
-                          },
-                          model: {
-                            value: _vm.picks[index].team,
-                            callback: function($$v) {
-                              _vm.$set(_vm.picks[index], "team", $$v)
-                            },
-                            expression: "picks[index].team"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-flex",
-                      [
-                        _c("v-text-field", {
-                          attrs: {
-                            type: "number",
-                            label: "Spread",
-                            outline: ""
-                          },
-                          model: {
-                            value: _vm.picks[index].spread,
-                            callback: function($$v) {
-                              _vm.$set(_vm.picks[index], "spread", $$v)
-                            },
-                            expression: "picks[index].spread"
-                          }
-                        })
+                        _c(
+                          "v-layout",
+                          { attrs: { wrap: "", row: "" } },
+                          [
+                            _c(
+                              "v-flex",
+                              [
+                                _c("v-checkbox", {
+                                  attrs: {
+                                    label: sch.home,
+                                    color: "orange",
+                                    value: sch.home,
+                                    "hide-details": ""
+                                  },
+                                  model: {
+                                    value: _vm.picks[index].team,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.picks[index], "team", $$v)
+                                    },
+                                    expression: "picks[index].team"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-flex",
+                              [
+                                _c("v-checkbox", {
+                                  attrs: {
+                                    label: sch.away,
+                                    color: "blue",
+                                    value: sch.away,
+                                    "hide-details": ""
+                                  },
+                                  model: {
+                                    value: _vm.picks[index].team,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.picks[index], "team", $$v)
+                                    },
+                                    expression: "picks[index].team"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-flex",
+                              [
+                                _c("v-text-field", {
+                                  attrs: {
+                                    type: "number",
+                                    label: "Spread",
+                                    outline: ""
+                                  },
+                                  model: {
+                                    value: _vm.picks[index].spread,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.picks[index], "spread", $$v)
+                                    },
+                                    expression: "picks[index].spread"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
                       ],
                       1
                     )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          }),
-          _vm._v(" "),
-          _c(
-            "v-layout",
-            [
-              _c(
-                "v-flex",
-                [
+                  }),
+                  _vm._v(" "),
                   _c(
-                    "v-btn",
-                    { attrs: { type: "submit", color: "info", large: "" } },
-                    [_vm._v("Complete")]
+                    "v-layout",
+                    [
+                      _c(
+                        "v-flex",
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: {
+                                type: "submit",
+                                color: "info",
+                                large: ""
+                              }
+                            },
+                            [_vm._v("Complete")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
                   )
                 ],
-                1
+                2
               )
-            ],
-            1
-          )
+            ])
+          ],
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "text-xs-center" },
+        [
+          _c("v-pagination", {
+            attrs: { length: _vm.meta.last_page, circle: "" },
+            model: {
+              value: _vm.page,
+              callback: function($$v) {
+                _vm.page = $$v
+              },
+              expression: "page"
+            }
+          })
         ],
-        2
+        1
       )
-    ])
-  ])
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -46841,6 +46744,97 @@ var actions = {
 
 /***/ }),
 
+/***/ "./resources/js/store/modules/schedule.js":
+/*!************************************************!*\
+  !*** ./resources/js/store/modules/schedule.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+var state = {
+  schedules: [],
+  errors: "",
+  links: "",
+  meta: ""
+};
+var mutations = {
+  SET_SCHEDULE: function SET_SCHEDULE(state, schedules) {
+    state.schedules = schedules;
+  },
+  SET_LINKS: function SET_LINKS(state, links) {
+    state.links = links;
+  },
+  SET_META: function SET_META(state, meta) {
+    state.meta = meta;
+  },
+  SET_ERRORS: function SET_ERRORS(state, error) {
+    state.errors = error;
+  }
+};
+var getters = {
+  GET_SCHEDULE: function GET_SCHEDULE(state) {
+    return state.schedules;
+  },
+  GET_LINKS: function GET_LINKS(state) {
+    return state.links;
+  },
+  GET_META: function GET_META(state) {
+    return state.meta;
+  },
+  SCHEDULE_ERRORS: function SCHEDULE_ERRORS(state) {
+    return state.errors;
+  }
+};
+var actions = {
+  GET_SCHEDULE: function GET_SCHEDULE(_ref) {
+    var commit = _ref.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("token");
+    return new Promise(function (resolve, reject) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/schedules").then(function (res) {
+        resolve(res);
+        var data = res.data.data;
+        var links = res.data.links;
+        var meta = res.data.meta; // console.log(res.data.links);
+        // console.log(res.data.meta);
+
+        commit("SET_SCHEDULE", data);
+        commit("SET_LINKS", links);
+        commit("SET_META", meta);
+      })["catch"](function (err) {
+        reject(err);
+        commit("SCHEDULE_ERRORS", err);
+      });
+    });
+  },
+  LoadSchedules: function LoadSchedules(_ref2, page) {
+    var commit = _ref2.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("token");
+    return new Promise(function (resolve, reject) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/schedules?page=" + page).then(function (res) {
+        resolve(res);
+        var data = res.data.data;
+        commit("SET_SCHEDULE", data);
+      })["catch"](function (err) {
+        reject(err);
+        commit("SCHEDULE_ERRORS", err);
+      });
+    });
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: state,
+  mutations: mutations,
+  getters: getters,
+  actions: actions
+});
+
+/***/ }),
+
 /***/ "./resources/js/store/store.js":
 /*!*************************************!*\
   !*** ./resources/js/store/store.js ***!
@@ -46855,13 +46849,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/auth */ "./resources/js/store/modules/auth.js");
+/* harmony import */ var _modules_schedule__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/schedule */ "./resources/js/store/modules/schedule.js");
+
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
-    auth: _modules_auth__WEBPACK_IMPORTED_MODULE_2__["default"]
+    auth: _modules_auth__WEBPACK_IMPORTED_MODULE_2__["default"],
+    schedules: _modules_schedule__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 });
 

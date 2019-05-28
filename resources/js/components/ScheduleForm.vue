@@ -1,41 +1,48 @@
 <template>
   <div>
-    <div>
-      <form @submit.prevent="onSubmit">
-        <div v-for="(sch, index) in schedules" :key="sch.id">
-          {{index}}
-          {{newTeam(index)}}
-          <v-layout wrap row>
-            <v-flex>
-              <v-checkbox
-                v-model="picks[index].team"
-                :label="sch.home"
-                color="orange"
-                :value="sch.home"
-                hide-details
-              ></v-checkbox>
-            </v-flex>
+    <template v-if="!loaded">
+      <div>please wait...</div>
+    </template>
+    <template v-else>
+      <div>
+        <form @submit.prevent="onSubmit">
+          <div v-for="(sch, index) in  schedule" :key="sch.id">
+            <v-layout wrap row>
+              <v-flex>
+                <v-checkbox
+                  :label="sch.home"
+                  color="orange"
+                  :value="sch.home"
+                  v-model="picks[index].team"
+                  hide-details
+                ></v-checkbox>
+              </v-flex>
 
+              <v-flex>
+                <v-checkbox
+                  :label="sch.away"
+                  color="blue"
+                  :value="sch.away"
+                  v-model="picks[index].team"
+                  hide-details
+                ></v-checkbox>
+              </v-flex>
+              <v-flex>
+                <v-text-field type="number" label="Spread" outline v-model="picks[index].spread"></v-text-field>
+              </v-flex>
+            </v-layout>
+          </div>
+          <v-layout>
             <v-flex>
-              <v-checkbox
-                v-model="picks[index].team"
-                :label="sch.away"
-                color="blue"
-                :value="sch.away"
-                hide-details
-              ></v-checkbox>
-            </v-flex>
-            <v-flex>
-              <v-text-field type="number" label="Spread" outline v-model="picks[index].spread"></v-text-field>
+              <v-btn type="submit" color="info" large>Complete</v-btn>
             </v-flex>
           </v-layout>
-        </div>
-        <v-layout>
-          <v-flex>
-            <v-btn type="submit" color="info" large>Complete</v-btn>
-          </v-flex>
-        </v-layout>
-      </form>
+        </form>
+      </div>
+    </template>
+
+    <div class="text-xs-center">
+      <v-pagination v-model="page" :length="meta.last_page" circle></v-pagination>
     </div>
   </div>
 </template>
@@ -45,186 +52,16 @@ import axios from "axios";
 export default {
   data() {
     return {
+      page: 1,
+      loaded: false,
       schedules: [],
-      picks: [],
-      testing: [
-        {
-          id: 8,
-          games: 16,
-          week: "6",
-          date: "2019-09-07",
-          schedules: [
-            {
-              id: 1,
-              home: "Giants",
-              away: "Redskins",
-              game: "1",
-              favorite: "Giants",
-              spread: "2",
-              location: "New York",
-              time: "2019-09-07"
-            },
-            {
-              id: 2,
-              home: "Tampa",
-              away: "Falcons",
-              game: "2",
-              favorite: "Falcons",
-              spread: "2",
-              location: "Atlanta",
-              time: "2019-09-07"
-            }
-          ]
-        },
-        {
-          id: 9,
-          games: 16,
-          week: "6",
-          date: "2019-09-07",
-          schedules: [
-            {
-              id: 2,
-              home: "Tampa",
-              away: "Falcons",
-              game: "2",
-              favorite: "Falcons",
-              spread: "2",
-              location: "Atlanta",
-              time: "2019-09-07"
-            }
-          ]
-        }
-      ],
-      test: [
-        {
-          id: 1,
-          home: "Giants",
-          away: "Redskins",
-          game: "1",
-          favorite: "Giants",
-          spread: "2",
-          location: "New York",
-          time: "2019-09-07"
-        },
-        {
-          id: 2,
-          home: "Bucs",
-          away: "Cowboys",
-          game: "2",
-          favorite: "Cowbuys",
-          spread: "2",
-          location: "Irving",
-          time: "2019-09-07"
-        },
-        {
-          id: 3,
-          home: "Packers",
-          away: "Lions",
-          game: "3",
-          favorite: "Packers",
-          spread: "2",
-          location: "Lions",
-          time: "2019-09-07"
-        },
-        {
-          id: 4,
-          home: "Cards",
-          away: "49ers",
-          game: "4",
-          favorite: "49ers",
-          spread: "2",
-          location: "New York",
-          time: "2019-09-07"
-        }
-      ],
-      games: [
-        {
-          id: 1,
-          game1: {
-            home: "Giants",
-            away: "Bucs"
-          },
-          game2: {
-            home: "Redskins",
-            away: "Falcons"
-          },
-          game3: {
-            home: "Seahawks",
-            away: "Rams"
-          },
-          game4: {
-            home: "Cowboys",
-            away: "Eagles"
-          },
-          week: 1,
-          date: new Date()
-        },
-        {
-          id: 2,
-          game1: {
-            home: "Falcons",
-            away: "Bucs"
-          },
-          game2: {
-            home: "Redskins",
-            away: "Giants"
-          },
-          game3: {
-            home: "Seahawks",
-            away: "49ers"
-          },
-          game4: {
-            home: "Denver",
-            away: "Eagles"
-          },
-          week: 2,
-          date: new Date()
-        }
-      ],
-      nfl: [
-        {
-          id: 1,
-          week: 1,
-          date: new Date(),
-          schedule: [
-            {
-              game1: {
-                home: "Giants",
-                away: "Bucs",
-                game: 1
-              },
-              game2: {
-                home: "Eagles",
-                away: "Bears",
-                game: 2
-              },
-              game3: {
-                home: "Dolphins",
-                away: "Pats",
-                game: 3
-              },
-              game4: {
-                home: "Bills",
-                away: "Raiders",
-                game: 4
-              }
-            }
-          ]
-        }
-      ],
-
-      form: {
-        team1: null,
-        team2: null,
-        team3: null,
-        team4: null
-      }
+      picks: []
     };
   },
   methods: {
     onSubmit() {
       console.log(this.picks);
-      const games = this.schedules.length;
+      const games = this.schedule.length;
       let picks = "";
       switch (games) {
         case 4:
@@ -260,29 +97,46 @@ export default {
           console.log(err);
         });
     },
-    newTeam(index) {
-      console.log(index);
+    loadMore(value) {
+      console.log(value + "im called");
+      this.$store.dispatch("LoadSchedules", value).then(res => {
+        console.log("loaded");
+      });
+    }
+  },
+  computed: {
+    paginate() {
+      let data = this.page;
+      return data;
+    },
+    schedule() {
+      const sch = this.$store.getters.GET_SCHEDULE;
+      sch.forEach(element => {
+        this.picks.push({
+          team: "",
+          spread: ""
+        });
+      });
+
+      return sch;
+    },
+    links() {
+      return this.$store.getters.GET_LINKS;
+    },
+    meta() {
+      return this.$store.getters.GET_META;
+    }
+  },
+  watch: {
+    paginate(value) {
+      console.log(value);
+      this.loadMore(value);
     }
   },
   created() {
-    axios
-      .get("api/schedules")
-      .then(res => {
-        console.log(res.data.data);
-        this.schedules = res.data.data;
-
-        this.schedules.forEach(element => {
-          count++;
-          this.picks.push({
-            team: "",
-            spread: ""
-          });
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    let count = 0;
+    this.$store.dispatch("GET_SCHEDULE").then(res => {
+      this.loaded = true;
+    });
   }
 };
 </script>

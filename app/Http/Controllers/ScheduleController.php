@@ -18,7 +18,7 @@ class ScheduleController extends Controller
     public function index()
     {
 
-        $schedule = Schedule::all();
+        $schedule = Schedule::paginate(5);
 
         return ScheduleResource::collection($schedule);
     }
