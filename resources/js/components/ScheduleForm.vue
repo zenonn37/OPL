@@ -98,9 +98,11 @@ export default {
         });
     },
     loadMore(value) {
+      this.loaded = false;
       console.log(value + "im called");
       this.$store.dispatch("LoadSchedules", value).then(res => {
         console.log("loaded");
+        this.loaded = true;
       });
     }
   },

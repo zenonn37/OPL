@@ -1888,9 +1888,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     loadMore: function loadMore(value) {
+      var _this = this;
+
+      this.loaded = false;
       console.log(value + "im called");
       this.$store.dispatch("LoadSchedules", value).then(function (res) {
         console.log("loaded");
+        _this.loaded = true;
       });
     }
   },
@@ -1900,11 +1904,11 @@ __webpack_require__.r(__webpack_exports__);
       return data;
     },
     schedule: function schedule() {
-      var _this = this;
+      var _this2 = this;
 
       var sch = this.$store.getters.GET_SCHEDULE;
       sch.forEach(function (element) {
-        _this.picks.push({
+        _this2.picks.push({
           team: "",
           spread: ""
         });
@@ -1925,10 +1929,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     this.$store.dispatch("GET_SCHEDULE").then(function (res) {
-      _this2.loaded = true;
+      _this3.loaded = true;
     });
   }
 });
