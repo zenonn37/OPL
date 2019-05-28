@@ -10,6 +10,9 @@
       <v-btn to="/register" flat>
         <v-icon>account_circle</v-icon>
       </v-btn>
+      <v-btn to="/about" flat>
+        <v-icon>info</v-icon>
+      </v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>

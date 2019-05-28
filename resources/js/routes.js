@@ -12,12 +12,54 @@ export default {
 
     routes: [
         { path: "*", component: NotFound },
-        { path: "/", component: Home, name: "home" },
-        { path: "/about", component: About, name: "about" },
-        { path: "/contact", component: Contact, name: "contact" },
+        {
+            path: "/",
+            component: Home,
+            name: "home",
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: "/about",
+            component: About,
+            name: "about",
+            meta: {
+                requiresVisitor: true
+            }
+        },
+        {
+            path: "/contact",
+            component: Contact,
+            name: "contact",
+            meta: {
+                requiresAuth: true
+            }
+        },
         { path: "/teams", component: Team, name: "team" },
-        { path: "/schedule", component: Schedule, name: "schedule" },
-        { path: "/login", component: Login, name: "login" },
-        { path: "/register", component: Register, name: "register" }
+        {
+            path: "/schedule",
+            component: Schedule,
+            name: "schedule",
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: "/login",
+            component: Login,
+            name: "login",
+            meta: {
+                requiresVisitor: true
+            }
+        },
+        {
+            path: "/register",
+            component: Register,
+            name: "register",
+            meta: {
+                requiresVisitor: true
+            }
+        }
     ]
 };

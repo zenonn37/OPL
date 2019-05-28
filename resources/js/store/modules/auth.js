@@ -31,6 +31,9 @@ const getters = {
     },
     GET_ERRORS(state) {
         return state.errors;
+    },
+    isLogged(state) {
+        return state.token !== null;
     }
 };
 
@@ -70,12 +73,9 @@ const actions = {
                 });
         });
     },
-    LOGOUT({ commit }) {
-        if (!localStorage.getItem("token") || undefined) {
-            return false;
-        }
-        const token = localStorage.getItem("token");
-        axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+    LOGOUT({ commit, state }) {
+        axios.defaults.headers.common["Authorization"] =
+            "Bearer " + state.token;
         return new Promise((resolve, reject) => {
             axios
                 .post("api/logout")
@@ -86,6 +86,7 @@ const actions = {
                 })
                 .catch(err => {
                     reject(err);
+                    commit("CLEAR_AUTH");
                     commit("AUTH_ERRORS", err);
                 });
         });

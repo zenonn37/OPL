@@ -2082,6 +2082,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -3893,6 +3896,13 @@ var render = function() {
             { attrs: { to: "/register", flat: "" } },
             [_c("v-icon", [_vm._v("account_circle")])],
             1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            { attrs: { to: "/about", flat: "" } },
+            [_c("v-icon", [_vm._v("info")])],
+            1
           )
         ],
         1
@@ -4075,7 +4085,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Home")])
+  return _c("h1", [_vm._v("Dashboard")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -46336,11 +46346,34 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_4___default.a); //Vue.component("app", require("./App.vue").default);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("app", __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue")["default"]);
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"](_routes__WEBPACK_IMPORTED_MODULE_2__["default"]); // router.beforeEach((to,from,next)=> {
-//      if (to.matched.some(record => record.meta.requiresAuth)) {
-//      }
-// })
-
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"](_routes__WEBPACK_IMPORTED_MODULE_2__["default"]);
+router.beforeEach(function (to, from, next) {
+  if (to.matched.some(function (record) {
+    return record.meta.requiresAuth;
+  })) {
+    if (!_store_store__WEBPACK_IMPORTED_MODULE_5__["store"].getters.isLogged) {
+      console.log("not logged");
+      next({
+        name: "login"
+      });
+    } else {
+      next();
+    }
+  } else if (to.matched.some(function (record) {
+    return record.meta.requiresVisitor;
+  })) {
+    if (_store_store__WEBPACK_IMPORTED_MODULE_5__["store"].getters.isLogged) {
+      console.log("not logged");
+      next({
+        name: "home"
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   router: router,
   store: _store_store__WEBPACK_IMPORTED_MODULE_5__["store"]
@@ -46657,15 +46690,24 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     path: "/",
     component: _views_Home__WEBPACK_IMPORTED_MODULE_1__["default"],
-    name: "home"
+    name: "home",
+    meta: {
+      requiresAuth: true
+    }
   }, {
     path: "/about",
     component: _views_About__WEBPACK_IMPORTED_MODULE_2__["default"],
-    name: "about"
+    name: "about",
+    meta: {
+      requiresVisitor: true
+    }
   }, {
     path: "/contact",
     component: _views_Contact__WEBPACK_IMPORTED_MODULE_3__["default"],
-    name: "contact"
+    name: "contact",
+    meta: {
+      requiresAuth: true
+    }
   }, {
     path: "/teams",
     component: _views_Team__WEBPACK_IMPORTED_MODULE_4__["default"],
@@ -46673,15 +46715,24 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     path: "/schedule",
     component: _views_Schedule__WEBPACK_IMPORTED_MODULE_5__["default"],
-    name: "schedule"
+    name: "schedule",
+    meta: {
+      requiresAuth: true
+    }
   }, {
     path: "/login",
     component: _views_Login__WEBPACK_IMPORTED_MODULE_6__["default"],
-    name: "login"
+    name: "login",
+    meta: {
+      requiresVisitor: true
+    }
   }, {
     path: "/register",
     component: _views_Register__WEBPACK_IMPORTED_MODULE_7__["default"],
-    name: "register"
+    name: "register",
+    meta: {
+      requiresVisitor: true
+    }
   }]
 });
 
@@ -46728,6 +46779,9 @@ var getters = {
   },
   GET_ERRORS: function GET_ERRORS(state) {
     return state.errors;
+  },
+  isLogged: function isLogged(state) {
+    return state.token !== null;
   }
 };
 var actions = {
@@ -46763,20 +46817,16 @@ var actions = {
     });
   },
   LOGOUT: function LOGOUT(_ref3) {
-    var commit = _ref3.commit;
-
-    if (!localStorage.getItem("token") || undefined) {
-      return false;
-    }
-
-    var token = localStorage.getItem("token");
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + token;
+    var commit = _ref3.commit,
+        state = _ref3.state;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + state.token;
     return new Promise(function (resolve, reject) {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/logout").then(function (res) {
         resolve(res);
         commit("CLEAR_AUTH");
       })["catch"](function (err) {
         reject(err);
+        commit("CLEAR_AUTH");
         commit("AUTH_ERRORS", err);
       });
     });

@@ -14,12 +14,31 @@ Vue.use(Vuetify);
 Vue.component("app", require("./App.vue").default);
 const router = new VueRouter(routes);
 
-// router.beforeEach((to,from,next)=> {
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!store.getters.isLogged) {
+            console.log("not logged");
 
-//      if (to.matched.some(record => record.meta.requiresAuth)) {
+            next({
+                name: "login"
+            });
+        } else {
+            next();
+        }
+    } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+        if (store.getters.isLogged) {
+            console.log("not logged");
 
-//      }
-// })
+            next({
+                name: "home"
+            });
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
+});
 
 let app = new Vue({
     router,
