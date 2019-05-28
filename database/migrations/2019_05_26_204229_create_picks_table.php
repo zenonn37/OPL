@@ -17,6 +17,7 @@ class CreatePicksTable extends Migration
 
             $table->increments('id');
             $table->unsignedInteger('user_id')->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('team1');
             $table->string('team2');
             $table->string('team3');

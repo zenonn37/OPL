@@ -15,7 +15,8 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('game_id')->unsigned();
+            $table->integer('game_id')->unsigned()->index();
+            $table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
             $table->string('home', 255);
             $table->string('away', 255);
             $table->string('game', 255);
