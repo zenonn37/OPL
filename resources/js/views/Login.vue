@@ -2,27 +2,29 @@
   <div>
     <v-layout column justify-center>
       <v-flex>
-        <v-card>
-          <div class="auth-card">
-            <form @submit.prevent="onLogin">
-              <v-text-field
-                label="Username"
-                v-model.trim="auth.username"
-                type="email"
-                prepend-inner-icon="account_circle"
-              ></v-text-field>
-              <v-text-field
-                aria-label="Password"
-                label="Password"
-                v-model.trim="auth.password"
-                type="password"
-                prepend-inner-icon="lock"
-              ></v-text-field>
-              <p>{{errors}}</p>
-              <v-btn type="submit" color="primary" large>Login</v-btn>
-            </form>
-          </div>
-        </v-card>
+        <div class="container">
+          <v-card>
+            <div class="auth-card">
+              <form @submit.prevent="onLogin">
+                <v-text-field
+                  label="Username"
+                  v-model.trim="auth.username"
+                  type="email"
+                  prepend-inner-icon="account_circle"
+                ></v-text-field>
+                <v-text-field
+                  aria-label="Password"
+                  label="Password"
+                  v-model.trim="auth.password"
+                  type="password"
+                  prepend-inner-icon="lock"
+                ></v-text-field>
+                <p>{{errors}}</p>
+                <v-btn type="submit" color="primary" large>Login</v-btn>
+              </form>
+            </div>
+          </v-card>
+        </div>
       </v-flex>
     </v-layout>
   </div>
@@ -56,6 +58,10 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  width: 60%;
+  margin-top: 80px;
+}
 .auth-card {
   padding: 30px;
 }

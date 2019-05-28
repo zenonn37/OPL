@@ -2,7 +2,7 @@ import axios from "axios";
 
 const state = {
     user: null,
-    token: "",
+    token: localStorage.getItem("token") || null,
     errors: ""
 };
 
@@ -70,7 +70,26 @@ const actions = {
                 });
         });
     },
-    LOGOUT({ commit }) {}
+    LOGOUT({ commit }) {
+        if (!localStorage.getItem("token") || undefined) {
+            return false;
+        }
+        const token = localStorage.getItem("token");
+        axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+        return new Promise((resolve, reject) => {
+            axios
+                .post("api/logout")
+
+                .then(res => {
+                    resolve(res);
+                    commit("CLEAR_AUTH");
+                })
+                .catch(err => {
+                    reject(err);
+                    commit("AUTH_ERRORS", err);
+                });
+        });
+    }
 };
 
 export default {

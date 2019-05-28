@@ -12,7 +12,16 @@ Vue.use(VueRouter);
 Vue.use(Vuetify);
 //Vue.component("app", require("./App.vue").default);
 Vue.component("app", require("./App.vue").default);
+const router = new VueRouter(routes);
+
+// router.beforeEach((to,from,next)=> {
+
+//      if (to.matched.some(record => record.meta.requiresAuth)) {
+
+//      }
+// })
+
 let app = new Vue({
-    router: new VueRouter(routes),
+    router,
     store
 }).$mount("#app");
