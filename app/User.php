@@ -46,4 +46,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Pick::class);
     }
+    public function games()
+    {
+        return $this->hasMany(Game::class);
+    }
+    public function leagues()
+    {
+        return $this->hasMany(League::class);
+    }
 }

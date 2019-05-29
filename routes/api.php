@@ -27,7 +27,11 @@ Route::middleware('auth:api')->group(function () {
 
     //picks all
 
-
+    Route::get('/league', 'LeagueController@index');
+    Route::get('/league/{league}', 'LeagueController@show');
+    Route::post('/league', 'LeagueController@store');
+    Route::patch('/league/{league}', 'LeagueController@update');
+    Route::delete('/league/{league}', 'LeagueController@delete');
 });
 
 Route::get('/user', 'AuthenicateController@user')->middleware('auth:api');

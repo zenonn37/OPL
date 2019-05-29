@@ -4258,7 +4258,7 @@ var render = function() {
                               large: ""
                             }
                           },
-                          [_vm._v("Login")]
+                          [_vm._v("Register")]
                         )
                       ],
                       1

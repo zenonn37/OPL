@@ -26,7 +26,7 @@
                   prepend-inner-icon="lock"
                 ></v-text-field>
                 <p v-if="errors">{{errors}}</p>
-                <v-btn type="submit" color="primary" large>Login</v-btn>
+                <v-btn type="submit" color="primary" large>Register</v-btn>
               </form>
             </div>
           </v-card>
