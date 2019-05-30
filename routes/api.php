@@ -31,16 +31,11 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/league/{league}', 'LeagueController@show');
     Route::post('/league', 'LeagueController@store');
     Route::patch('/league/{league}', 'LeagueController@update');
-    Route::delete('/league/{league}', 'LeagueController@delete');
+    Route::delete('/league/{league}', 'LeagueController@destroy');
 });
 
 Route::get('/user', 'AuthenicateController@user')->middleware('auth:api');
-// Route::get('/picks', 'PickController@index')->middleware('auth:api');
 
-// Route::get('/picks/{pick}', 'PickController@show')->middleware('auth:api');
-// Route::post('/picks', 'PickController@store')->middleware('auth:api');
-// Route::patch('/picks/{pick}', 'PickController@update')->middleware('auth:api');
-// Route::delete('/picks/{pick}', 'PickController@destroy')->middleware('auth:api');
 
 Route::get('/picks', 'PickController@index')->middleware('auth:api');
 
