@@ -17,7 +17,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        $games = Game::all();
+        $games = Game::where('user_id', auth()->user()->id)->get();
 
         return GameResource::collection($games);
     }
@@ -44,19 +44,21 @@ class GameController extends Controller
         $game->games = $request->games;
         $game->week = $request->week;
         $game->date = $request->date;
+        $game->league_id = $request->league_id;
+        $game->user()->associate($request->user());
 
-        $schedule = new Schedule;
-        $schedule->home = $request->home;
-        $schedule->away = $request->away;
-        $schedule->game = $request->game;
-        $schedule->favorite = $request->favorite;
-        $schedule->spread = $request->spread;
-        $schedule->location = $request->location;
-        $schedule->time = $request->time;
+        // $schedule = new Schedule;
+        // $schedule->home = $request->home;
+        // $schedule->away = $request->away;
+        // $schedule->game = $request->game;
+        // $schedule->favorite = $request->favorite;
+        // $schedule->spread = $request->spread;
+        // $schedule->location = $request->location;
+        // $schedule->time = $request->time;
 
 
         $game->save();
-        $game->schedules()->save($schedule);
+        // $game->schedules()->save($schedule);
 
         return new GameResource($game);
     }

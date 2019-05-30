@@ -27,13 +27,8 @@ class GameCreateRequest extends FormRequest
             'week' => 'required|integer',
             'games' => 'required|integer',
             'date' => 'required',
-            'home' => 'required|string',
-            'away' => 'required|string',
-            'game' => 'required|string',
-            'favorite' => 'required|string',
-            'spread' => 'required|string',
-            'location' => 'required|string',
-            'time' => 'required|string'
+            'league_id' => 'required'
+
         ];
     }
 }

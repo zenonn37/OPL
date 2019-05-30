@@ -49,6 +49,7 @@ class ScheduleController extends Controller
         $schedule->location = $request->location;
         $schedule->time = $request->time;
 
+
         $schedule->save();
         return new ScheduleResource($schedule);
     }

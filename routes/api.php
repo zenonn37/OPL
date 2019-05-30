@@ -25,6 +25,8 @@ Route::middleware('auth:api')->group(function () {
 
     Route::post('/logout', 'AuthenicateController@logout');
 
+
+
     //picks all
 
     Route::get('/league', 'LeagueController@index');
@@ -32,6 +34,14 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/league', 'LeagueController@store');
     Route::patch('/league/{league}', 'LeagueController@update');
     Route::delete('/league/{league}', 'LeagueController@destroy');
+
+
+    Route::get('/games', 'GameController@index');
+    //admin only
+    Route::get('/games/{game}', 'GameController@show');
+    Route::post('/games', 'GameController@store');
+    Route::patch('/games/{game}', 'GameController@update');
+    Route::delete('/games/{game}', 'GameController@destroy');
 });
 
 Route::get('/user', 'AuthenicateController@user')->middleware('auth:api');
@@ -53,13 +63,7 @@ Route::patch('/schedules/{schedule}', 'ScheduleController@update')->middleware('
 Route::delete('/schedules/{schedule}', 'ScheduleController@destroy')->middleware('auth:api');
 
 
-//game user all
-Route::get('/games', 'GameController@index');
-//admin only
-Route::get('/games/{game}', 'GameController@show');
-Route::post('/games', 'GameController@store');
-Route::patch('/games/{game}', 'GameController@update');
-Route::delete('/games/{game}', 'GameController@destroy');
+
 
 
 
