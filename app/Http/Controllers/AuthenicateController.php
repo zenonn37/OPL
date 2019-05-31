@@ -9,6 +9,7 @@ use Lcobucci\JWT\Parser as JwtParser;
 use League\OAuth2\Server\AuthorizationServer;
 use Psr\Http\Message\ServerRequestInterface;
 use App\User;
+use App\League;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserResource;
@@ -47,6 +48,9 @@ class AuthenicateController extends Controller
         $user->password = Hash::make($request->password);
 
         $user->save();
+
+
+
         return new UserResource($user);
     }
 

@@ -99,9 +99,9 @@ export default {
     },
     loadMore(value) {
       this.loaded = false;
-      console.log(value + "im called");
+      // console.log(value + "im called");
       this.$store.dispatch("LoadSchedules", value).then(res => {
-        console.log("loaded");
+        // console.log("loaded");
         this.loaded = true;
       });
     }
@@ -131,7 +131,7 @@ export default {
   },
   watch: {
     paginate(value) {
-      console.log(value);
+      // console.log(value);
       this.loadMore(value);
     }
   },
