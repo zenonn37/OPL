@@ -1844,6 +1844,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1903,17 +1906,29 @@ __webpack_require__.r(__webpack_exports__);
       var data = this.page;
       return data;
     },
+    game: function game() {
+      var games = this.$store.getters.GET_SCHEDULE;
+      var game;
+      games.forEach(function (element) {
+        game = element;
+      });
+      return game;
+    },
     schedule: function schedule() {
       var _this2 = this;
 
       var sch = this.$store.getters.GET_SCHEDULE;
-      sch.forEach(function (element) {
+      var game = "";
+      sch.forEach(function (games) {
+        game = games;
+      });
+      game.schedules.forEach(function (game) {
         _this2.picks.push({
           team: "",
           spread: ""
         });
       });
-      return sch;
+      return game.schedules;
     },
     links: function links() {
       return this.$store.getters.GET_LINKS;
@@ -1931,7 +1946,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this3 = this;
 
-    this.$store.dispatch("GET_SCHEDULE").then(function (res) {
+    this.$store.dispatch("GET_GAMES").then(function (res) {
       _this3.loaded = true;
     });
   }
@@ -3615,6 +3630,12 @@ var render = function() {
         ? [_c("div", [_vm._v("please wait...")])]
         : [
             _c("div", [
+              _c("h3", [_vm._v("Scheduled Games " + _vm._s(_vm.game.games))]),
+              _vm._v(" "),
+              _c("h4", [_vm._v("Week " + _vm._s(_vm.game.week))]),
+              _vm._v(" "),
+              _c("h4", [_vm._v("Date " + _vm._s(_vm.game.date))]),
+              _vm._v(" "),
               _c(
                 "form",
                 {
@@ -46762,6 +46783,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var state = {
   schedules: [],
+  games: [],
   errors: "",
   links: "",
   meta: ""
@@ -46770,18 +46792,24 @@ var mutations = {
   SET_SCHEDULE: function SET_SCHEDULE(state, schedules) {
     state.schedules = schedules;
   },
+  SET_GAMES: function SET_GAMES(state, games) {
+    state.schedules = games;
+  },
   SET_LINKS: function SET_LINKS(state, links) {
     state.links = links;
   },
   SET_META: function SET_META(state, meta) {
     state.meta = meta;
   },
-  SET_ERRORS: function SET_ERRORS(state, error) {
+  SCHEDULE_ERRORS: function SCHEDULE_ERRORS(state, error) {
     state.errors = error;
   }
 };
 var getters = {
   GET_SCHEDULE: function GET_SCHEDULE(state) {
+    return state.schedules;
+  },
+  GET_GAMES: function GET_GAMES(state) {
     return state.schedules;
   },
   GET_LINKS: function GET_LINKS(state) {
@@ -46795,31 +46823,55 @@ var getters = {
   }
 };
 var actions = {
-  GET_SCHEDULE: function GET_SCHEDULE(_ref) {
+  GET_GAMES: function GET_GAMES(_ref) {
     var commit = _ref.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("token");
     return new Promise(function (resolve, reject) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/schedules").then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/games").then(function (res) {
         resolve(res);
         var data = res.data.data;
         var links = res.data.links;
-        var meta = res.data.meta; // console.log(res.data.links);
-        // console.log(res.data.meta);
-
+        var meta = res.data.meta;
+        commit("SET_GAMES", data);
         commit("SET_SCHEDULE", data);
         commit("SET_LINKS", links);
         commit("SET_META", meta);
+        console.log(data);
+        data.forEach(function (element) {
+          console.log(element.schedules);
+        });
       })["catch"](function (err) {
         reject(err);
         commit("SCHEDULE_ERRORS", err);
       });
-    });
+    }); // GET_SCHEDULE({ commit }) {
+    //     axios.defaults.headers.common["Authorization"] =
+    //         "Bearer " + localStorage.getItem("token");
+    //     return new Promise((resolve, reject) => {
+    //         axios
+    //             .get("api/schedules")
+    //             .then(res => {
+    //                 resolve(res);
+    //                 const data = res.data.data;
+    //                 const links = res.data.links;
+    //                 const meta = res.data.meta;
+    //                 // console.log(res.data.links);
+    //                 // console.log(res.data.meta);
+    //                 commit("SET_SCHEDULE", data);
+    //                 commit("SET_LINKS", links);
+    //                 commit("SET_META", meta);
+    //             })
+    //             .catch(err => {
+    //                 reject(err);
+    //                 commit("SCHEDULE_ERRORS", err);
+    //             });
+    //     });
   },
   LoadSchedules: function LoadSchedules(_ref2, page) {
     var commit = _ref2.commit;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("token");
     return new Promise(function (resolve, reject) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/schedules?page=" + page).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/games?page=" + page).then(function (res) {
         resolve(res);
         var data = res.data.data;
         commit("SET_SCHEDULE", data);

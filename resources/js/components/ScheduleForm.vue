@@ -5,6 +5,9 @@
     </template>
     <template v-else>
       <div>
+        <h3>Scheduled Games {{game.games}}</h3>
+        <h4>Week {{game.week}}</h4>
+        <h4>Date {{game.date}}</h4>
         <form @submit.prevent="onSubmit">
           <div v-for="(sch, index) in  schedule" :key="sch.id">
             <v-layout wrap row>
@@ -111,16 +114,32 @@ export default {
       let data = this.page;
       return data;
     },
+    game() {
+      const games = this.$store.getters.GET_SCHEDULE;
+
+      let game;
+      games.forEach(element => {
+        game = element;
+      });
+      return game;
+    },
     schedule() {
       const sch = this.$store.getters.GET_SCHEDULE;
-      sch.forEach(element => {
+
+      let game = "";
+
+      sch.forEach(games => {
+        game = games;
+      });
+
+      game.schedules.forEach(game => {
         this.picks.push({
           team: "",
           spread: ""
         });
       });
 
-      return sch;
+      return game.schedules;
     },
     links() {
       return this.$store.getters.GET_LINKS;
@@ -136,7 +155,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("GET_SCHEDULE").then(res => {
+    this.$store.dispatch("GET_GAMES").then(res => {
       this.loaded = true;
     });
   }
