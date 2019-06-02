@@ -1890,10 +1890,10 @@ __webpack_require__.r(__webpack_exports__);
     loadMore: function loadMore(value) {
       var _this = this;
 
-      this.loaded = false;
-      console.log(value + "im called");
+      this.loaded = false; // console.log(value + "im called");
+
       this.$store.dispatch("LoadSchedules", value).then(function (res) {
-        console.log("loaded");
+        // console.log("loaded");
         _this.loaded = true;
       });
     }
@@ -1924,7 +1924,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     paginate: function paginate(value) {
-      console.log(value);
+      // console.log(value);
       this.loadMore(value);
     }
   },
