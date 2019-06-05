@@ -27,7 +27,7 @@ class GameCreateRequest extends FormRequest
             'week' => 'required|integer',
             'games' => 'required|integer',
             'date' => 'required',
-            'league_id' => 'required'
+
 
         ];
     }

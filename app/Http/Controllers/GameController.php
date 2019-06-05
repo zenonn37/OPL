@@ -39,7 +39,7 @@ class GameController extends Controller
         $game->games = $request->games;
         $game->week = $request->week;
         $game->date = $request->date;
-        $game->league_id = $request->league_id;
+
         $game->user()->associate($request->user());
 
         // $schedule = new Schedule;

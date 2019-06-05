@@ -60,7 +60,8 @@ export default {
     onSubmit(index) {
       const game = {
         ...this.teams[index],
-        game: String(index + 1)
+        game: String(index + 1),
+        game_id: this.games.data.id
       };
 
       this.$store.dispatch("NEW_SCHEDULE", game).then(res => {

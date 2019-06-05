@@ -23,7 +23,7 @@ class CreateSchedulesTable extends Migration
             $table->string('favorite', 255);
             $table->string('spread', 255);
             $table->string('location', 255);
-            $table->date('time');
+            $table->string('time');
 
             $table->timestamps();
         });

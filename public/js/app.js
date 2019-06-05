@@ -2057,7 +2057,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     onSubmit: function onSubmit(index) {
       var game = _objectSpread({}, this.teams[index], {
-        game: String(index + 1)
+        game: String(index + 1),
+        game_id: this.games.data.id
       });
 
       this.$store.dispatch("NEW_SCHEDULE", game).then(function (res) {
