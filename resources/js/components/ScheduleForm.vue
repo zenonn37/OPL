@@ -1,11 +1,11 @@
 <template>
   <div>
     <template v-if="!loaded">
-      <div>please wait...</div>
+      <div class="test">please wait...</div>
     </template>
     <template v-else>
       <div>
-        <h3>Scheduled Games {{game.games}}</h3>
+        <h3 class="test">Scheduled Games {{game.games}}</h3>
         <h4>Week {{game.week}}</h4>
         <h4>Date {{game.date}}</h4>
         <form @submit.prevent="onSubmit">
@@ -63,11 +63,16 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log(this.picks);
+      // console.log(this.picks);
+      console.log(this.schedule);
+
+      //computed value
       const games = this.schedule.length;
+      const game = this.schedule;
       let picks = "";
+
       switch (games) {
-        case 4:
+        case 16:
           picks = {
             team1: this.picks[0].team,
             spread1: this.picks[0].spread,
@@ -76,7 +81,33 @@ export default {
             team3: this.picks[2].team,
             spread3: this.picks[2].spread,
             team4: this.picks[3].team,
-            spread4: this.picks[3].spread
+            spread4: this.picks[3].spread,
+            team5: this.picks[4].team,
+            spread5: this.picks[4].spread,
+            team6: this.picks[5].team,
+            spread6: this.picks[5].spread,
+            team7: this.picks[6].team,
+            spread7: this.picks[6].spread,
+            team8: this.picks[7].team,
+            spread8: this.picks[7].spread,
+            team9: this.picks[8].team,
+            spread9: this.picks[8].spread,
+            team10: this.picks[9].team,
+            spread10: this.picks[9].spread,
+            team11: this.picks[10].team,
+            spread11: this.picks[10].spread,
+            team12: this.picks[11].team,
+            spread12: this.picks[11].spread,
+            team13: this.picks[12].team,
+            spread13: this.picks[12].spread,
+            team14: this.picks[13].team,
+            spread14: this.picks[13].spread,
+            team15: this.picks[14].team,
+            spread15: this.picks[14].spread,
+            team16: this.picks[15].team,
+            spread16: this.picks[15].spread,
+            team17: this.picks[16].team,
+            spread17: this.picks[16].spread
           };
 
           break;
@@ -86,10 +117,6 @@ export default {
 
           break;
       }
-
-      console.log(games);
-
-      console.log(picks);
 
       axios
         .post("api/picks", picks)

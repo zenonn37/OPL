@@ -6,6 +6,7 @@ import Team from "./views/Team";
 import Schedule from "./views/Schedule";
 import Login from "./views/Login";
 import Register from "./views/Register";
+import Game from "./components/admin/Game";
 
 export default {
     mode: "history",
@@ -59,6 +60,15 @@ export default {
             name: "register",
             meta: {
                 requiresVisitor: true
+            }
+        },
+
+        {
+            path: "/games",
+            component: Game,
+            name: "AdminSchedule",
+            meta: {
+                requiresAuth: true
             }
         }
     ]

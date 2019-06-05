@@ -21,6 +21,9 @@ const mutations = {
     SET_META(state, meta) {
         state.meta = meta;
     },
+    NEW_GAMES(state, games) {
+        state.schedules = games;
+    },
 
     SCHEDULE_ERRORS(state, error) {
         state.errors = error;
@@ -46,6 +49,42 @@ const getters = {
 };
 
 const actions = {
+    NEW_GAME({ commit }, game) {
+        axios.defaults.headers.common["Authorization"] =
+            "Bearer " + localStorage.getItem("token");
+        console.log(game);
+
+        return new Promise((resolve, reject) => {
+            axios
+                .post("api/games", game)
+                .then(res => {
+                    resolve(res);
+                    commit("NEW_GAMES", res.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                    commit("SCHEDULE_ERRORS", err);
+                });
+        });
+    },
+    NEW_SCHEDULE({ commit }, schedule) {
+        axios.defaults.headers.common["Authorization"] =
+            "Bearer " + localStorage.getItem("token");
+
+        return new Promise((resolve, reject) => {
+            axios
+                .post("api/schedules", schedule)
+                .then(res => {
+                    resolve(res);
+                    commit("NEW_GAMES", res.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                    commit("SCHEDULE_ERRORS", err);
+                });
+        });
+    },
+
     GET_GAMES({ commit }) {
         axios.defaults.headers.common["Authorization"] =
             "Bearer " + localStorage.getItem("token");
