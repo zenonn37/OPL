@@ -68,6 +68,8 @@ const actions = {
         });
     },
     NEW_SCHEDULE({ commit }, schedule) {
+        console.log(schedule);
+
         axios.defaults.headers.common["Authorization"] =
             "Bearer " + localStorage.getItem("token");
 
@@ -80,7 +82,7 @@ const actions = {
                 })
                 .catch(err => {
                     reject(err);
-                    commit("SCHEDULE_ERRORS", err);
+                    commit("SCHEDULE_ERRORS", err.message);
                 });
         });
     },
