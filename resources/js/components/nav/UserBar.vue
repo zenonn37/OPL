@@ -53,13 +53,23 @@
 
     <v-toolbar flat dark color="black">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Team:</v-toolbar-title>
+      <v-toolbar-title v-if="name">
+        {{name.profile[0].team}}
+        <small
+          class="ml-3"
+        >{{name.profile[0].wins}} - {{name.profile[0].loses}} - {{name.profile[0].ties}} | {{name.profile[0].points}}</small>
+      </v-toolbar-title>
+      <v-toolbar-title v-else>My Team</v-toolbar-title>
       <v-spacer></v-spacer>
 
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn v-if="name" to="/" flat>
           <v-icon left>account_circle</v-icon>
           {{name.name}}
+        </v-btn>
+        <v-btn v-if="name" to="/" flat>
+          <v-icon left>stars</v-icon>
+          {{name.profile[0].rank}}
         </v-btn>
         <v-btn v-else to="/" flat>
           <v-icon>account_circle</v-icon>

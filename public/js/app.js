@@ -2434,6 +2434,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2550,7 +2560,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    profile: function profile() {
+      return this.$store.getters.GET_USER;
+    }
+  }
+});
 
 /***/ }),
 
@@ -5066,7 +5085,24 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("v-toolbar-title", [_vm._v("Team:")]),
+          _vm.name
+            ? _c("v-toolbar-title", [
+                _vm._v(
+                  "\n      " + _vm._s(_vm.name.profile[0].team) + "\n      "
+                ),
+                _c("small", { staticClass: "ml-3" }, [
+                  _vm._v(
+                    _vm._s(_vm.name.profile[0].wins) +
+                      " - " +
+                      _vm._s(_vm.name.profile[0].loses) +
+                      " - " +
+                      _vm._s(_vm.name.profile[0].ties) +
+                      " | " +
+                      _vm._s(_vm.name.profile[0].points)
+                  )
+                ])
+              ])
+            : _c("v-toolbar-title", [_vm._v("My Team")]),
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
@@ -5083,6 +5119,22 @@ var render = function() {
                         _vm._v("account_circle")
                       ]),
                       _vm._v("\n        " + _vm._s(_vm.name.name) + "\n      ")
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.name
+                ? _c(
+                    "v-btn",
+                    { attrs: { to: "/", flat: "" } },
+                    [
+                      _c("v-icon", { attrs: { left: "" } }, [_vm._v("stars")]),
+                      _vm._v(
+                        "\n        " +
+                          _vm._s(_vm.name.profile[0].rank) +
+                          "\n      "
+                      )
                     ],
                     1
                   )
@@ -5227,7 +5279,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Profile")])
+  return _c("div", [
+    _c("h1", [_vm._v("Profile")]),
+    _vm._v(" "),
+    _vm.profile ? _c("p", [_vm._v(_vm._s(_vm.profile))]) : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -48229,11 +48285,13 @@ var actions = {
   },
   REGISTER: function REGISTER(_ref3, credentials) {
     var commit = _ref3.commit;
+    console.log(credentials);
     return new Promise(function (resolve, reject) {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/register", {
         name: credentials.name,
         email: credentials.email,
-        password: credentials.password
+        password: credentials.password,
+        team: credentials.team
       }).then(function (res) {
         resolve(res);
       })["catch"](function (err) {

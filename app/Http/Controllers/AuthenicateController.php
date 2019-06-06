@@ -10,6 +10,7 @@ use League\OAuth2\Server\AuthorizationServer;
 use Psr\Http\Message\ServerRequestInterface;
 use App\User;
 use App\League;
+use App\Profile;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserResource;
@@ -42,6 +43,7 @@ class AuthenicateController extends Controller
     public function register(UserRequest $request)
     {
         $user = new User;
+        $profile = new Profile;
 
         $user->name = $request->name;
         $user->email = $request->email;
@@ -49,6 +51,15 @@ class AuthenicateController extends Controller
 
         $user->save();
 
+        $profile->user_id = $user->id;
+        $profile->team = $request->team;
+        $profile->wins = 0;
+        $profile->loses = 0;
+        $profile->ties = 0;
+        $profile->points = 0;
+        $profile->rank = 0;
+
+        $profile->save();
 
 
         return new UserResource($user);

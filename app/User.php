@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(League::class);
     }
+
+    public function profiles()
+    {
+        return $this->hasMany(Profile::class);
+    }
 }

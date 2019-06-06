@@ -78,12 +78,15 @@ const actions = {
         });
     },
     REGISTER({ commit }, credentials) {
+        console.log(credentials);
+
         return new Promise((resolve, reject) => {
             axios
                 .post("api/register", {
                     name: credentials.name,
                     email: credentials.email,
-                    password: credentials.password
+                    password: credentials.password,
+                    team: credentials.team
                 })
                 .then(res => {
                     resolve(res);
