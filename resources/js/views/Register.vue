@@ -13,6 +13,12 @@
                   prepend-inner-icon="account_circle"
                 ></v-text-field>
                 <v-text-field
+                  label="Team Name"
+                  v-model.trim="auth.team"
+                  type="text"
+                  prepend-inner-icon="star"
+                ></v-text-field>
+                <v-text-field
                   label="Email"
                   v-model.trim="auth.email"
                   type="email"
@@ -45,7 +51,8 @@ export default {
       auth: {
         name: "",
         email: "",
-        password: ""
+        password: "",
+        team: ""
       }
     };
   },

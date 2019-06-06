@@ -2218,7 +2218,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -2711,6 +2710,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2719,7 +2724,8 @@ __webpack_require__.r(__webpack_exports__);
       auth: {
         name: "",
         email: "",
-        password: ""
+        password: "",
+        team: ""
       }
     };
   },
@@ -4663,7 +4669,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-toolbar",
-    { attrs: { flat: "", dark: "", color: "blue darken-3" } },
+    { attrs: { flat: "", dark: "", color: "blue darken-5" } },
     [
       _c("v-toolbar-title", [_vm._v("OPL")]),
       _vm._v(" "),
@@ -4671,7 +4677,6 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-toolbar-items",
-        { staticClass: "hidden-sm-and-down" },
         [
           _c(
             "v-btn",
@@ -5461,6 +5466,25 @@ var render = function() {
                               )
                             },
                             expression: "auth.name"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("v-text-field", {
+                          attrs: {
+                            label: "Team Name",
+                            type: "text",
+                            "prepend-inner-icon": "star"
+                          },
+                          model: {
+                            value: _vm.auth.team,
+                            callback: function($$v) {
+                              _vm.$set(
+                                _vm.auth,
+                                "team",
+                                typeof $$v === "string" ? $$v.trim() : $$v
+                              )
+                            },
+                            expression: "auth.team"
                           }
                         }),
                         _vm._v(" "),
