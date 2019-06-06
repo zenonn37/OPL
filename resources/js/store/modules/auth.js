@@ -38,6 +38,26 @@ const getters = {
 };
 
 const actions = {
+    GET_USER({ commit }) {
+        axios.defaults.headers.common["Authorization"] =
+            "Bearer " + state.token;
+        return new Promise((resolve, reject) => {
+            axios
+                .get("api/user")
+
+                .then(res => {
+                    resolve(res);
+                    console.log(res);
+                    console.log("called");
+
+                    commit("SET_USER", res.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                    commit("AUTH_ERRORS", err.message);
+                });
+        });
+    },
     LOGIN({ commit }, credentials) {
         return new Promise((resolve, reject) => {
             axios
@@ -47,6 +67,7 @@ const actions = {
                 })
                 .then(res => {
                     resolve(res);
+
                     commit("SET_AUTH", res.data.access_token);
                     localStorage.setItem("token", res.data.access_token);
                 })

@@ -21,12 +21,6 @@ export default {
   computed: {
     isLogged() {
       return this.$store.getters.GET_AUTH;
-
-      //   if (localStorage.getItem("token") !== undefined) {
-      //     return true;
-      //   } else {
-      //     return false;
-      //   }
     }
   }
 };
