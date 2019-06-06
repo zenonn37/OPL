@@ -1,17 +1,17 @@
 <template>
   <div>
     <template v-if="!loaded">
-      <div class="test">please wait...</div>
+      <div class="test">Loading please wait...</div>
     </template>
     <template v-else>
       <div>
-        <h3 class="test">Scheduled Games {{game.games}}</h3>
+        <h3 class="headers">Scheduled Games {{game.games}}</h3>
         <h4>Week {{game.week}}</h4>
         <h4>Date {{game.date}}</h4>
         <form @submit.prevent="onSubmit">
-          <div v-for="(sch, index) in  schedule" :key="sch.id">
+          <div class="c-panel mt-2" v-for="(sch, index) in  schedule" :key="sch.id">
             <v-layout wrap row>
-              <v-flex>
+              <v-flex xs11 md4 class="pa-right">
                 <v-checkbox
                   :label="sch.home"
                   color="orange"
@@ -19,9 +19,10 @@
                   v-model="picks[index].team"
                   hide-details
                 ></v-checkbox>
+                <h4 class="headers">(HOME): {{sch.location}}</h4>
               </v-flex>
 
-              <v-flex>
+              <v-flex xs12 md4>
                 <v-checkbox
                   :label="sch.away"
                   color="blue"
@@ -29,13 +30,24 @@
                   v-model="picks[index].team"
                   hide-details
                 ></v-checkbox>
+                <h4 class="headers">(AWAY)</h4>
               </v-flex>
-              <v-flex>
-                <v-text-field type="number" label="Spread" outline v-model="picks[index].spread"></v-text-field>
+              <v-flex xs12 md2>
+                <h4 class="headers mt-3">(Fav):</h4>
+                {{sch.favorite}}
+              </v-flex>
+              <v-flex xs12 md2>
+                <v-text-field
+                  class="mt-2"
+                  type="number"
+                  label="Spread"
+                  outline
+                  v-model="picks[index].spread"
+                ></v-text-field>
               </v-flex>
             </v-layout>
           </div>
-          <v-layout>
+          <v-layout class="mt-3">
             <v-flex>
               <v-btn type="submit" color="info" large>Complete</v-btn>
             </v-flex>

@@ -1847,6 +1847,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3852,10 +3864,14 @@ var render = function() {
     "div",
     [
       !_vm.loaded
-        ? [_c("div", { staticClass: "test" }, [_vm._v("please wait...")])]
+        ? [
+            _c("div", { staticClass: "test" }, [
+              _vm._v("Loading please wait...")
+            ])
+          ]
         : [
             _c("div", [
-              _c("h3", { staticClass: "test" }, [
+              _c("h3", { staticClass: "headers" }, [
                 _vm._v("Scheduled Games " + _vm._s(_vm.game.games))
               ]),
               _vm._v(" "),
@@ -3877,7 +3893,7 @@ var render = function() {
                   _vm._l(_vm.schedule, function(sch, index) {
                     return _c(
                       "div",
-                      { key: sch.id },
+                      { key: sch.id, staticClass: "c-panel mt-2" },
                       [
                         _c(
                           "v-layout",
@@ -3885,6 +3901,10 @@ var render = function() {
                           [
                             _c(
                               "v-flex",
+                              {
+                                staticClass: "pa-right",
+                                attrs: { xs11: "", md4: "" }
+                              },
                               [
                                 _c("v-checkbox", {
                                   attrs: {
@@ -3900,13 +3920,18 @@ var render = function() {
                                     },
                                     expression: "picks[index].team"
                                   }
-                                })
+                                }),
+                                _vm._v(" "),
+                                _c("h4", { staticClass: "headers" }, [
+                                  _vm._v("(HOME): " + _vm._s(sch.location))
+                                ])
                               ],
                               1
                             ),
                             _vm._v(" "),
                             _c(
                               "v-flex",
+                              { attrs: { xs12: "", md4: "" } },
                               [
                                 _c("v-checkbox", {
                                   attrs: {
@@ -3922,15 +3947,32 @@ var render = function() {
                                     },
                                     expression: "picks[index].team"
                                   }
-                                })
+                                }),
+                                _vm._v(" "),
+                                _c("h4", { staticClass: "headers" }, [
+                                  _vm._v("(AWAY)")
+                                ])
                               ],
                               1
                             ),
                             _vm._v(" "),
+                            _c("v-flex", { attrs: { xs12: "", md2: "" } }, [
+                              _c("h4", { staticClass: "headers mt-3" }, [
+                                _vm._v("(Fav):")
+                              ]),
+                              _vm._v(
+                                "\n              " +
+                                  _vm._s(sch.favorite) +
+                                  "\n            "
+                              )
+                            ]),
+                            _vm._v(" "),
                             _c(
                               "v-flex",
+                              { attrs: { xs12: "", md2: "" } },
                               [
                                 _c("v-text-field", {
+                                  staticClass: "mt-2",
                                   attrs: {
                                     type: "number",
                                     label: "Spread",
@@ -3957,6 +3999,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-layout",
+                    { staticClass: "mt-3" },
                     [
                       _c(
                         "v-flex",
