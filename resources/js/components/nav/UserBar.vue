@@ -123,6 +123,11 @@ export default {
   computed: {
     name() {
       return this.$store.getters.GET_USER;
+    },
+    stats() {
+      return `${this.name.profile[0].wins}-${this.name.profile[0].loses}-${
+        this.name.profile[0].ties
+      } | ${this.name.profile[0].points}}`;
     }
   },
   methods: {

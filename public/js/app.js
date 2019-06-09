@@ -2483,6 +2483,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     name: function name() {
       return this.$store.getters.GET_USER;
+    },
+    stats: function stats() {
+      return "".concat(this.name.profile[0].wins, "-").concat(this.name.profile[0].loses, "-").concat(this.name.profile[0].ties, " | ").concat(this.name.profile[0].points, "}");
     }
   },
   methods: {
