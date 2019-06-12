@@ -56,6 +56,7 @@ class PickRequest extends FormRequest
             'spread14' => 'nullable',
             'spread15' => 'nullable',
             'spread16' => 'nullable',
+            'league_id' => 'required'
         ];
     }
 }

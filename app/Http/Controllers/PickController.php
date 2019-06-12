@@ -35,6 +35,8 @@ class PickController extends Controller
     {
         $picks = new Pick;
 
+        $picks->league_id = $request->league_id;
+
         $picks->team1 = $request->team1;
         $picks->team2 = $request->team2;
         $picks->team3 = $request->team3;
