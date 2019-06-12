@@ -42,6 +42,13 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/games', 'GameController@store');
     Route::patch('/games/{game}', 'GameController@update');
     Route::delete('/games/{game}', 'GameController@destroy');
+
+    //answers
+    Route::get('/answers', 'AnswerController@index');
+    Route::get('/answers/{answer}', 'AnswerController@show');
+    Route::post('/answers', 'AnswerController@store');
+    Route::patch('/answers/{answer}', 'AnswerController@update');
+    Route::delete('/answers/{answer}', 'AnswerController@destroy');
 });
 
 Route::get('/user', 'AuthenicateController@user')->middleware('auth:api');
