@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Pick;
 use App\Answer;
 use App\Profile;
+use App\Record;
 use Illuminate\Support\Facades\DB;
 
 class ScoringController extends Controller
@@ -30,135 +31,113 @@ class ScoringController extends Controller
 
         $wins = 0;
         $loses = 0;
+        $spread = 0;
         $records = [];
         //score for each game
         for ($i = 0; $i < $c; $i++) {
-            echo $answers[$i]->team1 . '<br>';
-            echo $answers[$i]->team2 . '<br>';
-            echo $answers[$i]->team3 . '<br>';
-            echo $answers[$i]->team4 . '<br>';
-            echo $answers[$i]->team5 . '<br>';
-            echo '<br/>';
+
             $ans1 = $answers[$i]->team1;
             $ans2 = $answers[$i]->team2;
             $ans3 = $answers[$i]->team3;
             $ans4 = $answers[$i]->team4;
             $ans5 = $answers[$i]->team5;
+            $ans6 = $answers[$i]->team6;
+            $ans7 = $answers[$i]->team7;
+            $ans8 = $answers[$i]->team8;
+            $ans9 = $answers[$i]->team9;
+            $ans10 = $answers[$i]->team10;
+
+            $ansp1 = $answers[$i]->spread1;
+            $ansp2 = $answers[$i]->spread2;
+            $ansp3 = $answers[$i]->spread3;
+            $ansp4 = $answers[$i]->spread4;
+            $ansp5 = $answers[$i]->spread5;
+            $ansp6 = $answers[$i]->spread6;
+            $ansp7 = $answers[$i]->spread7;
+            $ansp8 = $answers[$i]->spread8;
+            $ansp9 = $answers[$i]->spread9;
+            $ansp10 = $answers[$i]->spread10;
             for ($i = 0; $i < $count; $i++) {
 
                 $wins = 0;
                 $loses = 0;
+                $spread = 0;
 
-                echo  $picks[$i]->team1 . '<br>';
-                echo  $picks[$i]->team2 . '<br>';
-                echo  $picks[$i]->team3 . '<br>';
-                echo  $picks[$i]->team4 . '<br>';
-                echo  $picks[$i]->team5 . '<br>';
-                echo '<br/>';
+
+
+
                 ($ans1 === $picks[$i]->team1) ? $wins = $wins + 1 : $loses = $loses + 1;
                 ($ans2 === $picks[$i]->team2) ? $wins = $wins + 1 : $loses = $loses + 1;
                 ($ans3 === $picks[$i]->team3) ? $wins = $wins + 1 : $loses = $loses + 1;
                 ($ans4 === $picks[$i]->team4) ? $wins = $wins + 1 : $loses = $loses + 1;
                 ($ans5 === $picks[$i]->team5) ? $wins = $wins + 1 : $loses = $loses + 1;
+                ($ans6 === $picks[$i]->team6) ? $wins = $wins + 1 : $loses = $loses + 1;
+                ($ans7 === $picks[$i]->team7) ? $wins = $wins + 1 : $loses = $loses + 1;
+                ($ans8 === $picks[$i]->team8) ? $wins = $wins + 1 : $loses = $loses + 1;
+                ($ans9 === $picks[$i]->team9) ? $wins = $wins + 1 : $loses = $loses + 1;
+                ($ans10 === $picks[$i]->team10) ? $wins = $wins + 1 : $loses = $loses + 1;
 
-                $result = $wins . '-' . $loses;
+                ($ansp1 === $picks[$i]->spread1) ? $spread = $spread + 5 : '';
+                ($ansp2 === $picks[$i]->spread2) ? $spread = $spread + 5 : '';
+                ($ansp3 === $picks[$i]->spread3) ? $spread = $spread + 5 : '';
+                ($ansp4 === $picks[$i]->spread4) ? $spread = $spread + 5 : '';
+                ($ansp5 === $picks[$i]->spread5) ? $spread = $spread + 5 : '';
 
-                DB::table('profiles')
-                    ->where('user_id', $picks[$i]->user_id)
-                    ->update(['wins' => $wins, 'loses' => $loses]);
+                ($ansp6 === $picks[$i]->spread6) ? $spread = $spread + 5 : '';
+                ($ansp7 === $picks[$i]->spread7) ? $spread = $spread + 5 : '';
+                ($ansp8 === $picks[$i]->spread8) ? $spread = $spread + 5 : '';
+                ($ansp9 === $picks[$i]->spread9) ? $spread = $spread + 5 : '';
+                ($ansp10 === $picks[$i]->spread10) ? $spread = $spread + 5 : '';
 
-                DB::table('records')
-                    ->insert([
-                        'user_id' => $picks[$i]->user_id,
-                        'wins' => $wins,
-                        'loses' => $loses,
-                        'points' => 0,
-                        'ties' => 0
+                $points =  $this->totalPoints($wins, $spread);
 
-                    ]);
-
-
-
-
-                // $profile->wins = $wins;
-                // $profile->loses = $loses;
-
-
-                array_push($records, $picks[$i]->user_id, $result);
+                $this->Record($wins, $loses, $points, $picks[$i]->user_id);
 
 
 
-                echo $wins . '-' . $loses;
-                echo '<br/>';
+                // for ($x = 0; $x < $count; $x++) {
+                //     # code...
+                // }
+
+
+
+
+
+                // DB::table('profiles')
+                //     ->where('user_id', $picks[$i]->user_id)
+                //     ->update(['wins' => $wins, 'loses' => $loses]);
             }
         }
 
-        dd($records);
+        $records = Record::all();
+
+        $c = collect($records)->count();
+
+        echo '<br>';
+        echo $c;
+        echo '<br>';
+        echo $records;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+
+    private function Record($wins, $loses, $points, $user_id)
     {
-        //
+        DB::table('records')
+            ->insert([
+                'user_id' => $user_id,
+                'wins' => $wins,
+                'loses' => $loses,
+                'points' => $points,
+                'ties' => 0
+
+            ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    private function totalPoints($wins, $spread)
     {
-        //
-    }
+        echo  $total = ($wins * 2) + $spread;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return $total;
     }
 }
