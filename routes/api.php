@@ -50,6 +50,9 @@ Route::middleware('auth:api')->group(function () {
     Route::patch('/answers/{answer}', 'AnswerController@update');
     Route::delete('/answers/{answer}', 'AnswerController@destroy');
 });
+
+Route::get('/invite', 'InviteController@invite');
+Route::get('/accept/{token}', 'InviteController@accept')->name('accept');
 Route::get('/scoring', 'ScoringController@index');
 
 Route::get('/user', 'AuthenicateController@user')->middleware('auth:api');
