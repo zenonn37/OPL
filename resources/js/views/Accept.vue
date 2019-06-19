@@ -1,9 +1,16 @@
 <template>
-  <h1>Accept</h1>
+  <h1>Accept {{$route.params.token}}</h1>
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+export default {
+  created() {
+    axios.post("/api/process").then(res => {
+      console.log(res.data);
+    });
+  }
+};
 </script>
 
 <style>

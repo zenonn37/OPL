@@ -56,7 +56,7 @@ export default {
         },
 
         {
-            path: "/accept",
+            path: "/accept/:token",
             component: Accept,
             name: "accept",
             meta: {

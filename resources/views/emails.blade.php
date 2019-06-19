@@ -2,10 +2,10 @@
 
 #Thank you!
 
-<strong>Message</strong> {{$data}}
+<strong>Message</strong> {{$data->name}}
 
 <p>
-<a href="{{route('accept',$data)}}">Join My League</a>
+<a href="{{route('accept',$data->token)}}">Join My League</a>
 </p>
 @component('mail::button', ['url' => 'http://opl.test/register'])
 Button Text

@@ -29,6 +29,7 @@ class InviteController extends Controller
 
         $invite->save();
 
+        Mail::to('opl@invite.com')->send(new InviteMail($invite));
 
 
 
@@ -36,21 +37,32 @@ class InviteController extends Controller
 
 
 
-        return new InviteResource($request);
+
+        return new InviteResource($invite);
 
 
 
-        // Mail::to('test@test.com')->send(new InviteMail($data));
+
 
         // return response('sent');
     }
 
     public function accept($token)
     {
+        if (!Invite::where('token', $token)->first()) {
+            return response('token invalid');
+        } else {
 
-        return response($token);
+            return redirect('accept/' . $token);
+            //return response('token accepted');
+        }
     }
 
-    public function process()
-    { }
+    public function process($token)
+    {
+        $in =  Invite::where('token', $token)->get();
+
+
+        return response($in);
+    }
 }

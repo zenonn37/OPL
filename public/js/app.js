@@ -2567,11 +2567,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/process").then(function (res) {
+      console.log(res.data);
+    });
+  }
+});
 
 /***/ }),
 
@@ -5419,7 +5428,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Accept")])
+  return _c("h1", [_vm._v("Accept " + _vm._s(_vm.$route.params.token))])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -48507,7 +48516,7 @@ __webpack_require__.r(__webpack_exports__);
       requiresVisitor: true
     }
   }, {
-    path: "/accept",
+    path: "/accept/:token",
     component: _views_Accept__WEBPACK_IMPORTED_MODULE_10__["default"],
     name: "accept",
     meta: {

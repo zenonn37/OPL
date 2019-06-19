@@ -53,7 +53,7 @@ Route::middleware('auth:api')->group(function () {
 
 //invite routes
 Route::post('/invite', 'InviteController@invite')->name('invite');
-Route::post('/process', 'InviteController@process')->name('process');
+Route::get('/process/{token}', 'InviteController@process');
 Route::get('/accept/{token}', 'InviteController@accept')->name('accept');
 
 //score sysytem
