@@ -8,6 +8,8 @@ import Login from "./views/Login";
 import Register from "./views/Register";
 import Game from "./components/admin/Game";
 import League from "./views/League";
+import Accept from "./views/Accept";
+import Invite from "./views/Invite";
 
 export default {
     mode: "history",
@@ -50,6 +52,23 @@ export default {
             name: "login",
             meta: {
                 requiresVisitor: true
+            }
+        },
+
+        {
+            path: "/accept",
+            component: Accept,
+            name: "accept",
+            meta: {
+                requiresVisitor: true
+            }
+        },
+        {
+            path: "/invite",
+            component: Invite,
+            name: "invite",
+            meta: {
+                requiresAuth: true
             }
         },
         {

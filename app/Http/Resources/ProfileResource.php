@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\LeagueResource;
 
 class ProfileResource extends JsonResource
 {
@@ -20,7 +21,9 @@ class ProfileResource extends JsonResource
             'loses' => $this->loses,
             'points' => $this->points,
             'rank' => $this->rank,
-            'ties' => $this->ties
+            'ties' => $this->ties,
+            'league_id' => $this->league_id,
+
 
         ];
     }

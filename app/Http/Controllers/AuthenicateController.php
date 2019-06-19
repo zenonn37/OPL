@@ -55,7 +55,7 @@ class AuthenicateController extends Controller
 
 
         $league->user_id = $user->id;
-        $league->name = $request->name;
+        $league->name = $request->league;
         $league->sport = "NFL Football";
 
         $league->save();

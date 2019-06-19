@@ -2,11 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\ProfileResource;
-use App\Http\Resources\LeagueResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class InviteResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,12 +16,7 @@ class UserResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'email' => $this->email,
-            'id' => $this->id,
-            'profile' => ProfileResource::collection($this->profiles),
-            'league' => LeagueResource::collection($this->leagues)
-
-
+            'email' => $this->email
         ];
     }
 }

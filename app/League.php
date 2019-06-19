@@ -20,4 +20,9 @@ class League extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function profiles()
+    {
+        return $this->hasMany(Profile::class);
+    }
 }

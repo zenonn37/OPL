@@ -16,7 +16,8 @@ class LeagueResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'sport' => $this->sport
+            'sport' => $this->sport,
+            'id' => $this->id
         ];
     }
 }

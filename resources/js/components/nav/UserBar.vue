@@ -91,6 +91,25 @@
           <v-icon>exit_to_app</v-icon>
         </v-btn>
 
+        <v-menu transition="slide-y-transition" bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn dark icon v-on="on">
+              <v-icon>more_vert</v-icon>
+            </v-btn>
+          </template>
+
+          <v-list>
+            <v-list-tile v-for="(link,i) in links" :key="i" :to="link.to" router exact>
+              <v-list-tile-action>
+                <v-icon>{{ link.icon }}</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>{{link.title}}</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+
         <!-- <v-btn to="/login" flat>Login</v-btn>
         <v-btn to="/register" flat>register</v-btn>-->
       </v-toolbar-items>
@@ -109,6 +128,19 @@ export default {
     drawer: false,
     mini: false,
     right: null,
+    links: [
+      { title: "Invite Friends", icon: "account_circle", to: "/invite" },
+      {
+        title: "Current Invite",
+        icon: "calendar_today",
+        to: "/current_invites"
+      },
+      {
+        title: "League Admin",
+        icon: "supervised_user_circle",
+        to: "/league_admin"
+      }
+    ],
     items: [
       { title: "Profile", icon: "account_circle", to: "/" },
       { title: "Schedule", icon: "calendar_today", to: "/schedule" },

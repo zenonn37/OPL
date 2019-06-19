@@ -38,6 +38,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function invites()
+    {
+        return $this->hasMany(Invite::class);
+    }
+
     public function roles()
     {
         return $this->belongsToMany('App\Role');

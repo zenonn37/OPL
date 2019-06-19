@@ -51,8 +51,12 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/answers/{answer}', 'AnswerController@destroy');
 });
 
-Route::get('/invite', 'InviteController@invite');
+//invite routes
+Route::post('/invite', 'InviteController@invite')->name('invite');
+Route::post('/process', 'InviteController@process')->name('process');
 Route::get('/accept/{token}', 'InviteController@accept')->name('accept');
+
+//score sysytem
 Route::get('/scoring', 'ScoringController@index');
 
 Route::get('/user', 'AuthenicateController@user')->middleware('auth:api');

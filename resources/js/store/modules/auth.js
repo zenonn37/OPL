@@ -47,10 +47,17 @@ const actions = {
 
                 .then(res => {
                     resolve(res);
-                    console.log(res);
-                    console.log("called");
 
                     commit("SET_USER", res.data.data);
+
+                    localStorage.setItem(
+                        "league_id",
+                        res.data.data.league[0].id
+                    );
+                    localStorage.setItem(
+                        "league_name",
+                        res.data.data.league[0].name
+                    );
                 })
                 .catch(err => {
                     reject(err);
