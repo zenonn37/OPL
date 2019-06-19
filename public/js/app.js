@@ -2738,6 +2738,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2747,7 +2753,8 @@ __webpack_require__.r(__webpack_exports__);
         name: "",
         email: "",
         password: "",
-        team: ""
+        team: "",
+        league: ""
       }
     };
   },
@@ -5525,6 +5532,25 @@ var render = function() {
                               )
                             },
                             expression: "auth.name"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("v-text-field", {
+                          attrs: {
+                            label: "League Name",
+                            type: "text",
+                            "prepend-inner-icon": "star"
+                          },
+                          model: {
+                            value: _vm.auth.league,
+                            callback: function($$v) {
+                              _vm.$set(
+                                _vm.auth,
+                                "league",
+                                typeof $$v === "string" ? $$v.trim() : $$v
+                              )
+                            },
+                            expression: "auth.league"
                           }
                         }),
                         _vm._v(" "),

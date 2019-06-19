@@ -117,6 +117,8 @@ class ScoringController extends Controller
         echo $c;
         echo '<br>';
         echo $records;
+
+        for ($x = 0; $x < $c; $x++) { }
     }
 
 

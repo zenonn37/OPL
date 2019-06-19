@@ -12,6 +12,12 @@
                   type="text"
                   prepend-inner-icon="account_circle"
                 ></v-text-field>
+                   <v-text-field
+                  label="League Name"
+                  v-model.trim="auth.league"
+                  type="text"
+                  prepend-inner-icon="star"
+                ></v-text-field>
                 <v-text-field
                   label="Team Name"
                   v-model.trim="auth.team"
@@ -52,7 +58,8 @@ export default {
         name: "",
         email: "",
         password: "",
-        team: ""
+        team: "",
+        league:""
       }
     };
   },

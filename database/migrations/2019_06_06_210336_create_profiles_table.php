@@ -17,6 +17,10 @@ class CreateProfilesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('league_id')->index();
+            $table->foreign('league_id')->references('id')->on('leagues')->onDelete('cascade');
+
+            $table->string('name', 100);
             $table->string('team', 255);
             $table->integer('wins');
             $table->integer('loses');

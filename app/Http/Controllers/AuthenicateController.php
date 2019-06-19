@@ -44,6 +44,7 @@ class AuthenicateController extends Controller
     {
         $user = new User;
         $profile = new Profile;
+        $league = new League;
 
         $user->name = $request->name;
         $user->email = $request->email;
@@ -51,7 +52,18 @@ class AuthenicateController extends Controller
 
         $user->save();
 
+
+
+        $league->user_id = $user->id;
+        $league->name = $request->name;
+        $league->sport = "NFL Football";
+
+        $league->save();
+
+
         $profile->user_id = $user->id;
+        $profile->league_id = $league->id;
+        $profile->name = $user->name;
         $profile->team = $request->team;
         $profile->wins = 0;
         $profile->loses = 0;
@@ -60,6 +72,7 @@ class AuthenicateController extends Controller
         $profile->rank = 0;
 
         $profile->save();
+
 
 
         return new UserResource($user);
