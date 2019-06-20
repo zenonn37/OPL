@@ -2463,6 +2463,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2513,6 +2515,16 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch("GET_USER");
   },
   computed: {
+    owner: function owner() {
+      var user = this.$store.getters.GET_USER;
+      console.log(user);
+
+      if (user.league.length == 0) {
+        return false;
+      } else {
+        return true;
+      }
+    },
     name: function name() {
       return this.$store.getters.GET_USER;
     },
@@ -5357,65 +5369,90 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c(
-                "v-menu",
-                {
-                  attrs: { transition: "slide-y-transition", bottom: "" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "activator",
-                      fn: function(ref) {
-                        var on = ref.on
-                        return [
-                          _c(
-                            "v-btn",
-                            _vm._g({ attrs: { dark: "", icon: "" } }, on),
-                            [_c("v-icon", [_vm._v("more_vert")])],
-                            1
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                },
-                [
-                  _vm._v(" "),
-                  _c(
-                    "v-list",
-                    _vm._l(_vm.links, function(link, i) {
-                      return _c(
-                        "v-list-tile",
-                        {
-                          key: i,
-                          attrs: { to: link.to, router: "", exact: "" }
-                        },
-                        [
-                          _c(
-                            "v-list-tile-action",
-                            [_c("v-icon", [_vm._v(_vm._s(link.icon))])],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-list-tile-content",
-                            [
-                              _c("v-list-tile-title", [
-                                _vm._v(_vm._s(link.title))
-                              ])
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    }),
-                    1
-                  )
-                ],
-                1
-              )
+              _vm.name
+                ? [
+                    _vm.owner
+                      ? _c(
+                          "v-menu",
+                          {
+                            attrs: {
+                              transition: "slide-y-transition",
+                              bottom: ""
+                            },
+                            scopedSlots: _vm._u(
+                              [
+                                {
+                                  key: "activator",
+                                  fn: function(ref) {
+                                    var on = ref.on
+                                    return [
+                                      _c(
+                                        "v-btn",
+                                        _vm._g(
+                                          { attrs: { dark: "", icon: "" } },
+                                          on
+                                        ),
+                                        [_c("v-icon", [_vm._v("more_vert")])],
+                                        1
+                                      )
+                                    ]
+                                  }
+                                }
+                              ],
+                              null,
+                              false,
+                              1582921727
+                            )
+                          },
+                          [
+                            _vm._v(" "),
+                            _c(
+                              "v-list",
+                              _vm._l(_vm.links, function(link, i) {
+                                return _c(
+                                  "v-list-tile",
+                                  {
+                                    key: i,
+                                    attrs: {
+                                      to: link.to,
+                                      router: "",
+                                      exact: ""
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "v-list-tile-action",
+                                      [
+                                        _c("v-icon", [
+                                          _vm._v(_vm._s(link.icon))
+                                        ])
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-list-tile-content",
+                                      [
+                                        _c("v-list-tile-title", [
+                                          _vm._v(_vm._s(link.title))
+                                        ])
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              }),
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      : _vm._e()
+                  ]
+                : _vm._e()
             ],
-            1
+            2
           )
         ],
         1
