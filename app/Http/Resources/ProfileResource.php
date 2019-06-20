@@ -23,6 +23,8 @@ class ProfileResource extends JsonResource
             'rank' => $this->rank,
             'ties' => $this->ties,
             'league_id' => $this->league_id,
+            'name' => $this->name,
+            'id' => $this->id
 
 
         ];

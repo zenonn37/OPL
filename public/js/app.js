@@ -2772,7 +2772,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      loaded: false,
+      league: localStorage.getItem("league_name")
+    };
+  },
+  computed: {
+    roster: function roster() {
+      return this.$store.getters.GET_ROSTER;
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    this.loaded = true;
+    this.$store.dispatch("GET_ALL_ROSTER").then(function () {
+      _this.loaded = false;
+    });
+  }
+});
 
 /***/ }),
 
@@ -5780,9 +5832,62 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-layout",
-    [_c("v-flex", [_c("h2", { staticClass: "headers" }, [_vm._v("League")])])],
-    1
+    "div",
+    [
+      _vm.loaded
+        ? [_c("div", [_vm._v("loading plz wait....")])]
+        : [
+            _c(
+              "div",
+              [
+                _c(
+                  "v-layout",
+                  [
+                    _c("v-flex", [
+                      _c("h2", { staticClass: "headers" }, [
+                        _vm._v(_vm._s(_vm.league))
+                      ])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-layout",
+                  [
+                    _c("v-flex", [
+                      _c(
+                        "ul",
+                        _vm._l(_vm.roster, function(roster) {
+                          return _c("li", { key: roster.id }, [
+                            _c("h2", [_vm._v(_vm._s(roster.name))]),
+                            _vm._v(" "),
+                            _c("h4", [
+                              _vm._v(
+                                "Record " +
+                                  _vm._s(roster.wins) +
+                                  " - " +
+                                  _vm._s(roster.loses) +
+                                  " - " +
+                                  _vm._s(roster.ties) +
+                                  " | " +
+                                  _vm._s(roster.points)
+                              )
+                            ])
+                          ])
+                        }),
+                        0
+                      )
+                    ])
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ]
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -48917,6 +49022,60 @@ var actions = {
 
 /***/ }),
 
+/***/ "./resources/js/store/modules/league.js":
+/*!**********************************************!*\
+  !*** ./resources/js/store/modules/league.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+var state = {
+  roster: [],
+  errors: []
+};
+var mutations = {
+  SET_ROSTER: function SET_ROSTER(state, payload) {
+    state.roster = payload;
+  },
+  SET_LEAGUE_ERRORS: function SET_LEAGUE_ERRORS(state, payload) {
+    state.errors = payload;
+  }
+};
+var getters = {
+  GET_ROSTER: function GET_ROSTER(state) {
+    return state.roster;
+  }
+};
+var actions = {
+  GET_ALL_ROSTER: function GET_ALL_ROSTER(_ref) {
+    var commit = _ref.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + state.token;
+    var league_id = localStorage.getItem("league_id");
+    return new Promise(function (resolve, reject) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/profile/".concat(league_id)).then(function (res) {
+        resolve(res);
+        commit("SET_ROSTER", res.data.data);
+      })["catch"](function (errors) {
+        reject(errors);
+        commit("SET_LEAGUE_ERRORS", errors);
+      });
+    });
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: state,
+  mutations: mutations,
+  getters: getters,
+  actions: actions
+});
+
+/***/ }),
+
 /***/ "./resources/js/store/modules/schedule.js":
 /*!************************************************!*\
   !*** ./resources/js/store/modules/schedule.js ***!
@@ -49086,6 +49245,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/auth */ "./resources/js/store/modules/auth.js");
 /* harmony import */ var _modules_schedule__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/schedule */ "./resources/js/store/modules/schedule.js");
 /* harmony import */ var _modules_invite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/invite */ "./resources/js/store/modules/invite.js");
+/* harmony import */ var _modules_league__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/league */ "./resources/js/store/modules/league.js");
+
 
 
 
@@ -49096,7 +49257,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
     auth: _modules_auth__WEBPACK_IMPORTED_MODULE_2__["default"],
     schedules: _modules_schedule__WEBPACK_IMPORTED_MODULE_3__["default"],
-    invite: _modules_invite__WEBPACK_IMPORTED_MODULE_4__["default"]
+    invite: _modules_invite__WEBPACK_IMPORTED_MODULE_4__["default"],
+    league: _modules_league__WEBPACK_IMPORTED_MODULE_5__["default"]
   }
 });
 

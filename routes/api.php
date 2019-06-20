@@ -17,9 +17,13 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-
+Route::get('/profile/{id}', 'ProfileController@index');
 
 Route::middleware('auth:api')->group(function () {
+
+
+
+
 
 
 
