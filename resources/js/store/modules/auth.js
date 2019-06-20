@@ -76,6 +76,14 @@ const actions = {
                     resolve(res);
 
                     commit("SET_AUTH", res.data.access_token);
+                    axios
+                        .get("api/records")
+                        .then(() => {
+                            console.log("updated");
+                        })
+                        .catch(err => {
+                            commit("AUTH_ERRORS", err.errors);
+                        });
                     localStorage.setItem("token", res.data.access_token);
                 })
                 .catch(err => {

@@ -16,7 +16,7 @@ class ScoringController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Profile $profile)
+    public function index($id)
     {
         //use where by game date only for both collections
         $picks = Pick::all();
@@ -46,6 +46,12 @@ class ScoringController extends Controller
             $ans8 = $answers[$i]->team8;
             $ans9 = $answers[$i]->team9;
             $ans10 = $answers[$i]->team10;
+            $ans11 = $answers[$i]->team11;
+            $ans12 = $answers[$i]->team12;
+            $ans13 = $answers[$i]->team13;
+            $ans14 = $answers[$i]->team14;
+            $ans15 = $answers[$i]->team15;
+            $ans16 = $answers[$i]->team16;
 
             $ansp1 = $answers[$i]->spread1;
             $ansp2 = $answers[$i]->spread2;
@@ -57,6 +63,12 @@ class ScoringController extends Controller
             $ansp8 = $answers[$i]->spread8;
             $ansp9 = $answers[$i]->spread9;
             $ansp10 = $answers[$i]->spread10;
+            $ansp11 = $answers[$i]->spread11;
+            $ansp12 = $answers[$i]->spread12;
+            $ansp13 = $answers[$i]->spread13;
+            $ansp14 = $answers[$i]->spread14;
+            $ansp15 = $answers[$i]->spread15;
+            $ansp16 = $answers[$i]->spread16;
             for ($i = 0; $i < $count; $i++) {
 
                 $wins = 0;
@@ -76,18 +88,29 @@ class ScoringController extends Controller
                 ($ans8 === $picks[$i]->team8) ? $wins = $wins + 1 : $loses = $loses + 1;
                 ($ans9 === $picks[$i]->team9) ? $wins = $wins + 1 : $loses = $loses + 1;
                 ($ans10 === $picks[$i]->team10) ? $wins = $wins + 1 : $loses = $loses + 1;
+                ($ans11 === $picks[$i]->team11) ? $wins = $wins + 1 : $loses = $loses + 1;
+                ($ans12 === $picks[$i]->team12) ? $wins = $wins + 1 : $loses = $loses + 1;
+                ($ans13 === $picks[$i]->team13) ? $wins = $wins + 1 : $loses = $loses + 1;
+                ($ans14 === $picks[$i]->team14) ? $wins = $wins + 1 : $loses = $loses + 1;
+                ($ans15 === $picks[$i]->team15) ? $wins = $wins + 1 : $loses = $loses + 1;
+                ($ans16 === $picks[$i]->team16) ? $wins = $wins + 1 : $loses = $loses + 1;
 
                 ($ansp1 === $picks[$i]->spread1) ? $spread = $spread + 5 : '';
                 ($ansp2 === $picks[$i]->spread2) ? $spread = $spread + 5 : '';
                 ($ansp3 === $picks[$i]->spread3) ? $spread = $spread + 5 : '';
                 ($ansp4 === $picks[$i]->spread4) ? $spread = $spread + 5 : '';
                 ($ansp5 === $picks[$i]->spread5) ? $spread = $spread + 5 : '';
-
                 ($ansp6 === $picks[$i]->spread6) ? $spread = $spread + 5 : '';
                 ($ansp7 === $picks[$i]->spread7) ? $spread = $spread + 5 : '';
                 ($ansp8 === $picks[$i]->spread8) ? $spread = $spread + 5 : '';
                 ($ansp9 === $picks[$i]->spread9) ? $spread = $spread + 5 : '';
                 ($ansp10 === $picks[$i]->spread10) ? $spread = $spread + 5 : '';
+                ($ansp11 === $picks[$i]->spread11) ? $spread = $spread + 5 : '';
+                ($ansp12 === $picks[$i]->spread12) ? $spread = $spread + 5 : '';
+                ($ansp13 === $picks[$i]->spread13) ? $spread = $spread + 5 : '';
+                ($ansp14 === $picks[$i]->spread14) ? $spread = $spread + 5 : '';
+                ($ansp15 === $picks[$i]->spread15) ? $spread = $spread + 5 : '';
+                ($ansp16 === $picks[$i]->spread16) ? $spread = $spread + 5 : '';
 
                 $points =  $this->totalPoints($wins, $spread);
 

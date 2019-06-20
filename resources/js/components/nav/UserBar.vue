@@ -121,6 +121,7 @@
 
 <script>
 import Drawer from "./Drawer";
+import axios from "axios";
 export default {
   components: {
     Drawer

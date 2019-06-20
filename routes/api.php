@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 
 
 Route::patch('/profile/{profile}', 'ProfileController@update');
+Route::get('/records', 'ProfileController@records');
 
 Route::middleware('auth:api')->group(function () {
 
@@ -63,7 +64,7 @@ Route::post('/process', 'InviteController@process');
 Route::get('/accept/{token}', 'InviteController@accept')->name('accept');
 
 //score sysytem
-Route::get('/scoring', 'ScoringController@index');
+Route::get('/scoring/{id}', 'ScoringController@index');
 
 Route::get('/user', 'AuthenicateController@user')->middleware('auth:api');
 
