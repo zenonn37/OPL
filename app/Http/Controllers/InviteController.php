@@ -10,6 +10,10 @@ use App\Http\Resources\InviteResource;
 use App\League;
 use App\Invite;
 use App\User;
+use App\Profile;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Resources\UserResource;
+use App\Http\Requests\ProcessRequest;
 
 class InviteController extends Controller
 {
@@ -58,11 +62,58 @@ class InviteController extends Controller
         }
     }
 
-    public function process($token)
+    public function process(Request $request)
     {
-        $in =  Invite::where('token', $token)->get();
+        $user =  Invite::where('token', $request->token)->get();
+        $register = new User;
+        $profile = new Profile;
+
+        $name = "";
+        $email = "";
+        foreach ($user as $users) {
+
+            $name = $users->name;
+            $email = $users->email;
+            $league_id = $users->league_id;
+            echo $users->name;
+            // $name = $users->name;
+            // $email = $users->email;
+            $register->name = $name;
+            $register->email = $email;
+            $register->password =  Hash::make($request->password);
+
+            $register->save();
+
+            $profile->user_id = $register->id;
+            $profile->team = $request->team;
+            $profile->league_id = $league_id;
+            $profile->name = $name;
+            $profile->wins = 0;
+            $profile->loses = 0;
+            $profile->ties = 0;
+            $profile->points = 0;
+            $profile->rank = 0;
+
+            $profile->save();
+        }
 
 
-        return response($in);
+
+        $profile->team = $register->user_id;
+        $profile->team = $request->team;
+        $profile->league_id = $user[0]->league_id;
+        $profile->name = $user[0]->name;
+        $profile->wins = 0;
+        $profile->loses = 0;
+        $profile->ties = 0;
+        $profile->points = 0;
+        $profile->rank = 0;
+
+        $profile->save();
+
+        // return response($user);
+
+
+        return new UserResource($register);
     }
 }

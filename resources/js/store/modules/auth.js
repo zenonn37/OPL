@@ -84,16 +84,34 @@ const actions = {
                 });
         });
     },
-    REGISTER({ commit }, credentials) {
-        console.log(credentials);
+    REGISTER_INVITED({ commit }, payload) {
+        console.log(payload);
 
+        new Promise((resolve, reject) => {
+            axios
+                .post("http://opl.test/api/process", {
+                    password: payload.password,
+                    team: payload.team,
+                    token: payload.token
+                })
+                .then(res => {
+                    resolve(res);
+                })
+                .catch(err => {
+                    reject(err);
+                    commit("AUTH_ERRORS", err);
+                });
+        });
+    },
+    REGISTER({ commit }, credentials) {
         return new Promise((resolve, reject) => {
             axios
                 .post("api/register", {
                     name: credentials.name,
                     email: credentials.email,
                     password: credentials.password,
-                    team: credentials.team
+                    team: credentials.team,
+                    league: credentials.league
                 })
                 .then(res => {
                     resolve(res);

@@ -2573,13 +2573,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  created: function created() {
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/process").then(function (res) {
-      console.log(res.data);
-    });
-  }
+  data: function data() {
+    return {
+      form: {
+        password: "",
+        team: "",
+        token: this.$route.params.token
+      }
+    };
+  },
+  methods: {
+    onAccept: function onAccept() {
+      var _this = this;
+
+      this.$store.dispatch("REGISTER_INVITED", this.form).then(function () {
+        _this.$router.push("/login");
+      });
+    }
+  },
+  created: function created() {}
 });
 
 /***/ }),
@@ -2687,9 +2730,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onInvite: function onInvite() {
-      console.log("test form");
+      var _this = this;
+
       this.$store.dispatch("NEW_INVITE", this.form).then(function () {
         console.log("good");
+        _this.form.email = "";
+        _this.form.name = "";
       });
     }
   }
@@ -5428,7 +5474,83 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Accept " + _vm._s(_vm.$route.params.token))])
+  return _c(
+    "div",
+    [
+      _c(
+        "v-layout",
+        [_c("v-flex", [_c("h1", [_vm._v("Accept League Invitation")])])],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        [
+          _c("v-flex", [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.onAccept($event)
+                  }
+                }
+              },
+              [
+                _c("v-text-field", {
+                  attrs: {
+                    type: "text",
+                    label: "Team Name",
+                    outline: "",
+                    "prepend-inner-icon": "star"
+                  },
+                  model: {
+                    value: _vm.form.team,
+                    callback: function($$v) {
+                      _vm.$set(
+                        _vm.form,
+                        "team",
+                        typeof $$v === "string" ? $$v.trim() : $$v
+                      )
+                    },
+                    expression: "form.team"
+                  }
+                }),
+                _vm._v(" "),
+                _c("v-text-field", {
+                  attrs: {
+                    type: "password",
+                    label: "Password",
+                    outline: "",
+                    "prepend-inner-icon": "lock"
+                  },
+                  model: {
+                    value: _vm.form.password,
+                    callback: function($$v) {
+                      _vm.$set(
+                        _vm.form,
+                        "password",
+                        typeof $$v === "string" ? $$v.trim() : $$v
+                      )
+                    },
+                    expression: "form.password"
+                  }
+                }),
+                _vm._v(" "),
+                _c("v-btn", { attrs: { type: "submit", color: "primary" } }, [
+                  _vm._v("Join")
+                ])
+              ],
+              1
+            )
+          ])
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -48633,15 +48755,14 @@ var actions = {
       });
     });
   },
-  REGISTER: function REGISTER(_ref3, credentials) {
+  REGISTER_INVITED: function REGISTER_INVITED(_ref3, payload) {
     var commit = _ref3.commit;
-    console.log(credentials);
-    return new Promise(function (resolve, reject) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/register", {
-        name: credentials.name,
-        email: credentials.email,
-        password: credentials.password,
-        team: credentials.team
+    console.log(payload);
+    new Promise(function (resolve, reject) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://opl.test/api/process", {
+        password: payload.password,
+        team: payload.team,
+        token: payload.token
       }).then(function (res) {
         resolve(res);
       })["catch"](function (err) {
@@ -48650,9 +48771,26 @@ var actions = {
       });
     });
   },
-  LOGOUT: function LOGOUT(_ref4) {
-    var commit = _ref4.commit,
-        state = _ref4.state;
+  REGISTER: function REGISTER(_ref4, credentials) {
+    var commit = _ref4.commit;
+    return new Promise(function (resolve, reject) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/register", {
+        name: credentials.name,
+        email: credentials.email,
+        password: credentials.password,
+        team: credentials.team,
+        league: credentials.league
+      }).then(function (res) {
+        resolve(res);
+      })["catch"](function (err) {
+        reject(err);
+        commit("AUTH_ERRORS", err);
+      });
+    });
+  },
+  LOGOUT: function LOGOUT(_ref5) {
+    var commit = _ref5.commit,
+        state = _ref5.state;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + state.token;
     return new Promise(function (resolve, reject) {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/logout").then(function (res) {

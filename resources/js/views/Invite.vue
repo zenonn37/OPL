@@ -43,10 +43,14 @@ export default {
   },
   methods: {
     onInvite() {
-      console.log("test form");
+
 
       this.$store.dispatch("NEW_INVITE", this.form).then(() => {
         console.log("good");
+       this.form.email = "";
+         this.form.name = "";
+
+
       });
     }
   }
