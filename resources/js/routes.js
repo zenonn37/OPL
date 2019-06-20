@@ -10,6 +10,7 @@ import Game from "./components/admin/Game";
 import League from "./views/League";
 import Accept from "./views/Accept";
 import Invite from "./views/Invite";
+import Player from "./views/Player";
 
 export default {
     mode: "history",
@@ -92,6 +93,14 @@ export default {
             path: "/league",
             component: League,
             name: "league",
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: "/player/:id",
+            component: Player,
+            name: "player",
             meta: {
                 requiresAuth: true
             }

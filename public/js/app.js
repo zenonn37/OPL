@@ -1871,15 +1871,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onSubmit: function onSubmit() {
+      var _this = this;
+
       // console.log(this.picks);
       console.log(this.schedule); //computed value
 
       var games = this.schedule.length;
+      console.log(games);
       var game = this.schedule;
       var picks = "";
 
       switch (games) {
         case 16:
+          console.log("16 games");
           picks = {
             team1: this.picks[0].team,
             spread1: this.picks[0].spread,
@@ -1912,9 +1916,106 @@ __webpack_require__.r(__webpack_exports__);
             team15: this.picks[14].team,
             spread15: this.picks[14].spread,
             team16: this.picks[15].team,
-            spread16: this.picks[15].spread,
-            team17: this.picks[16].team,
-            spread17: this.picks[16].spread
+            spread16: this.picks[15].spread
+          };
+          break;
+
+        case 15:
+          picks = {
+            team1: this.picks[0].team,
+            spread1: this.picks[0].spread,
+            team2: this.picks[1].team,
+            spread2: this.picks[1].spread,
+            team3: this.picks[2].team,
+            spread3: this.picks[2].spread,
+            team4: this.picks[3].team,
+            spread4: this.picks[3].spread,
+            team5: this.picks[4].team,
+            spread5: this.picks[4].spread,
+            team6: this.picks[5].team,
+            spread6: this.picks[5].spread,
+            team7: this.picks[6].team,
+            spread7: this.picks[6].spread,
+            team8: this.picks[7].team,
+            spread8: this.picks[7].spread,
+            team9: this.picks[8].team,
+            spread9: this.picks[8].spread,
+            team10: this.picks[9].team,
+            spread10: this.picks[9].spread,
+            team11: this.picks[10].team,
+            spread11: this.picks[10].spread,
+            team12: this.picks[11].team,
+            spread12: this.picks[11].spread,
+            team13: this.picks[12].team,
+            spread13: this.picks[12].spread,
+            team14: this.picks[13].team,
+            spread14: this.picks[13].spread,
+            team15: this.picks[14].team,
+            spread15: this.picks[14].spread
+          };
+          break;
+
+        case 14:
+          picks = {
+            team1: this.picks[0].team,
+            spread1: this.picks[0].spread,
+            team2: this.picks[1].team,
+            spread2: this.picks[1].spread,
+            team3: this.picks[2].team,
+            spread3: this.picks[2].spread,
+            team4: this.picks[3].team,
+            spread4: this.picks[3].spread,
+            team5: this.picks[4].team,
+            spread5: this.picks[4].spread,
+            team6: this.picks[5].team,
+            spread6: this.picks[5].spread,
+            team7: this.picks[6].team,
+            spread7: this.picks[6].spread,
+            team8: this.picks[7].team,
+            spread8: this.picks[7].spread,
+            team9: this.picks[8].team,
+            spread9: this.picks[8].spread,
+            team10: this.picks[9].team,
+            spread10: this.picks[9].spread,
+            team11: this.picks[10].team,
+            spread11: this.picks[10].spread,
+            team12: this.picks[11].team,
+            spread12: this.picks[11].spread,
+            team13: this.picks[12].team,
+            spread13: this.picks[12].spread,
+            team14: this.picks[13].team,
+            spread14: this.picks[13].spread
+          };
+          break;
+
+        case 13:
+          picks = {
+            team1: this.picks[0].team,
+            spread1: this.picks[0].spread,
+            team2: this.picks[1].team,
+            spread2: this.picks[1].spread,
+            team3: this.picks[2].team,
+            spread3: this.picks[2].spread,
+            team4: this.picks[3].team,
+            spread4: this.picks[3].spread,
+            team5: this.picks[4].team,
+            spread5: this.picks[4].spread,
+            team6: this.picks[5].team,
+            spread6: this.picks[5].spread,
+            team7: this.picks[6].team,
+            spread7: this.picks[6].spread,
+            team8: this.picks[7].team,
+            spread8: this.picks[7].spread,
+            team9: this.picks[8].team,
+            spread9: this.picks[8].spread,
+            team10: this.picks[9].team,
+            spread10: this.picks[9].spread,
+            team11: this.picks[10].team,
+            spread11: this.picks[10].spread,
+            team12: this.picks[11].team,
+            spread12: this.picks[11].spread,
+            team13: this.picks[12].team,
+            spread13: this.picks[12].spread
           };
           break;
 
@@ -1923,20 +2024,26 @@ __webpack_require__.r(__webpack_exports__);
           break;
       }
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/picks", picks).then(function (res) {
-        console.log(res.data.data);
-      })["catch"](function (err) {
-        console.log(err);
-      });
+      console.log(picks);
+      this.$store.dispatch("SEND_PICKS", picks).then(function () {
+        _this.$router.push("/");
+      }); // axios
+      //   .post("api/picks", picks)
+      //   .then(res => {
+      //     console.log(res.data.data);
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
     },
     loadMore: function loadMore(value) {
-      var _this = this;
+      var _this2 = this;
 
       this.loaded = false; // console.log(value + "im called");
 
       this.$store.dispatch("LoadSchedules", value).then(function (res) {
         // console.log("loaded");
-        _this.loaded = true;
+        _this2.loaded = true;
       });
     }
   },
@@ -1954,7 +2061,7 @@ __webpack_require__.r(__webpack_exports__);
       return game;
     },
     schedule: function schedule() {
-      var _this2 = this;
+      var _this3 = this;
 
       var sch = this.$store.getters.GET_SCHEDULE;
       var game = "";
@@ -1962,7 +2069,7 @@ __webpack_require__.r(__webpack_exports__);
         game = games;
       });
       game.schedules.forEach(function (game) {
-        _this2.picks.push({
+        _this3.picks.push({
           team: "",
           spread: ""
         });
@@ -1983,10 +2090,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
     this.$store.dispatch("GET_GAMES").then(function (res) {
-      _this3.loaded = true;
+      _this4.loaded = true;
     });
   }
 });
@@ -2804,6 +2911,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2911,6 +3020,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Player.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Player.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      loading: false
+    };
+  },
+  computed: {
+    roster: function roster() {
+      return this.$store.getters.GET_ONE_ROSTER;
+    }
+  },
+  beforeMount: function beforeMount() {
+    var _this = this;
+
+    console.log("called");
+    this.loading = true;
+    this.$store.dispatch("GET_ROSTER", this.$route.params.id).then(function () {
+      _this.loading = false;
+    });
+  }
+});
 
 /***/ }),
 
@@ -5859,22 +6012,31 @@ var render = function() {
                       _c(
                         "ul",
                         _vm._l(_vm.roster, function(roster) {
-                          return _c("li", { key: roster.id }, [
-                            _c("h2", [_vm._v(_vm._s(roster.name))]),
-                            _vm._v(" "),
-                            _c("h4", [
-                              _vm._v(
-                                "Record " +
-                                  _vm._s(roster.wins) +
-                                  " - " +
-                                  _vm._s(roster.loses) +
-                                  " - " +
-                                  _vm._s(roster.ties) +
-                                  " | " +
-                                  _vm._s(roster.points)
-                              )
-                            ])
-                          ])
+                          return _c(
+                            "li",
+                            { key: roster.id },
+                            [
+                              _c(
+                                "router-link",
+                                { attrs: { to: "player/" + roster.id } },
+                                [_c("h2", [_vm._v(_vm._s(roster.name))])]
+                              ),
+                              _vm._v(" "),
+                              _c("h4", [
+                                _vm._v(
+                                  "Record " +
+                                    _vm._s(roster.wins) +
+                                    " - " +
+                                    _vm._s(roster.loses) +
+                                    " - " +
+                                    _vm._s(roster.ties) +
+                                    " | " +
+                                    _vm._s(roster.points)
+                                )
+                              ])
+                            ],
+                            1
+                          )
                         }),
                         0
                       )
@@ -6037,6 +6199,46 @@ var staticRenderFns = [
     return _c("div", [_c("h1", [_vm._v("404 | Not Found")])])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Player.vue?vue&type=template&id=3368fc40&":
+/*!****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/Player.vue?vue&type=template&id=3368fc40& ***!
+  \****************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-layout",
+        [
+          _c("v-flex", [
+            _c("h2", [_vm._v("Player: " + _vm._s(_vm.roster.name))]),
+            _vm._v(" "),
+            _c("h3", [_vm._v("Team: " + _vm._s(_vm.roster.team))])
+          ])
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -48726,6 +48928,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_League__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./views/League */ "./resources/js/views/League.vue");
 /* harmony import */ var _views_Accept__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./views/Accept */ "./resources/js/views/Accept.vue");
 /* harmony import */ var _views_Invite__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./views/Invite */ "./resources/js/views/Invite.vue");
+/* harmony import */ var _views_Player__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./views/Player */ "./resources/js/views/Player.vue");
+
 
 
 
@@ -48811,6 +49015,13 @@ __webpack_require__.r(__webpack_exports__);
     path: "/league",
     component: _views_League__WEBPACK_IMPORTED_MODULE_9__["default"],
     name: "league",
+    meta: {
+      requiresAuth: true
+    }
+  }, {
+    path: "/player/:id",
+    component: _views_Player__WEBPACK_IMPORTED_MODULE_12__["default"],
+    name: "player",
     meta: {
       requiresAuth: true
     }
@@ -49035,11 +49246,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 var state = {
-  roster: [],
-  errors: []
+  rosters: [],
+  roster: "",
+  errors: [],
+  token: localStorage.getItem("token") || null
 };
 var mutations = {
   SET_ROSTER: function SET_ROSTER(state, payload) {
+    state.rosters = payload;
+  },
+  SET_ONE_ROSTER: function SET_ONE_ROSTER(state, payload) {
     state.roster = payload;
   },
   SET_LEAGUE_ERRORS: function SET_LEAGUE_ERRORS(state, payload) {
@@ -49048,6 +49264,9 @@ var mutations = {
 };
 var getters = {
   GET_ROSTER: function GET_ROSTER(state) {
+    return state.rosters;
+  },
+  GET_ONE_ROSTER: function GET_ONE_ROSTER(state) {
     return state.roster;
   }
 };
@@ -49057,9 +49276,24 @@ var actions = {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + state.token;
     var league_id = localStorage.getItem("league_id");
     return new Promise(function (resolve, reject) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/profile/".concat(league_id)).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/profiles/".concat(league_id)).then(function (res) {
         resolve(res);
         commit("SET_ROSTER", res.data.data);
+      })["catch"](function (errors) {
+        reject(errors);
+        commit("SET_LEAGUE_ERRORS", errors);
+      });
+    });
+  },
+  GET_ROSTER: function GET_ROSTER(_ref2, id) {
+    var commit = _ref2.commit;
+    console.log(id);
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + state.token;
+    return new Promise(function (resolve, reject) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://opl.test/api/profile/".concat(id)).then(function (res) {
+        resolve(res);
+        console.log(res);
+        commit("SET_ONE_ROSTER", res.data.data);
       })["catch"](function (errors) {
         reject(errors);
         commit("SET_LEAGUE_ERRORS", errors);
@@ -49087,6 +49321,10 @@ var actions = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 var state = {
   schedules: [],
@@ -49213,6 +49451,21 @@ var actions = {
         resolve(res);
         var data = res.data.data;
         commit("SET_SCHEDULE", data);
+      })["catch"](function (err) {
+        reject(err);
+        commit("SCHEDULE_ERRORS", err);
+      });
+    });
+  },
+  SEND_PICKS: function SEND_PICKS(_ref5, payload) {
+    var commit = _ref5.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("token");
+    var league = localStorage.getItem("league_id");
+    return new Promise(function (resolve, reject) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/picks", _objectSpread({}, payload, {
+        league_id: league
+      })).then(function (res) {
+        resolve(res);
       })["catch"](function (err) {
         reject(err);
         commit("SCHEDULE_ERRORS", err);
@@ -49829,6 +50082,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFound_vue_vue_type_template_id_5dcdfd0e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NotFound_vue_vue_type_template_id_5dcdfd0e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/Player.vue":
+/*!***************************************!*\
+  !*** ./resources/js/views/Player.vue ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Player_vue_vue_type_template_id_3368fc40___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Player.vue?vue&type=template&id=3368fc40& */ "./resources/js/views/Player.vue?vue&type=template&id=3368fc40&");
+/* harmony import */ var _Player_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Player.vue?vue&type=script&lang=js& */ "./resources/js/views/Player.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Player_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Player_vue_vue_type_template_id_3368fc40___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Player_vue_vue_type_template_id_3368fc40___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/Player.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/Player.vue?vue&type=script&lang=js&":
+/*!****************************************************************!*\
+  !*** ./resources/js/views/Player.vue?vue&type=script&lang=js& ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Player_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Player.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Player.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Player_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/Player.vue?vue&type=template&id=3368fc40&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/views/Player.vue?vue&type=template&id=3368fc40& ***!
+  \**********************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Player_vue_vue_type_template_id_3368fc40___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Player.vue?vue&type=template&id=3368fc40& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/Player.vue?vue&type=template&id=3368fc40&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Player_vue_vue_type_template_id_3368fc40___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Player_vue_vue_type_template_id_3368fc40___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

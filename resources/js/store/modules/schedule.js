@@ -153,6 +153,27 @@ const actions = {
                     commit("SCHEDULE_ERRORS", err);
                 });
         });
+    },
+    SEND_PICKS({ commit }, payload) {
+        axios.defaults.headers.common["Authorization"] =
+            "Bearer " + localStorage.getItem("token");
+
+        const league = localStorage.getItem("league_id");
+
+        return new Promise((resolve, reject) => {
+            axios
+                .post("api/picks", {
+                    ...payload,
+                    league_id: league
+                })
+                .then(res => {
+                    resolve(res);
+                })
+                .catch(err => {
+                    reject(err);
+                    commit("SCHEDULE_ERRORS", err);
+                });
+        });
     }
 };
 

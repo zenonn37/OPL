@@ -17,13 +17,15 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::get('/profile/{id}', 'ProfileController@index');
+
+Route::patch('/profile/{profile}', 'ProfileController@update');
 
 Route::middleware('auth:api')->group(function () {
 
 
 
-
+    Route::get('/profiles/{id}', 'ProfileController@index');
+    Route::get('/profile/{profile}', 'ProfileController@show');
 
 
 

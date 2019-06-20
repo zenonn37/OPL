@@ -80,11 +80,15 @@ export default {
 
       //computed value
       const games = this.schedule.length;
+      console.log(games);
+
       const game = this.schedule;
       let picks = "";
 
       switch (games) {
         case 16:
+          console.log("16 games");
+
           picks = {
             team1: this.picks[0].team,
             spread1: this.picks[0].spread,
@@ -117,9 +121,108 @@ export default {
             team15: this.picks[14].team,
             spread15: this.picks[14].spread,
             team16: this.picks[15].team,
-            spread16: this.picks[15].spread,
-            team17: this.picks[16].team,
-            spread17: this.picks[16].spread
+            spread16: this.picks[15].spread
+          };
+
+          break;
+        case 15:
+          picks = {
+            team1: this.picks[0].team,
+            spread1: this.picks[0].spread,
+            team2: this.picks[1].team,
+            spread2: this.picks[1].spread,
+            team3: this.picks[2].team,
+            spread3: this.picks[2].spread,
+            team4: this.picks[3].team,
+            spread4: this.picks[3].spread,
+            team5: this.picks[4].team,
+            spread5: this.picks[4].spread,
+            team6: this.picks[5].team,
+            spread6: this.picks[5].spread,
+            team7: this.picks[6].team,
+            spread7: this.picks[6].spread,
+            team8: this.picks[7].team,
+            spread8: this.picks[7].spread,
+            team9: this.picks[8].team,
+            spread9: this.picks[8].spread,
+            team10: this.picks[9].team,
+            spread10: this.picks[9].spread,
+            team11: this.picks[10].team,
+            spread11: this.picks[10].spread,
+            team12: this.picks[11].team,
+            spread12: this.picks[11].spread,
+            team13: this.picks[12].team,
+            spread13: this.picks[12].spread,
+            team14: this.picks[13].team,
+            spread14: this.picks[13].spread,
+            team15: this.picks[14].team,
+            spread15: this.picks[14].spread
+          };
+
+          break;
+
+        case 14:
+          picks = {
+            team1: this.picks[0].team,
+            spread1: this.picks[0].spread,
+            team2: this.picks[1].team,
+            spread2: this.picks[1].spread,
+            team3: this.picks[2].team,
+            spread3: this.picks[2].spread,
+            team4: this.picks[3].team,
+            spread4: this.picks[3].spread,
+            team5: this.picks[4].team,
+            spread5: this.picks[4].spread,
+            team6: this.picks[5].team,
+            spread6: this.picks[5].spread,
+            team7: this.picks[6].team,
+            spread7: this.picks[6].spread,
+            team8: this.picks[7].team,
+            spread8: this.picks[7].spread,
+            team9: this.picks[8].team,
+            spread9: this.picks[8].spread,
+            team10: this.picks[9].team,
+            spread10: this.picks[9].spread,
+            team11: this.picks[10].team,
+            spread11: this.picks[10].spread,
+            team12: this.picks[11].team,
+            spread12: this.picks[11].spread,
+            team13: this.picks[12].team,
+            spread13: this.picks[12].spread,
+            team14: this.picks[13].team,
+            spread14: this.picks[13].spread
+          };
+
+          break;
+
+        case 13:
+          picks = {
+            team1: this.picks[0].team,
+            spread1: this.picks[0].spread,
+            team2: this.picks[1].team,
+            spread2: this.picks[1].spread,
+            team3: this.picks[2].team,
+            spread3: this.picks[2].spread,
+            team4: this.picks[3].team,
+            spread4: this.picks[3].spread,
+            team5: this.picks[4].team,
+            spread5: this.picks[4].spread,
+            team6: this.picks[5].team,
+            spread6: this.picks[5].spread,
+            team7: this.picks[6].team,
+            spread7: this.picks[6].spread,
+            team8: this.picks[7].team,
+            spread8: this.picks[7].spread,
+            team9: this.picks[8].team,
+            spread9: this.picks[8].spread,
+            team10: this.picks[9].team,
+            spread10: this.picks[9].spread,
+            team11: this.picks[10].team,
+            spread11: this.picks[10].spread,
+            team12: this.picks[11].team,
+            spread12: this.picks[11].spread,
+            team13: this.picks[12].team,
+            spread13: this.picks[12].spread
           };
 
           break;
@@ -130,14 +233,20 @@ export default {
           break;
       }
 
-      axios
-        .post("api/picks", picks)
-        .then(res => {
-          console.log(res.data.data);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      console.log(picks);
+
+      this.$store.dispatch("SEND_PICKS", picks).then(() => {
+        this.$router.push("/");
+      });
+
+      // axios
+      //   .post("api/picks", picks)
+      //   .then(res => {
+      //     console.log(res.data.data);
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
     },
     loadMore(value) {
       this.loaded = false;

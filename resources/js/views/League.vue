@@ -19,7 +19,9 @@
           <v-flex>
             <ul>
               <li v-for="roster in roster" :key="roster.id">
-                <h2>{{roster.name}}</h2>
+                <router-link :to="`player/${roster.id}`">
+                  <h2>{{roster.name}}</h2>
+                </router-link>
                 <h4>Record {{roster.wins}} - {{roster.loses}} - {{roster.ties}} | {{roster.points}}</h4>
               </li>
             </ul>
