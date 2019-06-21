@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 
 
 Route::patch('/profile/{profile}', 'ProfileController@update');
-Route::get('/records', 'ProfileController@records');
+Route::get('/records/{id}', 'ProfileController@records');
 
 Route::middleware('auth:api')->group(function () {
 

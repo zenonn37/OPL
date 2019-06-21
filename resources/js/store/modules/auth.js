@@ -49,15 +49,21 @@ const actions = {
                     resolve(res);
 
                     commit("SET_USER", res.data.data);
-
-                    localStorage.setItem(
-                        "league_id",
-                        res.data.data.league[0].id
-                    );
+                    const id = res.data.data.league[0].id;
+                    localStorage.setItem("league_id", id);
                     localStorage.setItem(
                         "league_name",
                         res.data.data.league[0].name
                     );
+
+                    axios
+                        .get(`api/records/${id}`)
+                        .then(res => {
+                            console.log(res);
+                        })
+                        .catch(err => {
+                            commit("AUTH_ERRORS", err.errors);
+                        });
                 })
                 .catch(err => {
                     reject(err);
@@ -76,14 +82,15 @@ const actions = {
                     resolve(res);
 
                     commit("SET_AUTH", res.data.access_token);
-                    axios
-                        .get("api/records")
-                        .then(() => {
-                            console.log("updated");
-                        })
-                        .catch(err => {
-                            commit("AUTH_ERRORS", err.errors);
-                        });
+                    // localStorage.getItem('league_id');
+                    // axios
+                    //     .get("api/records")
+                    //     .then(res => {
+                    //         console.log(res);
+                    //     })
+                    //     .catch(err => {
+                    //         commit("AUTH_ERRORS", err.errors);
+                    //     });
                     localStorage.setItem("token", res.data.access_token);
                 })
                 .catch(err => {

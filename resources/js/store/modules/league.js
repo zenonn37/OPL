@@ -31,7 +31,7 @@ const getters = {
 const actions = {
     GET_ALL_ROSTER({ commit }) {
         axios.defaults.headers.common["Authorization"] =
-            "Bearer " + state.token;
+            "Bearer " + localStorage.getItem("token");
         const league_id = localStorage.getItem("league_id");
 
         return new Promise((resolve, reject) => {
@@ -51,7 +51,7 @@ const actions = {
         console.log(id);
 
         axios.defaults.headers.common["Authorization"] =
-            "Bearer " + state.token;
+            "Bearer " + localStorage.getItem("token");
 
         return new Promise((resolve, reject) => {
             axios

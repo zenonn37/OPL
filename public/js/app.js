@@ -49087,8 +49087,14 @@ var actions = {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/user").then(function (res) {
         resolve(res);
         commit("SET_USER", res.data.data);
-        localStorage.setItem("league_id", res.data.data.league[0].id);
+        var id = res.data.data.league[0].id;
+        localStorage.setItem("league_id", id);
         localStorage.setItem("league_name", res.data.data.league[0].name);
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/records/".concat(id)).then(function (res) {
+          console.log(res);
+        })["catch"](function (err) {
+          commit("AUTH_ERRORS", err.errors);
+        });
       })["catch"](function (err) {
         reject(err);
         commit("AUTH_ERRORS", err.message);
@@ -49103,12 +49109,16 @@ var actions = {
         password: credentials.password
       }).then(function (res) {
         resolve(res);
-        commit("SET_AUTH", res.data.access_token);
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/records").then(function () {
-          console.log("updated");
-        })["catch"](function (err) {
-          commit("AUTH_ERRORS", err.errors);
-        });
+        commit("SET_AUTH", res.data.access_token); // localStorage.getItem('league_id');
+        // axios
+        //     .get("api/records")
+        //     .then(res => {
+        //         console.log(res);
+        //     })
+        //     .catch(err => {
+        //         commit("AUTH_ERRORS", err.errors);
+        //     });
+
         localStorage.setItem("token", res.data.access_token);
       })["catch"](function (err) {
         reject(err);
@@ -49281,7 +49291,7 @@ var getters = {
 var actions = {
   GET_ALL_ROSTER: function GET_ALL_ROSTER(_ref) {
     var commit = _ref.commit;
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + state.token;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("token");
     var league_id = localStorage.getItem("league_id");
     return new Promise(function (resolve, reject) {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/profiles/".concat(league_id)).then(function (res) {
@@ -49296,7 +49306,7 @@ var actions = {
   GET_ROSTER: function GET_ROSTER(_ref2, id) {
     var commit = _ref2.commit;
     console.log(id);
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + state.token;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("token");
     return new Promise(function (resolve, reject) {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://opl.test/api/profile/".concat(id)).then(function (res) {
         resolve(res);
