@@ -1859,6 +1859,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1870,9 +1872,19 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    home: function home(_home, away, index, sch) {
+      console.log(_home);
+      console.log(index);
+      this.picks[index].losing = away;
+      this.picks[index].favorite = sch.favorite;
+    },
+    away: function away(home, _away, index, sch) {
+      console.log(_away);
+      console.log(index);
+      this.picks[index].losing = home;
+      this.picks[index].favorite = sch.favorite;
+    },
     onSubmit: function onSubmit() {
-      var _this = this;
-
       // console.log(this.picks);
       console.log(this.schedule); //computed value
 
@@ -2024,10 +2036,10 @@ __webpack_require__.r(__webpack_exports__);
           break;
       }
 
-      console.log(picks);
-      this.$store.dispatch("SEND_PICKS", picks).then(function () {
-        _this.$router.push("/");
-      }); // axios
+      console.log(picks); // this.$store.dispatch("SEND_PICKS", picks).then(() => {
+      //   this.$router.push("/");
+      // });
+      // axios
       //   .post("api/picks", picks)
       //   .then(res => {
       //     console.log(res.data.data);
@@ -2037,13 +2049,13 @@ __webpack_require__.r(__webpack_exports__);
       //   });
     },
     loadMore: function loadMore(value) {
-      var _this2 = this;
+      var _this = this;
 
       this.loaded = false; // console.log(value + "im called");
 
       this.$store.dispatch("LoadSchedules", value).then(function (res) {
         // console.log("loaded");
-        _this2.loaded = true;
+        _this.loaded = true;
       });
     }
   },
@@ -2061,7 +2073,7 @@ __webpack_require__.r(__webpack_exports__);
       return game;
     },
     schedule: function schedule() {
-      var _this3 = this;
+      var _this2 = this;
 
       var sch = this.$store.getters.GET_SCHEDULE;
       var game = "";
@@ -2069,9 +2081,11 @@ __webpack_require__.r(__webpack_exports__);
         game = games;
       });
       game.schedules.forEach(function (game) {
-        _this3.picks.push({
+        _this2.picks.push({
           team: "",
-          spread: ""
+          losing: "",
+          spread: "",
+          favorite: ""
         });
       });
       return game.schedules;
@@ -2090,10 +2104,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this3 = this;
 
     this.$store.dispatch("GET_GAMES").then(function (res) {
-      _this4.loaded = true;
+      _this3.loaded = true;
     });
   }
 });
@@ -3050,11 +3064,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       edit: false
     };
+  },
+  methods: {
+    editMode: function editMode() {
+      this.edit = !this.edit;
+    }
   },
   beforeMount: function beforeMount() {
     this.$store.dispatch("SHOW_SELECTIONS", this.$route.params.id);
@@ -4621,6 +4652,16 @@ var render = function() {
                                     value: sch.home,
                                     "hide-details": ""
                                   },
+                                  on: {
+                                    change: function($event) {
+                                      return _vm.home(
+                                        sch.home,
+                                        sch.away,
+                                        index,
+                                        sch
+                                      )
+                                    }
+                                  },
                                   model: {
                                     value: _vm.picks[index].team,
                                     callback: function($$v) {
@@ -4647,6 +4688,16 @@ var render = function() {
                                     color: "blue",
                                     value: sch.away,
                                     "hide-details": ""
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      return _vm.away(
+                                        sch.home,
+                                        sch.away,
+                                        index,
+                                        sch
+                                      )
+                                    }
                                   },
                                   model: {
                                     value: _vm.picks[index].team,
@@ -6311,20 +6362,53 @@ var render = function() {
   return _c(
     "div",
     [
-      [
-        _c("div", [
-          _c("h1", [_vm._v("Selection")]),
-          _vm._v(" "),
-          _vm.selection ? _c("div", [_vm._v(_vm._s(_vm.selection))]) : _vm._e()
-        ])
-      ],
+      _c(
+        "v-layout",
+        [
+          _c("v-flex", [
+            _c("h1", [_vm._v("Selection")]),
+            _vm._v(" "),
+            _c(
+              "div",
+              [
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "blue", fab: "", small: "" },
+                    on: { click: _vm.editMode }
+                  },
+                  [_c("v-icon", [_vm._v("edit")])],
+                  1
+                )
+              ],
+              1
+            )
+          ])
+        ],
+        1
+      ),
       _vm._v(" "),
-      [_c("div", [_vm._v("Update Selections")])]
+      !_vm.edit
+        ? [
+            _c("div", [
+              _vm.selection
+                ? _c("div", [_vm._v(_vm._s(_vm.selection))])
+                : _vm._e()
+            ])
+          ]
+        : [_vm._m(0)]
     ],
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("h3", [_vm._v("Update Selections")])])
+  }
+]
 render._withStripped = true
 
 
@@ -49575,12 +49659,6 @@ var getters = {
   },
   GET_SELECTIONS: function GET_SELECTIONS(state) {
     return state.selections;
-  },
-  GET_SELECTION: function GET_SELECTION(state) {
-    var week = state.selections.find(function (sel) {
-      return sel.id === id;
-    });
-    return week;
   },
   GET_LINKS: function GET_LINKS(state) {
     return state.links;

@@ -18,6 +18,7 @@
                   :value="sch.home"
                   v-model="picks[index].team"
                   hide-details
+                  @change="home(sch.home,sch.away,index,sch)"
                 ></v-checkbox>
                 <h4 class="headers">(HOME): {{sch.location}}</h4>
               </v-flex>
@@ -29,6 +30,7 @@
                   :value="sch.away"
                   v-model="picks[index].team"
                   hide-details
+                  @change="away(sch.home,sch.away,index,sch)"
                 ></v-checkbox>
                 <h4 class="headers">(AWAY)</h4>
               </v-flex>
@@ -74,6 +76,18 @@ export default {
     };
   },
   methods: {
+    home(home, away, index, sch) {
+      console.log(home);
+      console.log(index);
+      this.picks[index].losing = away;
+      this.picks[index].favorite = sch.favorite;
+    },
+    away(home, away, index, sch) {
+      console.log(away);
+      console.log(index);
+      this.picks[index].losing = home;
+      this.picks[index].favorite = sch.favorite;
+    },
     onSubmit() {
       // console.log(this.picks);
       console.log(this.schedule);
@@ -235,9 +249,9 @@ export default {
 
       console.log(picks);
 
-      this.$store.dispatch("SEND_PICKS", picks).then(() => {
-        this.$router.push("/");
-      });
+      // this.$store.dispatch("SEND_PICKS", picks).then(() => {
+      //   this.$router.push("/");
+      // });
 
       // axios
       //   .post("api/picks", picks)
@@ -283,7 +297,9 @@ export default {
       game.schedules.forEach(game => {
         this.picks.push({
           team: "",
-          spread: ""
+          losing: "",
+          spread: "",
+          favorite: ""
         });
       });
 

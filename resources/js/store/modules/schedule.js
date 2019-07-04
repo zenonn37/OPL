@@ -52,10 +52,7 @@ const getters = {
     GET_SELECTIONS(state) {
         return state.selections;
     },
-    GET_SELECTION(state) {
-        const week = state.selections.find(sel => sel.id === id);
-        return week;
-    },
+
     GET_LINKS(state) {
         return state.links;
     },
