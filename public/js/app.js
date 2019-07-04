@@ -1875,6 +1875,7 @@ __webpack_require__.r(__webpack_exports__);
     home: function home(_home, away, index, sch) {
       console.log(_home);
       console.log(index);
+      console.log(this.picks);
       this.picks[index].losing = away;
       this.picks[index].favorite = sch.favorite;
     },
@@ -1883,6 +1884,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(index);
       this.picks[index].losing = home;
       this.picks[index].favorite = sch.favorite;
+      console.log(this.picks);
     },
     onSubmit: function onSubmit() {
       // console.log(this.picks);
@@ -1899,36 +1901,68 @@ __webpack_require__.r(__webpack_exports__);
           picks = {
             team1: this.picks[0].team,
             spread1: this.picks[0].spread,
+            losing1: this.picks[0].losing,
+            favorite1: this.picks[0].favorite,
             team2: this.picks[1].team,
             spread2: this.picks[1].spread,
+            losing2: this.picks[1].losing,
+            favorite2: this.picks[1].favorite,
             team3: this.picks[2].team,
             spread3: this.picks[2].spread,
+            losing3: this.picks[2].losing,
+            favorite3: this.picks[2].favorite,
             team4: this.picks[3].team,
             spread4: this.picks[3].spread,
+            losing4: this.picks[3].losing,
+            favorite4: this.picks[3].favorite,
             team5: this.picks[4].team,
             spread5: this.picks[4].spread,
+            losing5: this.picks[4].losing,
+            favorite5: this.picks[4].favorite,
             team6: this.picks[5].team,
             spread6: this.picks[5].spread,
+            losing6: this.picks[5].losing,
+            favorite6: this.picks[5].favorite,
             team7: this.picks[6].team,
             spread7: this.picks[6].spread,
+            losing7: this.picks[6].losing,
+            favorite7: this.picks[6].favorite,
             team8: this.picks[7].team,
             spread8: this.picks[7].spread,
+            losing8: this.picks[7].losing,
+            favorite8: this.picks[7].favorite,
             team9: this.picks[8].team,
             spread9: this.picks[8].spread,
+            losing9: this.picks[8].losing,
+            favorite9: this.picks[8].favorite,
             team10: this.picks[9].team,
             spread10: this.picks[9].spread,
+            losing10: this.picks[9].losing,
+            favorite10: this.picks[9].favorite,
             team11: this.picks[10].team,
             spread11: this.picks[10].spread,
+            losing11: this.picks[10].losing,
+            favorite11: this.picks[10].favorite,
             team12: this.picks[11].team,
             spread12: this.picks[11].spread,
+            losing12: this.picks[11].losing,
+            favorite12: this.picks[11].favorite,
             team13: this.picks[12].team,
             spread13: this.picks[12].spread,
+            losing13: this.picks[12].losing,
+            favorite13: this.picks[12].favorite,
             team14: this.picks[13].team,
             spread14: this.picks[13].spread,
+            losing14: this.picks[13].losing,
+            favorite14: this.picks[13].favorite,
             team15: this.picks[14].team,
             spread15: this.picks[14].spread,
+            losing15: this.picks[14].losing,
+            favorite15: this.picks[14].favorite,
             team16: this.picks[15].team,
-            spread16: this.picks[15].spread
+            spread16: this.picks[15].spread,
+            losing16: this.picks[16].losing,
+            favorite16: this.picks[16].favorite
           };
           break;
 
@@ -4611,7 +4645,7 @@ var render = function() {
         : [
             _c("div", [
               _c("h3", { staticClass: "headers" }, [
-                _vm._v("Scheduled Games " + _vm._s(_vm.game.games))
+                _vm._v("Scheduled NFL Games " + _vm._s(_vm.game.games))
               ]),
               _vm._v(" "),
               _c("h4", [_vm._v("Week " + _vm._s(_vm.game.week))]),

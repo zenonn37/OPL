@@ -70,7 +70,44 @@ class PickController extends Controller
         $picks->spread14 = $request->spread14;
         $picks->spread15 = $request->spread15;
         $picks->spread16 = $request->spread16;
-        $picks->user()->associate($request->user());
+
+        $picks->losing1 = $request->losing1;
+        $picks->losing2 = $request->losing2;
+        $picks->losing3 = $request->losing3;
+        $picks->losing4 = $request->losing4;
+        $picks->losing5 = $request->losing5;
+        $picks->losing6 = $request->losing6;
+        $picks->losing7 = $request->losing7;
+        $picks->losing8 = $request->losing8;
+        $picks->losing9 = $request->losing9;
+        $picks->losing10 = $request->losing10;
+        $picks->losing11 = $request->losing11;
+        $picks->losing12 = $request->losing12;
+        $picks->losing13 = $request->losing13;
+        $picks->losing14 = $request->losing14;
+        $picks->losing15 = $request->losing15;
+        $picks->losing16 = $request->losing16;
+
+        $picks->favorite1 = $request->favorite1;
+        $picks->favorite2 = $request->favorite2;
+        $picks->favorite3 = $request->favorite3;
+        $picks->favorite4 = $request->favorite4;
+        $picks->favorite5 = $request->favorite5;
+        $picks->favorite6 = $request->favorite6;
+        $picks->favorite7 = $request->favorite7;
+        $picks->favorite8 = $request->favorite8;
+        $picks->favorite9 = $request->favorite9;
+        $picks->favorite10 = $request->favorite10;
+        $picks->favorite11 = $request->favorite11;
+        $picks->favorite12 = $request->favorite12;
+        $picks->favorite13 = $request->favorite13;
+        $picks->favorite14 = $request->favorite14;
+        $picks->favorite15 = $request->favorite15;
+        $picks->favorite16 = $request->favorite16;
+
+
+        // $picks->user()->associate($request->user());
+        $picks->user_id = auth()->user()->id;
 
         $picks->save();
         //return response($request, 201);
