@@ -1887,6 +1887,8 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.picks);
     },
     onSubmit: function onSubmit() {
+      var _this = this;
+
       // console.log(this.picks);
       console.log(this.schedule); //computed value
 
@@ -1961,8 +1963,8 @@ __webpack_require__.r(__webpack_exports__);
             favorite15: this.picks[14].favorite,
             team16: this.picks[15].team,
             spread16: this.picks[15].spread,
-            losing16: this.picks[16].losing,
-            favorite16: this.picks[16].favorite
+            losing16: this.picks[15].losing,
+            favorite16: this.picks[15].favorite
           };
           break;
 
@@ -2070,10 +2072,10 @@ __webpack_require__.r(__webpack_exports__);
           break;
       }
 
-      console.log(picks); // this.$store.dispatch("SEND_PICKS", picks).then(() => {
-      //   this.$router.push("/");
-      // });
-      // axios
+      console.log(picks);
+      this.$store.dispatch("SEND_PICKS", picks).then(function () {
+        _this.$router.push("/");
+      }); // axios
       //   .post("api/picks", picks)
       //   .then(res => {
       //     console.log(res.data.data);
@@ -2083,13 +2085,13 @@ __webpack_require__.r(__webpack_exports__);
       //   });
     },
     loadMore: function loadMore(value) {
-      var _this = this;
+      var _this2 = this;
 
       this.loaded = false; // console.log(value + "im called");
 
       this.$store.dispatch("LoadSchedules", value).then(function (res) {
         // console.log("loaded");
-        _this.loaded = true;
+        _this2.loaded = true;
       });
     }
   },
@@ -2107,7 +2109,7 @@ __webpack_require__.r(__webpack_exports__);
       return game;
     },
     schedule: function schedule() {
-      var _this2 = this;
+      var _this3 = this;
 
       var sch = this.$store.getters.GET_SCHEDULE;
       var game = "";
@@ -2115,7 +2117,7 @@ __webpack_require__.r(__webpack_exports__);
         game = games;
       });
       game.schedules.forEach(function (game) {
-        _this2.picks.push({
+        _this3.picks.push({
           team: "",
           losing: "",
           spread: "",
@@ -2138,10 +2140,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
     this.$store.dispatch("GET_GAMES").then(function (res) {
-      _this3.loaded = true;
+      _this4.loaded = true;
     });
   }
 });

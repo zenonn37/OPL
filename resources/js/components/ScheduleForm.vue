@@ -169,8 +169,8 @@ export default {
             favorite15: this.picks[14].favorite,
             team16: this.picks[15].team,
             spread16: this.picks[15].spread,
-            losing16: this.picks[16].losing,
-            favorite16: this.picks[16].favorite
+            losing16: this.picks[15].losing,
+            favorite16: this.picks[15].favorite
           };
 
           break;
@@ -284,9 +284,9 @@ export default {
 
       console.log(picks);
 
-      // this.$store.dispatch("SEND_PICKS", picks).then(() => {
-      //   this.$router.push("/");
-      // });
+      this.$store.dispatch("SEND_PICKS", picks).then(() => {
+        this.$router.push("/");
+      });
 
       // axios
       //   .post("api/picks", picks)
