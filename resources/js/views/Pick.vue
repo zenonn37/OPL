@@ -20,13 +20,21 @@
     <template v-else>
       <div>
         <h3>Update Selections</h3>
+
+        <div>
+          <UpdateForm :picks="selection" />
+        </div>
       </div>
     </template>
   </div>
 </template>
 
 <script>
+import UpdateForm from "../components/UpdateFrom";
 export default {
+  components: {
+    UpdateForm
+  },
   data() {
     return {
       edit: false
