@@ -11,6 +11,8 @@ import League from "./views/League";
 import Accept from "./views/Accept";
 import Invite from "./views/Invite";
 import Player from "./views/Player";
+import Picks from "./views/Picks";
+import Pick from "./views/Pick";
 
 export default {
     mode: "history",
@@ -93,6 +95,22 @@ export default {
             path: "/league",
             component: League,
             name: "league",
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: "/picks",
+            component: Picks,
+            name: "picks",
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: "/pick/:id",
+            component: Pick,
+            name: "pick",
             meta: {
                 requiresAuth: true
             }

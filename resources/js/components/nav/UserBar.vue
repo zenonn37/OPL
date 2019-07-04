@@ -10,7 +10,7 @@
 
         <v-list-tile avatar tag="div">
           <v-list-tile-avatar>
-            <img src="https://randomuser.me/api/portraits/men/85.jpg">
+            <img src="https://randomuser.me/api/portraits/men/85.jpg" />
           </v-list-tile-avatar>
 
           <v-list-tile-content>
@@ -81,7 +81,7 @@
         <v-btn to="/league" flat>
           <v-icon>supervised_user_circle</v-icon>
         </v-btn>
-        <v-btn to="/about" flat>
+        <v-btn to="/picks" flat>
           <v-icon>info</v-icon>
         </v-btn>
         <v-btn to="/contact" flat>
@@ -147,8 +147,9 @@ export default {
     items: [
       { title: "Profile", icon: "account_circle", to: "/" },
       { title: "Schedule", icon: "calendar_today", to: "/schedule" },
+      { title: "Picks", icon: "info", to: "/picks" },
       { title: "League", icon: "supervised_user_circle", to: "/league" },
-      { title: "About", icon: "info", to: "/about" },
+
       { title: "Contact", icon: "contact_support", to: "/contact" }
     ]
   }),
@@ -171,9 +172,7 @@ export default {
       return this.$store.getters.GET_USER;
     },
     stats() {
-      return `${this.name.profile[0].wins}-${this.name.profile[0].loses}-${
-        this.name.profile[0].ties
-      } | ${this.name.profile[0].points}}`;
+      return `${this.name.profile[0].wins}-${this.name.profile[0].loses}-${this.name.profile[0].ties} | ${this.name.profile[0].points}}`;
     }
   },
   methods: {

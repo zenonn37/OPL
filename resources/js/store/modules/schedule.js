@@ -2,6 +2,8 @@ import axios from "axios";
 
 const state = {
     schedules: [],
+    selections: [],
+    pick: "",
     games: [],
     errors: "",
     links: "",
@@ -12,6 +14,13 @@ const mutations = {
     SET_SCHEDULE(state, schedules) {
         state.schedules = schedules;
     },
+    SET_SELECTION(state, selections) {
+        state.selections = selections;
+    },
+    PICK(state, pick) {
+        state.pick = pick;
+    },
+
     SET_GAMES(state, games) {
         state.schedules = games;
     },
@@ -34,8 +43,18 @@ const getters = {
     GET_SCHEDULE(state) {
         return state.schedules;
     },
+    GET_PICK(state) {
+        return state.pick;
+    },
     GET_GAMES(state) {
         return state.schedules;
+    },
+    GET_SELECTIONS(state) {
+        return state.selections;
+    },
+    GET_SELECTION(state) {
+        const week = state.selections.find(sel => sel.id === id);
+        return week;
     },
     GET_LINKS(state) {
         return state.links;
@@ -49,6 +68,44 @@ const getters = {
 };
 
 const actions = {
+    GET_SELECTIONS({ commit }) {
+        axios.defaults.headers.common["Authorization"] =
+            "Bearer " + localStorage.getItem("token");
+
+        return new Promise((resolve, reject) => {
+            axios
+                .get("api/picks")
+                .then(res => {
+                    resolve(res);
+                    commit("SET_SELECTION", res.data.data);
+                })
+                .catch(err => {
+                    commit("SCHEDULE_ERRORS", err.errors);
+                    reject(err);
+                });
+        });
+    },
+
+    SHOW_SELECTIONS({ commit }, id) {
+        axios.defaults.headers.common["Authorization"] =
+            "Bearer " + localStorage.getItem("token");
+
+        return new Promise((resolve, reject) => {
+            axios
+                .get(`http://opl.test/api/picks/${id}`)
+                .then(res => {
+                    commit("PICK", res.data.data);
+                    console.log(res.data.data);
+
+                    resolve(res);
+                })
+                .catch(err => {
+                    reject(err);
+                    commit("SCHEDULE_ERRORS", err.errors);
+                });
+        });
+    },
+
     NEW_GAME({ commit }, game) {
         axios.defaults.headers.common["Authorization"] =
             "Bearer " + localStorage.getItem("token");

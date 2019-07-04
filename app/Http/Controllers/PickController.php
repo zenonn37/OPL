@@ -17,7 +17,7 @@ class PickController extends Controller
      */
     public function index()
     {
-        $picks = Pick::paginate(1);
+        $picks = Pick::where('user_id', auth()->user()->id)->get();
 
         return PicksResource::collection($picks);
         //return response($picks, 201);
@@ -85,9 +85,9 @@ class PickController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Pick $pick)
     {
-        //
+        return new PicksResource($pick);
     }
 
 

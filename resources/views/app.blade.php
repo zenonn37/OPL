@@ -27,8 +27,9 @@
             </div>
 
 
-
+          
             <script src="/js/app.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
            
     </body>
 </html>

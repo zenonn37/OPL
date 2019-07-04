@@ -48,6 +48,7 @@ class PicksResource extends JsonResource
             'spread14' => $this->spread14,
             'spread15' => $this->spread15,
             'spread16' => $this->spread16,
+            'created_at' => $this->created_at
 
         ];
     }
