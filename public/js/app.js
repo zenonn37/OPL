@@ -2486,6 +2486,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["picks"],
   data: function data() {
@@ -2496,25 +2548,31 @@ __webpack_require__.r(__webpack_exports__);
         team3: this.picks.team3,
         team4: this.picks.team4,
         team5: this.picks.team5,
-        team6: this.picks.team4,
+        team6: this.picks.team6,
+        team7: this.picks.team7,
         spread1: this.picks.spread1,
         spread2: this.picks.spread2,
         spread3: this.picks.spread3,
         spread4: this.picks.spread4,
         spread5: this.picks.spread5,
-        spread6: this.picks.spread46,
+        spread6: this.picks.spread6,
+        spread7: this.picks.spread7,
         losing1: this.picks.losing1,
         losing2: this.picks.losing2,
         losing3: this.picks.losing3,
         losing4: this.picks.losing4,
         losing5: this.picks.losing5,
-        losing6: this.picks.losing6
+        losing6: this.picks.losing6,
+        losing7: this.picks.losing7
       }
     };
   },
   methods: {
     onSubmit: function onSubmit() {
       console.log(this.update);
+    },
+    setState: function setState(team) {
+      console.log(team);
     },
     current: function current(team) {
       switch (team) {
@@ -6110,6 +6168,122 @@ var render = function() {
                         _vm.$set(_vm.update, "team6", $$v)
                       },
                       expression: "update.team6"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("h4", { staticClass: "headers" }, [_vm._v("(AWAY)")])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-flex", { attrs: { xs12: "", md1: "" } }, [
+                _c("h4", { staticClass: "headers mt-3" }, [
+                  _vm._v("(Fav):" + _vm._s(_vm.picks.favorite6))
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { attrs: { xs12: "", md2: "" } },
+                [
+                  _c("v-text-field", {
+                    staticClass: "mt-2",
+                    attrs: {
+                      type: "number",
+                      value: _vm.picks.spread6,
+                      label: "Spread",
+                      outline: ""
+                    },
+                    model: {
+                      value: _vm.update.spread6,
+                      callback: function($$v) {
+                        _vm.$set(
+                          _vm.update,
+                          "spread6",
+                          typeof $$v === "string" ? $$v.trim() : $$v
+                        )
+                      },
+                      expression: "update.spread6"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "c-panel mt-2" },
+        [
+          _c(
+            "v-layout",
+            { attrs: { wrap: "", row: "" } },
+            [
+              _c(
+                "v-flex",
+                { staticClass: "pa-right", attrs: { xs11: "", md3: "" } },
+                [
+                  _c("v-checkbox", {
+                    attrs: {
+                      checked: "",
+                      label: _vm.picks.team6,
+                      color: "blue",
+                      disabled: "",
+                      value: _vm.picks.team6,
+                      "true-value": "true"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("h4", { staticClass: "headers" }, [
+                    _vm._v("(Current Selection)")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { staticClass: "pa-right", attrs: { xs11: "", md3: "" } },
+                [
+                  _c("v-checkbox", {
+                    attrs: {
+                      checked: "",
+                      label: _vm.picks.team7,
+                      color: "blue",
+                      value: _vm.picks.team6,
+                      "true-value": "true"
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.setState(_vm.picks.team6)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("h4", { staticClass: "headers" }, [_vm._v("(HOME)")])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { attrs: { xs12: "", md3: "" } },
+                [
+                  _c("v-checkbox", {
+                    attrs: {
+                      label: _vm.picks.losing6,
+                      color: "red",
+                      value: _vm.picks.losing6
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.setState(_vm.picks.losing6)
+                      }
                     }
                   }),
                   _vm._v(" "),

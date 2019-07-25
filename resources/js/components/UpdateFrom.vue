@@ -317,6 +317,58 @@
       </v-layout>
     </div>
 
+
+
+     <div class="c-panel mt-2">
+      <v-layout wrap row>
+        <v-flex xs11 md3 class="pa-right">
+          <v-checkbox
+            checked
+            :label="picks.team6"
+            color="blue"
+            disabled
+            :value="picks.team6"
+            true-value="true"
+          ></v-checkbox>
+          <h4 class="headers">(Current Selection)</h4>
+        </v-flex>
+        <v-flex xs11 md3 class="pa-right">
+          <v-checkbox
+            checked
+            :label="picks.team7"
+             color="blue"
+            :value="picks.team6"
+            true-value="true"
+            @change="setState(picks.team6)"
+          ></v-checkbox>
+          <h4 class="headers">(HOME)</h4>
+        </v-flex>
+
+        <v-flex xs12 md3>
+          <v-checkbox
+            :label="picks.losing6"
+            color="red"
+            :value="picks.losing6"
+            @change="setState(picks.losing6)"
+          ></v-checkbox>
+          <h4 class="headers">(AWAY)</h4>
+        </v-flex>
+        <v-flex xs12 md1>
+          <h4 class="headers mt-3">(Fav):{{picks.favorite6}}</h4>
+        </v-flex>
+        <v-flex xs12 md2>
+          <v-text-field
+            class="mt-2"
+            type="number"
+            v-model.trim="update.spread6"
+            :value="picks.spread6"
+            label="Spread"
+            outline
+          ></v-text-field>
+        </v-flex>
+      </v-layout>
+    </div>
+
     <v-layout class="mt-3">
       <v-flex>
         <v-btn type="submit" color="info" large>Update</v-btn>
@@ -337,19 +389,23 @@ export default {
         team3: this.picks.team3,
         team4: this.picks.team4,
         team5: this.picks.team5,
-        team6: this.picks.team4,
+        team6: this.picks.team6,
+         team7: this.picks.team7,
         spread1: this.picks.spread1,
         spread2: this.picks.spread2,
         spread3: this.picks.spread3,
         spread4: this.picks.spread4,
         spread5: this.picks.spread5,
-        spread6: this.picks.spread46,
+        spread6: this.picks.spread6,
+          spread7: this.picks.spread7,
+
         losing1: this.picks.losing1,
         losing2: this.picks.losing2,
         losing3: this.picks.losing3,
         losing4: this.picks.losing4,
         losing5: this.picks.losing5,
-        losing6: this.picks.losing6
+        losing6: this.picks.losing6,
+          losing7: this.picks.losing7
       }
     };
   },
@@ -357,6 +413,11 @@ export default {
   methods: {
     onSubmit() {
       console.log(this.update);
+    },
+
+    setState(team){
+         console.log(team);
+         
     },
     current(team) {
       switch (team) {
